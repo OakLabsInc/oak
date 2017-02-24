@@ -1,0 +1,12 @@
+node_modules/
+*.log
+*/tmp/
+.git/
+.gitignore
+.idea/
+.vscode/
+circle.yml
+build.sh
+Dockerfile
+Dockerfile.template
+readme.md

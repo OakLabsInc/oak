@@ -1,0 +1,28 @@
+#
+# This is a sample docker-compose file, normally you will be using FROM to inherit oak
+# If you run this project, it will use `default/index.js` by default
+#
+version: '2'
+services:
+  oak:
+    build: .
+    container_name: oak
+    image: oaklabs/oak:1.0.0-amd64
+    network_mode: host
+    # For NVIDIA
+    # image: oaklabs/oak:1.0.0-nvidia
+    devices:
+      # our video card device
+      - /dev/dri:/dev/dri
+      # For NVIDIA
+      # - /dev/nvidia0:/dev/nvidia0
+      # - /dev/nvidiactl:/dev/nvidiactl
+    volumes:
+      # for debugging!
+      - ./bin:/opt/oak/bin
+      - ./lib:/opt/oak/lib
+      - ./default:/opt/oak/default
+      # share memory
+      - /dev/shm:/dev/shm
+      # mount our X server socket
+      - /tmp/.X11-unix:/tmp/.X11-unix

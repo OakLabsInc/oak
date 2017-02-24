@@ -1,0 +1,51 @@
+{
+  "name": "oak",
+  "version": "4.0.0",
+  "description": "connect with peripherials ontop of oak hardware",
+  "bin": {
+    "oak": "bin/start"
+  },
+  "engines": {
+    "node": "6.5.0"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/standard && find test/*.js | xargs -n 1 node | node_modules/.bin/tap-difflet",
+    "coverage": "node node_modules/.bin/istanbul cover node_modules/.bin/tape test/*.js || true",
+    "coveralls": "npm run-script coverage && node node_modules/.bin/coveralls < coverage/lcov.info && rm -rf coverage/ || true"
+  },
+  "main": "lib/core.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OakLabsInc/oak.git"
+  },
+  "license": "MIT",
+  "author": "Flynn Joffray <nucleardreamer@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/OakLabsInc/oak/issues"
+  },
+  "homepage": "https://github.com/OakLabsInc/oak",
+  "dependencies": {
+    "async": "~2.0.1",
+    "eventemitter2": "~0.4.14",
+    "lodash": "~4.17.2",
+    "oak-tools": "~0.3.0",
+    "pino": "~2.12.4",
+    "request": "~2.79.0",
+    "swagger-js-codegen": "~1.7.11",
+    "uuid": "~2.0.2"
+  },
+  "devDependencies": {
+    "coveralls": "~2.11.6",
+    "ip": "~1.1.0",
+    "istanbul": "~0.4.2",
+    "rimraf": "~2.5.2",
+    "tap-difflet": "~0.4.0",
+    "tape": "~4.6.0",
+    "standard": "*"
+  },
+  "standard": {
+    "ignore": [
+      "*/tmp/"
+    ]
+  }
+}
