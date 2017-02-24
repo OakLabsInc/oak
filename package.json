@@ -1,6 +1,6 @@
 {
   "name": "oak",
-  "version": "4.0.0",
+  "version": "1.0.0",
   "description": "connect with peripherials ontop of oak hardware",
   "bin": {
     "oak": "bin/start"
@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/OakLabsInc/oak.git"
   },
-  "license": "MIT",
+  "license": "Apache 2.0",
   "author": "Flynn Joffray <nucleardreamer@gmail.com>",
   "bugs": {
     "url": "https://github.com/OakLabsInc/oak/issues"
