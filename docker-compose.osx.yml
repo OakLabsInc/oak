@@ -1,0 +1,13 @@
+version: '2'
+services:
+  oak:
+    build: .
+    container_name: oak
+    image: oaklabs/oak:1.0.0-amd64
+    network_mode: host
+    volumes:
+      # for debugging!
+      - ./default:/opt/oak/default
+    environment:
+      # replace the X's with your IP address
+      - DISPLAY=XXX.XXX.XXX.XXX:0

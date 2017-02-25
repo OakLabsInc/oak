@@ -1,92 +1,113 @@
 # oak
-[![release](https://img.shields.io/badge/release-v1.0.0green.svg)](https://github.com/OakLabsInc/oak/releases/tag/1.0.0)
+[![release](https://img.shields.io/badge/release-v1.0.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/1.0.0)
 [![node](https://img.shields.io/badge/node-v6.5.0-green.svg)](https://github.com/nodejs/node/releases/tag/v6.5.0)
 [![electron](https://img.shields.io/badge/electron-v1.4.15-green.svg)](https://github.com/electron/electron/releases/tag/v1.4.15)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?branch=master&t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak?branch=master)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-green.svg)](http://standardjs.com/)
 
-A very opinionated kiosk UI application based on [electron](http://electron.atom.io)
+A very opinionated kiosk UI application based on [electron](http://electron.atom.io).
 
-## Usage
-`oak` inherits from an `EventEmitter`, so when you start your app, you will want to listen for the `ready` event. Next, you want to call `oak.load()` to start a browser. The only hard requirement is a `url` to pass in, this can also be a static HTML file.
-```js
-const oak = require('oak')
+## Rationale
+Most of the `electron` project if focused around desktop application development, which is great! But when you are dealing with public computing (ATM machines, airline ticketing, movie theater ticket vendors, etc), you don't really need all the features a traditional desktop application requires.
+The job of the `oak` module is to give a really easy way to make a kiosk application with modern web technology, so that it's repeatable, scalable, and easy to rapidly prototype for production.
 
-oak.on('ready', function () {
-  oak.load({
-    url: 'file://path/to/index.html' // or 'http://wwww.mysite.com/' or 'http://localhost:8080/'
-  }, function () { 
-    // optional callback, when the page has finished and called `ready`
-  })
-})
-```
+## Getting Started
 
-After that, just run:
+### Install Docker
+
+We use docker containers for all our deployment (and most of our development as well). To get started, you will need to have Docker installed. You can install docker from their [website](https://www.docker.com/products/docker), or on Linux systems, run this script:
+
 ```sh
-xhost +
-docker-compose up --build
+  curl -sSL https://get.docker.com/ | sh
+  # add your user to the docker group
+  sudo usermod -aG docker $(whoami)
 ```
 
-## Prerequisites
-We use docker containers for all our deployment (and most of our development as well). To get started, you will need to have Docker installed, as well as an X server.
-`docker-compose` is a utility that easily orchestrates docker containers. This is far easier to manage than typing in single commands every time you want to start a container. An example `docker-compose.yml` is included at the root of this repo.
-Make sure you have at least `docker-compose >= 1.8.0` installed.
+You will also need an X server running (`xorg`). If you are on OSX, go ahead and follow the steps below to get setup.
 
-### Linux
+### On Linux
 This example is for debian based systems, you can accomplish the same by getting `docker` and `docker-compose` running yourself.
-```
-# install docker
-curl -sSL https://get.docker.com/ | sh
 
-# add your user to the docker group (dont forget to logout and log back in after you do this)
-sudo usermod -aG docker $(whoami)
+1. Install `python-setuptools`
+   ```sh
+    sudo apt-get install -y python-setuptools
+   ```
+2. Install `pip`
+   ```sh
+    sudo easy_install pip
+   ```
+3. Install `docker-compose`
+   ```sh
+    pip install docker-compose>=1.8.0
+   ```
+4. Allow your `X` server to allow outside connections. Make sure to disable this after you are finished!
+   ```sh
+    xhost +
+    docker-compose up
 
-# install latest docker-compose
-sudo apt-get install -y python-setuptools
-sudo easy_install pip
-pip install docker-compose>=1.8.0 docker-py>=1.9.0
-```
+   ```
+    You should turn off your open xhost after you are finished developing.
+   ```sh
+    docker-compose down
+    xhost -
+   ```
 
-### OSX and Windows
-Install docker from their [website](https://www.docker.com/products/docker)
+### On OSX
+I'm not going to lie... this is a pain in the ass. OSX doesn't have `xorg` or a build in X server by default. You are going to be using `socat` to proxy Xquartz via TCP so that you can use your IP address the docker container. It may be easier to start up a VM running ubuntu or debian.
 
-## Development
-You need to allow the X server to give access to outside connections. This is a lot more difficult on Windows and OSX than it is on linux variants.
+1.    Install [homebrew](https://brew.sh/)
 
-### Linux
-This command will grant access to use your X socket by anyone.
-```sh
-xhost +
-docker-compose up
-# you should turn off your open xhost after you are finished developing.
-xhost -
-```
+      Homebrew is a easy way to install linux packages on OSX. In your `Terminal` app:
+      ```sh
+      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      ```
 
-### OSX
-I'm not going to lie... this is a pain in the ass. OSX doesn't have `xorg` or a build in X server by default. You are going to be using `socat` to proxy your Xquartz X socket via TCP, so that you can specify your IP address into the docker container.
+2.    Install `socat` and `python`
 
-1. Make sure to have [homebrew](https://brew.sh/) installed. Visit the site, or use this command in your `Terminal` app:
-```sh
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
+      * `socat` will be needed to forward your X server socket, in order to display a window on your desktop. 
+         ```
+         brew install socat
+         ```
+      * `python` is useful for a number of reasons, but in our case, a means to get `docker-compose`. When you install `python`, you get the `pip` program along with it.
+        ```sh
+         brew install python
+        ```
 
-2. `socat` via [homebrew](https://brew.sh/). This will be needed to forward your X server socket, in order to display a window on your desktop.
-```sh
-brew install socat
-```
+3.    Install `docker-compose`
 
-3. [XQuartz](https://www.xquartz.org/), which is a X server for OSX.
+      Rather than using straight `docker` commands, we use `docker-compose` to simplfy orchestrating multiple containers. `docker-compose` uses a `.yml` file to describe docker commands and run them.
+      ```sh
+      pip install docker-compose
+      ```
 
-4. Open XQuartz, go to security and allow incoming connections.
+4.    Install [XQuartz](https://www.xquartz.org/), which is a X server for OSX.
+      ​
 
-5. Run socat to proxy your X host 
-```sh
-⁠⁠⁠⁠socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"
-```
+5.    Open XQuartz, go to Preferences > Security > Allow connections from network clients.
+      ​
 
-6. In your `docker-compose.yml` replace the `DISPLAY` environment variable with `- DISPLAY=YOURIPADDRESS6:0`. Don't forget the `:0` and the end, that specifys that it's the first display.
+6.    In `Terminal`, run `socat` to proxy your X server connection via TCP:
+      ```sh
+       ⁠⁠⁠⁠socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"
+      ```
 
-7. `docker-compose up`
+       After you run this, it will be waiting for connections, so don't close this `Terminal` window.
+      ​
 
-### Windows
-[Cygwin](https://www.cygwin.com/)...?
+7.    Edit `docker-compose.osx.yml` 
+
+       Replace the X's with your IP address. This will resolve your `socat` connection to the container, which is proxying XQuartz. 
+      ```yaml
+      environment:
+        - DISPLAY=XXX.XXX.XXX.XXX:0
+      ```
+
+      If your IP address was `192.168.0.5`, the line would be `DISPLAY=192.168.0.5:0` . Don't forget the `:0` and the end, that specifys that it's the first display, not a port.
+
+8. In your `oak` directory, run `docker-compose -f docker-compse.osx.yml up`
+
+### On Windows
+Sorry but you are a little on your own as far as an X server goes! In the future we may update this readme to provide info for developing on Windows. In the mean time... [Cygwin](https://www.cygwin.com/)?
+
+
+

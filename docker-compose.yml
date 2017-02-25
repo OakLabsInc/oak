@@ -12,15 +12,13 @@ services:
     # For NVIDIA
     # image: oaklabs/oak:1.0.0-nvidia
     devices:
-      # our video card device
+      # our video card device, may vary per operating system
       - /dev/dri:/dev/dri
-      # For NVIDIA
+      # For NVIDIA devices
       # - /dev/nvidia0:/dev/nvidia0
       # - /dev/nvidiactl:/dev/nvidiactl
     volumes:
       # for debugging!
-      - ./bin:/opt/oak/bin
-      - ./lib:/opt/oak/lib
       - ./default:/opt/oak/default
       # share memory
       - /dev/shm:/dev/shm
