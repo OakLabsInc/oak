@@ -29,19 +29,21 @@ You will also need an X server running (`xorg`). If you are on OSX, go ahead and
 This example is for debian based systems, you can accomplish the same by getting `docker` and `docker-compose` running yourself.
 
 1. Install `python-setuptools`
-   ```sh
+   ```
     sudo apt-get install -y python-setuptools
    ```
+
 2. Install `pip`
-   ```sh
+   ```
     sudo easy_install pip
    ```
 3. Install `docker-compose`
-   ```sh
+   ```
     pip install docker-compose>=1.8.0
    ```
+
 4. Allow your `X` server to allow outside connections. Make sure to disable this after you are finished!
-   ```sh
+   ```
     xhost +
     docker-compose up
 
@@ -58,7 +60,7 @@ I'm not going to lie... this is a pain in the ass. OSX doesn't have `xorg` or a 
 1.    Install [homebrew](https://brew.sh/)
 
       Homebrew is a easy way to install linux packages on OSX. In your `Terminal` app:
-      ```sh
+      ```
       /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
       ```
 
@@ -69,14 +71,14 @@ I'm not going to lie... this is a pain in the ass. OSX doesn't have `xorg` or a 
          brew install socat
          ```
       * `python` is useful for a number of reasons, but in our case, a means to get `docker-compose`. When you install `python`, you get the `pip` program along with it.
-        ```sh
+        ```
          brew install python
         ```
 
 3.    Install `docker-compose`
 
       Rather than using straight `docker` commands, we use `docker-compose` to simplfy orchestrating multiple containers. `docker-compose` uses a `.yml` file to describe docker commands and run them.
-      ```sh
+      ```
       pip install docker-compose
       ```
 
@@ -87,7 +89,7 @@ I'm not going to lie... this is a pain in the ass. OSX doesn't have `xorg` or a 
       ​
 
 6.    In `Terminal`, run `socat` to proxy your X server connection via TCP:
-      ```sh
+      ```
        ⁠⁠⁠⁠socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"
       ```
 
@@ -97,7 +99,7 @@ I'm not going to lie... this is a pain in the ass. OSX doesn't have `xorg` or a 
 7.    Edit `docker-compose.osx.yml` 
 
        Replace the X's with your IP address. This will resolve your `socat` connection to the container, which is proxying XQuartz. 
-      ```yaml
+      ```
       environment:
         - DISPLAY=XXX.XXX.XXX.XXX:0
       ```

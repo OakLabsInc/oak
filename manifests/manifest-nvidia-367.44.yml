@@ -1,6 +1,6 @@
-image: oaklabs/oak:1.0.0-nvidia-367.44
+image: oaklabs/oak:1.0.1-nvidia-367.44
 manifests:
-  - image: oaklabs/oak:1.0.0-amd64-nvidia-367.44
+  - image: oaklabs/oak:1.0.1-amd64-nvidia-367.44
     platform:
       architecture: amd64
       os: linux

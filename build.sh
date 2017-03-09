@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-BASE="oaklabs/oak:1.0.0"
+BASE="oaklabs/oak:1.0.1"
 
 # our FROM line in the Dockerfile, should ideally match the current electron node version
 FROM="node"
@@ -9,16 +9,23 @@ FROM_TAG="6.5.0-slim"
 ELECTRON="1.4.15"
 ELECTRON_REBUILD="1.4.0"
 
-DEBIAN_URL="http://httpredir.debian.org/debian"
-DEBIAN_REPO="jessie-backports"
-
 NPM_URL="https://registry.npmjs.org/"
 
 # these will get tagged, by default, as oaklabs/oak:VER-ARCH-nvidia-XXX.XX
-NVIDIA_VERSIONS=( "367.44" "375.26" )
+NVIDIA_VERSIONS=( "367.44" "375.26" "378.13" )
 
 DOCKERFILE_TEMPLATE_PATH="./node_modules/.bin/dockerfile-template"
 UNAME_ARCH=$(uname -m)
+
+if [[ $# -lt 2 && $1 == "app" ]]; then
+    docker run --rm -ti \
+        -v ${PWD}:/project \
+        -v ${PWD##*/}-node-modules:/project/node_modules \
+        -v ~/.electron:/root/.electron \
+        electronuserland/electron-builder:wine \
+        /bin/bash -c "npm install && npm prune && npm run linux"
+    exit;
+fi
 
 if [ ! -e "$DOCKERFILE_TEMPLATE_PATH" ]; then
   echo "";
@@ -56,8 +63,6 @@ $DOCKERFILE_TEMPLATE_PATH \
     -d FROM_TAG=$FROM_TAG \
     -d ELECTRON=$ELECTRON \
     -d ELECTRON_REBUILD=$ELECTRON_REBUILD \
-    -d DEBIAN_URL=$DEBIAN_URL \
-    -d DEBIAN_REPO=$DEBIAN_REPO \
     -d NPM_URL=$NPM_URL > Dockerfile;
 
 # build our base tag
@@ -67,7 +72,7 @@ echo "";
 docker build -t $FULL_TAG $(pwd);
 
 # ./build.sh nvidia will build nvidia version tags
-if [[ $# -lt 2 && $1 == "nvidia" ]]; then
+if [[ $# -lt 3 && $1 == "nvidia" ]]; then
     for SPECIFIC_NVIDIA in "${NVIDIA_VERSIONS[@]}"; do
         TAG="${FULL_TAG}-nvidia-${SPECIFIC_NVIDIA}";
         echo "";
@@ -79,7 +84,7 @@ if [[ $# -lt 2 && $1 == "nvidia" ]]; then
 fi
 
 # push our tags array
-if [[ $# -lt 2 && ($1 == "push" || $2 == "push") ]]; then
+if [[ $# -lt 3 && ($1 == "push" || $2 == "push") ]]; then
     for TAG in "${TAGS[@]}"; do
         echo "";
         echo "** Pushing $TAG";

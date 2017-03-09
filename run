@@ -1,0 +1,35 @@
+#!/usr/bin/env electron
+
+const { resolve, join } = require('path')
+const corePath = join(__dirname, 'lib', 'core.js')
+const { dialog } = require('electron')
+const oak = require(corePath)
+const program = require('commander')
+const { version } = require(join(__dirname, 'package.json'))
+
+// we are (ideally) running without popups, so we will ignore the popup box for JS errors
+dialog.showErrorBox = (title, err) => {
+  return
+}
+
+// take on uncaughtExceptions, emit them to the logger
+process.on('uncaughtException', e => {
+  oak.message.emit('logger.error', {
+    event: 'uncaughtException',
+    err: e
+  })
+})
+
+let appPath = join(__dirname, 'default')
+
+program
+  .version(version)
+  .arguments('<path>')
+  .action(function (path) {
+    if (path) {
+      appPath = resolve(path)
+    }
+  })
+  .parse(process.argv)
+
+require(appPath)

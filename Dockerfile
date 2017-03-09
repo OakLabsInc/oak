@@ -7,33 +7,34 @@ ARG NVIDIA_VERSION=367.44
 WORKDIR /opt/oak
 COPY . /opt/oak
 
-RUN echo deb http://httpredir.debian.org/debian jessie-backports main contrib non-free >> /etc/apt/sources.list.d/repo.list \
-    && apt-get update -q && apt-get install -t jessie-backports -y -qq --no-install-recommends \
-    build-essential \
-    dbus-x11 \
-    libasound2 \
-    libcanberra-gtk-module \
-    libcurl3 \
-    libexif-dev \
-    libgconf-2-4 \
-    libgl1-mesa-dri \
-    libgl1-mesa-glx \
-    libgtk2.0-0 \
-    libnotify4 \
-    libnss3 \
-    libxss1 \
-    libxtst6 \
-    python \
-    wget \
+RUN apt-get update -qq \
+    && apt-get install -y -qq --no-install-recommends \
+        apt-utils \
+        build-essential \
+        dbus-x11 \
+        libasound2 \
+        libcanberra-gtk-module \
+        libcurl3 \
+        libexif-dev \
+        libgconf-2-4 \
+        libgl1-mesa-dri \
+        libgl1-mesa-glx \
+        libgtk2.0-0 \
+        libnotify4 \
+        libnss3 \
+        libxss1 \
+        libxtst6 \
+        python \
+        wget \
     && mkdir -p /opt/oak/tmp \
     && npm config set registry https://registry.npmjs.org/ \
+    && npm i -g electron@1.4.15 electron-rebuild@1.4.0 \
     && npm install --production=false --engine-strict=true --progress=false --loglevel="error" \
     && npm test \
     && npm prune --production --loglevel="error" \
-    && npm install -g electron@1.4.15 electron-rebuild@1.4.0 --exact --loglevel "error" \
-    && electron-rebuild -p -v 1.4.15 -m /opt/oak/node_modules \
+    && electron-rebuild -p -m /opt/oak \
     && npm link --progress=false --loglevel="error" \
-    && npm link oak  --progress=false --loglevel="error" \
+    && cd default && npm link oak --progress=false --loglevel="error" && cd ../ \
     && /bin/bash -c "if [ $NVIDIA == true ]; then\
  apt-get install -y -qq --no-install-recommends module-init-tools binutils &&\
  wget -q -O /tmp/nvidia-driver.run\
@@ -50,7 +51,7 @@ ONBUILD WORKDIR /data/oak/app
 ONBUILD COPY . /data/oak/app
 ONBUILD RUN npm config set registry http://nexus.oak.host/repository/npm/ \
             && npm i --production=false --engine-strict=true --progress=false --loglevel="error" \
-            && electron-rebuild -p -v 1.4.15 -m /data/oak/app/node_modules \
+            && electron-rebuild -p -m /data/oak/app \
             && npm test \
             && npm prune --production --loglevel="error" \
             && npm link oak \

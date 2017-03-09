@@ -1,24 +1,29 @@
 {
   "name": "oak",
-  "version": "1.0.0",
+  "productName": "Oak",
+  "version": "1.0.1",
   "description": "connect with peripherials ontop of oak hardware",
-  "bin": {
-    "oak": "bin/start"
-  },
   "engines": {
     "node": "6.5.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/standard && find test/*.js | xargs -n 1 node | node_modules/.bin/tap-difflet",
     "coverage": "node node_modules/.bin/istanbul cover node_modules/.bin/tape test/*.js || true",
-    "coveralls": "npm run-script coverage && node node_modules/.bin/coveralls < coverage/lcov.info && rm -rf coverage/ || true"
+    "coveralls": "npm run-script coverage && node node_modules/.bin/coveralls < coverage/lcov.info && rm -rf coverage/ || true",
+    "dev": "node_modules/.bin/electron",
+    "linux": "node_modules/.bin/build -l",
+    "osx": "node_modules/.bin/build -m",
+    "test": "node_modules/.bin/standard && find test/*.js | xargs -n 1 node | node_modules/.bin/tap-difflet",
+    "windows": "node_modules/.bin/build -w"
   },
   "main": "lib/core.js",
+  "bin": {
+    "oak": "run"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/OakLabsInc/oak.git"
   },
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "author": "Flynn Joffray <nucleardreamer@gmail.com>",
   "bugs": {
     "url": "https://github.com/OakLabsInc/oak/issues"
@@ -26,6 +31,7 @@
   "homepage": "https://github.com/OakLabsInc/oak",
   "dependencies": {
     "async": "~2.0.1",
+    "commander": "~2.9.0",
     "eventemitter2": "~0.4.14",
     "lodash": "~4.17.2",
     "oak-tools": "~0.3.0",
@@ -36,12 +42,15 @@
   },
   "devDependencies": {
     "coveralls": "~2.11.6",
+    "electron": "1.4.15",
+    "electron-builder": "~14.4.0",
+    "electron-rebuild": "~1.4.0",
     "ip": "~1.1.0",
     "istanbul": "~0.4.2",
     "rimraf": "~2.5.2",
+    "standard": "~8.6.0",
     "tap-difflet": "~0.4.0",
-    "tape": "~4.6.0",
-    "standard": "*"
+    "tape": "~4.6.0"
   },
   "standard": {
     "ignore": [
