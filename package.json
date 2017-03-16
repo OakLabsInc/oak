@@ -2,7 +2,7 @@
   "name": "oak",
   "productName": "Oak",
   "version": "1.1.0",
-  "description": "connect with peripherials ontop of oak hardware",
+  "description": "A very opinionated kiosk framework based on Electron",
   "engines": {
     "node": "6.5.0"
   },
@@ -50,6 +50,14 @@
     "tap-difflet": "~0.4.0",
     "tape": "~4.6.0"
   },
+  "keywords": [
+    "oak",
+    "IoT",
+    "oak",
+    "kiosk",
+    "electron",
+    "docker"
+  ],
   "standard": {
     "ignore": [
       "*/tmp/"
