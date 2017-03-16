@@ -8,7 +8,5 @@ oak.on('ready', () => {
     url: 'file://' + join(__dirname, 'index.html'),
     fullscreen: false,
     debugger: true
-  }, function () {
-    oak.message.emit('window.test_message', true)
   })
 })
