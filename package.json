@@ -9,7 +9,6 @@
   "scripts": {
     "coverage": "node node_modules/.bin/istanbul cover node_modules/.bin/tape test/*.js || true",
     "coveralls": "npm run-script coverage && node node_modules/.bin/coveralls < coverage/lcov.info && rm -rf coverage/ || true",
-    "dev": "node_modules/.bin/electron",
     "linux": "node_modules/.bin/build -l",
     "osx": "node_modules/.bin/build -m",
     "test": "node_modules/.bin/standard && find test/*.js | xargs -n 1 node | node_modules/.bin/tap-difflet",
@@ -30,7 +29,6 @@
   },
   "homepage": "https://github.com/OakLabsInc/oak",
   "dependencies": {
-    "async": "~2.0.1",
     "commander": "~2.9.0",
     "eventemitter2": "~0.4.14",
     "lodash": "~4.17.2",
