@@ -87,6 +87,9 @@ insecure: false,
 
 // waits for `oak.message.emit('window.proceed', newUrlString)`
 waitForUrl: false
+
+// default user-agent string
+userAgent: 'Oak/' + oak.version
 ```
 
 If you want to develop and test quickly, you just need to have `oak` installed locally, and `electron` installed globally.
@@ -102,7 +105,8 @@ If you want to develop and test quickly, you just need to have `oak` installed l
 This will not give you a lot of the advantages of a dockerized application however. It's great for rapidly developing locally, but for a production usecase you will want to follow the steps below.
 
 # Examples
-* [`oak-examples`](https://github.com/OakLabsInc/oak-examples)
+* [`simple kiosk`](https://github.com/OakLabsInc/oak-examples/tree/master/simple-kiosk)
+* [`tetris`](https://github.com/OakLabsInc/oak-examples/tree/master/tetris)
 
 # I don't always test my code, but when I do...
 
