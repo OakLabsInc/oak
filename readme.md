@@ -13,9 +13,97 @@ The job of the `oak` module is to give a really easy way to make a kiosk applica
 
 ## Getting Started
 
-### Install Docker
+`oak` only requires a couple things to get up and running: A URL, and an `index.js` file.
 
-We use docker containers for all our deployment (and most of our development as well). To get started, you will need to have Docker installed. You can install docker from their [website](https://www.docker.com/products/docker), or on Linux systems, run this script:
+### index.js
+The most minimal example, this will launch a fullscreen app, injecting the `oak` object into the client side:
+```
+const oak = require('oak')
+
+// when oak is ready, we can tell it to load something
+oak.on('ready', () => {
+  // loading takes an options object with a `url`, second parameter is an optional callback
+  oak.load({
+    url: 'http://www.mywebapp.com'
+  })
+})
+```
+
+The second parameter of oak.load is an optional callback function, which executes after `oak.ready()` has been fired from the client or `oak.window.ready()` has been called from the server side.
+
+The `url` option is the only one required, and will load any valid URI
+```
+// load a local HTML file
+url: 'file://' + join(__dirname, 'index.html')
+
+// load your own webserver
+url: 'http://localhost:8080'
+```
+### Options
+Most of the `oak.load()` options are wrapping electron.js `BrowserWindow` options, but some are specific to our kiosk use-case.
+```
+// chrome launch flags to set while starting the window
+flags: []
+
+// local node modules to load into the `window` during pre-dom phase
+modules: [],
+
+// window title
+title: 'OAK',
+
+// the default display is your main monitor, if you have more, 
+display: 0, 
+
+// window size, which is irrelevant if fullscreen is true
+width: 1024, height: 768,
+
+// position of the window
+x: 0, y: 0,
+
+// the window background color (when no content is there, or transparent)
+background: '#000000',
+
+// launch the app full screen
+fullscreen: true,
+
+// always launch ontop of other windows
+ontop: true, 
+
+// don't put a frame on the application window
+frame: false,
+
+shortcut: {
+  // enable CommandOrControl+Shift+R to reload the window
+  reload: false,
+  // enable CommandOrControl+Shift+X to close the app
+  quit: false
+},
+
+// start the window shown, otherwise false will start the app hidden, waiting for an explicit `show()` call
+show: true,
+
+// allow running and displaying insecure content
+insecure: false,
+
+// waits for `oak.message.emit('window.proceed', newUrlString)`
+waitForUrl: false
+```
+
+If you want to develop and test quickly, you just need to have `oak` installed locally, and `electron` installed globally.
+```
+ npm i -g electron@1.4.15
+ npm i oak
+ // execute locally
+ ./node_modules/.bin/oak path/to/your/index.js
+ // or globally
+ npm i -g oak && oak path/to/your/index.js
+```
+
+This will not give you a lot of the advantages of a dockerized application however. It's great for rapidly developing locally, but for a production usecase you will want to follow the steps below.
+
+### I don't always test my code, but when I do...
+
+We use docker containers for all our production deployments. To get started, you will need to have Docker installed. You can install docker from their [website](https://www.docker.com/products/docker), or on Linux systems, run this script:
 
 ```sh
   curl -sSL https://get.docker.com/ | sh
