@@ -1,5 +1,9 @@
 image: oaklabs/oak:1.1.0
 manifests:
+  - image: oaklabs/oak:1.1.0-arm
+    platform:
+      architecture: arm
+      os: linux
   - image: oaklabs/oak:1.1.0-amd64
     platform:
       architecture: amd64

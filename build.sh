@@ -41,8 +41,8 @@ case $UNAME_ARCH in
     FROM_TAG="6.5.0-slim";
     ARCH_TAG="amd64";
     ;;
-  armv71|armv8)
-    FROM="hypriot/node";
+  armv7l|armv8)
+    FROM="hypriot/rpi-node";
     FROM_TAG="6.5.0-slim";
     ARCH_TAG="arm";
     ;;
