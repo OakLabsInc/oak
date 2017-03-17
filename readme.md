@@ -1,5 +1,5 @@
 # Oak
-[![release](https://img.shields.io/badge/release-v1.0.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/1.0.0)
+[![release](https://img.shields.io/badge/release-v1.1.1-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/1.0.0)
 [![node](https://img.shields.io/badge/node-v6.5.0-green.svg)](https://github.com/nodejs/node/releases/tag/v6.5.0)
 [![electron](https://img.shields.io/badge/electron-v1.4.15-green.svg)](https://github.com/electron/electron/releases/tag/v1.4.15)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?branch=master&t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak?branch=master)
@@ -11,7 +11,18 @@ A very opinionated kiosk UI application based on [electron](http://electron.atom
 Most of the `electron` project if focused around desktop application development, which is great! But when you are dealing with public computing (ATM machines, airline ticketing, movie theater ticket vendors, etc), you don't really need all the features a traditional desktop application requires.
 The job of the `oak` module is to give a really easy way to make a kiosk application with modern web technology, so that it's repeatable, scalable, and easy to rapidly prototype for production.
 
-# Getting Started
+# Install
+```
+npm i -g electron@1.4.15 && npm i -g oak
+```
+
+# Quick Start
+You can use any URL you want to simply launch a fullscreen webpage, for example:
+```
+oak http://gifdanceparty.giphy.com/
+```
+
+# Making an app
 
 `oak` only requires a couple things to get up and running: A URL, and an `index.js` file.
 
