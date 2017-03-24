@@ -41,10 +41,15 @@ case $UNAME_ARCH in
     FROM_TAG="6.5.0-slim";
     ARCH_TAG="amd64";
     ;;
-  armv7l|armv8)
+  armv6l)
     FROM="hypriot/rpi-node";
     FROM_TAG="6.5.0-slim";
     ARCH_TAG="arm";
+    ;;
+  armv7l)
+    FROM="hypriot/rpi-node";
+    FROM_TAG="6.5.0-slim";
+    ARCH_TAG="arm64";
     ;;
 esac
 
