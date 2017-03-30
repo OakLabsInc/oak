@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-BASE="oaklabs/oak:1.1.1"
+BASE="oaklabs/oak:1.2.0"
 
 # our FROM line in the Dockerfile, should ideally match the current electron node version
 FROM="node"
@@ -12,7 +12,7 @@ ELECTRON_REBUILD="1.4.0"
 NPM_URL="https://registry.npmjs.org/"
 
 # these will get tagged, by default, as oaklabs/oak:VER-ARCH-nvidia-XXX.XX
-NVIDIA_VERSIONS=( "367.44" "375.26" "378.13" )
+NVIDIA_VERSIONS=( "367.44" "375.26" "375.39" "378.13" )
 
 DOCKERFILE_TEMPLATE_PATH="./node_modules/.bin/dockerfile-template"
 UNAME_ARCH=$(uname -m)
@@ -23,7 +23,7 @@ if [[ $# -lt 2 && $1 == "app" ]]; then
         -v ${PWD##*/}-node-modules:/project/node_modules \
         -v ~/.electron:/root/.electron \
         electronuserland/electron-builder:wine \
-        /bin/bash -c "npm install && npm prune && npm run linux"
+        /bin/bash -c "npm install && npm prune && && npm run build && npm run dist"
     exit;
 fi
 

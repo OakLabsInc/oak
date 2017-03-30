@@ -1,6 +1,6 @@
-image: oaklabs/oak:1.1.1-nvidia-375.26
+image: oaklabs/oak:1.2.0-nvidia-375.26
 manifests:
-  - image: oaklabs/oak:1.1.1-amd64-nvidia-375.26
+  - image: oaklabs/oak:1.2.0-amd64-nvidia-375.26
     platform:
       architecture: amd64
       os: linux

@@ -1,7 +1,7 @@
 {
   "name": "oak",
   "productName": "Oak",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "A very opinionated kiosk framework based on Electron",
   "engines": {
     "node": "6.5.0"
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/OakLabsInc/oak",
   "dependencies": {
+    "append-query": "~2.0.1",
     "commander": "~2.9.0",
     "eventemitter2": "~0.4.14",
     "lodash": "~4.17.2",
@@ -52,8 +53,8 @@
   },
   "keywords": [
     "oak",
+    "oakos",
     "IoT",
-    "oak",
     "kiosk",
     "electron",
     "docker"
