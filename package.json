@@ -9,10 +9,7 @@
   "scripts": {
     "coverage": "node node_modules/.bin/istanbul cover node_modules/.bin/tape test/*.js || true",
     "coveralls": "npm run-script coverage && node node_modules/.bin/coveralls < coverage/lcov.info && rm -rf coverage/ || true",
-    "linux": "node_modules/.bin/build -l",
-    "osx": "node_modules/.bin/build -m",
-    "test": "node_modules/.bin/standard && find test/*.js | xargs -n 1 node | node_modules/.bin/tap-difflet",
-    "windows": "node_modules/.bin/build -w"
+    "test": "node_modules/.bin/standard && find test/*.js | xargs -n 1 node | node_modules/.bin/tap-difflet"
   },
   "main": "lib/core.js",
   "bin": {

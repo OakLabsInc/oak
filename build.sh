@@ -17,16 +17,6 @@ NVIDIA_VERSIONS=( "367.44" "375.26" "375.39" "378.13" )
 DOCKERFILE_TEMPLATE_PATH="./node_modules/.bin/dockerfile-template"
 UNAME_ARCH=$(uname -m)
 
-if [[ $# -lt 2 && $1 == "app" ]]; then
-    docker run --rm -ti \
-        -v ${PWD}:/project \
-        -v ${PWD##*/}-node-modules:/project/node_modules \
-        -v ~/.electron:/root/.electron \
-        electronuserland/electron-builder:wine \
-        /bin/bash -c "npm install && npm prune && && npm run build && npm run dist"
-    exit;
-fi
-
 if [ ! -e "$DOCKERFILE_TEMPLATE_PATH" ]; then
   echo "";
   echo "* dockerfile-template missing. Attempting to install now.";
