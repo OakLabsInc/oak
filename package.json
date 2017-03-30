@@ -39,8 +39,6 @@
   "devDependencies": {
     "coveralls": "~2.11.6",
     "electron": "1.4.15",
-    "electron-builder": "~14.4.0",
-    "electron-rebuild": "~1.4.0",
     "ip": "~1.1.0",
     "istanbul": "~0.4.2",
     "rimraf": "~2.5.2",
