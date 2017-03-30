@@ -1,5 +1,5 @@
 # Oak
-[![release](https://img.shields.io/badge/release-v1.1.1-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/1.0.0)
+[![release](https://img.shields.io/badge/release-v1.2.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/1.2.0)
 [![node](https://img.shields.io/badge/node-v6.5.0-green.svg)](https://github.com/nodejs/node/releases/tag/v6.5.0)
 [![electron](https://img.shields.io/badge/electron-v1.4.15-green.svg)](https://github.com/electron/electron/releases/tag/v1.4.15)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?branch=master&t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak?branch=master)
@@ -22,6 +22,20 @@ You can use any URL you want to simply launch a fullscreen webpage, for example:
 oak http://gifdanceparty.giphy.com/
 ```
 
+`oak` provides both a global and a local module. The global is for launching, the local is for module use.If you want to develop and test quickly, you just need to have `oak` and `electron` installed globally.
+
+Run locally
+```
+ npm i -g electron@1.4.15
+ npm i oak
+ ./node_modules/.bin/oak path/to/your/index.js
+```
+Run from global
+```
+ // or globally
+ npm i -g oak && oak path/to/your/index.js
+```
+
 # Making an app
 
 `oak` only requires a couple things to get up and running: A URL, and an `index.js` file.
@@ -36,88 +50,93 @@ oak.on('ready', () => {
   // loading takes an options object with a `url`, second parameter is an optional callback
   oak.load({
     url: 'http://www.mywebapp.com'
-  })
+  } // callback)
 })
 ```
 
-The second parameter of oak.load is an optional callback function, which executes after `oak.ready()` has been fired from the client or `oak.window.ready()` has been called from the server side.
 
-The `url` option is the only one required, and will load any valid URI
-```
-// load a local HTML file
-url: 'file://' + join(__dirname, 'index.html')
+## `oak.load(options[, callback])`
+Most of these options are wrapping electron.js `BrowserWindow` options, but some are specific to our kiosk use-case. This method returns the `Window` object
+* `options`: Object
+  * `url`: - Not optional
+    * `String` - The `url` option is the only one required, and will load any valid URI
+      ```
+      // load a local HTML file
+      url: 'file://' + join(__dirname, 'index.html')
 
-// load your own webserver
-url: 'http://localhost:8080'
-```
-## Options
-Most of the `oak.load()` options are wrapping electron.js `BrowserWindow` options, but some are specific to our kiosk use-case.
-```
-// chrome launch flags to set while starting the window
-flags: []
+      // load your own webserver
+      url: 'http://localhost:8080'
+      ```
+    * `Function` - You can also pass a function to `url`. The first parameter is a callback which you pass your string to. This is helpful for dynamic page loading, redirecting to another page, or simply passing query parameters.
+      ```
+      url: function (callback) {
+        callback('http://localhost:8080/?time=' + Date.now())
+      }
+      ```
+  * `title`: String `OAK`- The window title
+  * `display`: Number `0` - Your display number, and defaults to your main display
+  * `fullscreen`: Boolean `true` - Set the window to max height and width
+  * `kiosk`: Boolean `false` - Sets kiosk mode
+  * `ontop`: Boolean `true` - Set the window to be always on top of others
+  * `show`: Boolean `true` - Start the window shown
+  * `height`: Number `1024`
+  * `width`: Number `768`
+  * `x`: Number `0` - X position
+  * `y`: Number `0` - Y position
+  * `shortcut` Object
+    * `reload` Boolean `false` - enable CommandOrControl+Shift+R to reload the window
+    * `quit` Boolean `false` - enable CommandOrControl+Shift+X to close the app
+  * `background`: String `#000000` - Hex color of the window background
+  * `frame`: Boolean `false` - Show window frame
+  * `modules`: Array - Local node modules to load into the `window` during pre-dom phase
+  * `flags`: Array - Chrome launch flags to set while starting the window
+  * `insecure` Boolean - allow running and displaying insecure content (not recommended at all)
+  * `waitForUrl`: Boolean `false` - On reload, waits for an explicit `proceed([url])` call, or `proceed` event
+  * `userAgent`: String - Defaults to `'Oak/' + oak.version`
+* `callback`: [Function] - Executed when the `ready` function has fired
 
-// local node modules to load into the `window` during pre-dom phase
-modules: [],
+## Methods
+`oak.load()` returns a `Window` object with methods and events. The same methods are available in the client side on the `window.oak` object.
 
-// window title
-title: 'OAK',
+### `send(event[, payload])`
+Send events to the window
+* `event`: String - the event namespace, delimited by `.`
+* `payload`: Any - whatever data you want to send along
+Example: `window.send('myEvent', { foo: 'bar' })`
 
-// the default display is your main monitor, if you have more, 
-display: 0, 
+### `reload()`
+Reload the window. If `waitForUrl` was passed, after this function is the time to use `proceed`
 
-// window size, which is irrelevant if fullscreen is true
-width: 1024, height: 768,
+### `debug()`
+Toggle the chrome debugger
 
-// position of the window
-x: 0, y: 0,
+### `show()`
+Show the window
 
-// the window background color (when no content is there, or transparent)
-background: '#000000',
+### `hide()`
+Hide the window
 
-// launch the app full screen
-fullscreen: true,
+### `focus()`
+Set the desktop focus to this window
 
-// always launch ontop of other windows
-ontop: true, 
+### `proceed([url])`
+If `waitForUrl` was set `true`, you will need to execute this in order to continue with the reload.
+* `url`: String - Optional new URL to load, instead of the previous set URL. This will not overwrite options.
 
-// don't put a frame on the application window
-frame: false,
-
-shortcut: {
-  // enable CommandOrControl+Shift+R to reload the window
-  reload: false,
-  // enable CommandOrControl+Shift+X to close the app
-  quit: false
-},
-
-// start the window shown, otherwise false will start the app hidden, waiting for an explicit `show()` call
-show: true,
-
-// allow running and displaying insecure content
-insecure: false,
-
-// waits for `oak.message.emit('window.proceed', newUrlString)`
-waitForUrl: false
-
-// default user-agent string
-userAgent: 'Oak/' + oak.version
-```
-
-If you want to develop and test quickly, you just need to have `oak` installed locally, and `electron` installed globally.
-```
- npm i -g electron@1.4.15
- npm i oak
- // execute locally
- ./node_modules/.bin/oak path/to/your/index.js
- // or globally
- npm i -g oak && oak path/to/your/index.js
-```
-
-This will not give you a lot of the advantages of a dockerized application however. It's great for rapidly developing locally, but for a production usecase you will want to follow the steps below.
+### `on(event, callback)`
+This is an instance of `EventEmitter2`
+* `ready` - Will emit the ready event, and also execute the optional callback
+* `reloading` - The window is reloading, can be used in tandem with `proceed()`
+  * `oldSession` - previous session ID
+  * `newSession` - new session ID
+* `loadFailed` - The window load failed
+  * `opts`: Object - original options used
+  * `err`: Error
 
 # Examples
 * [`simple kiosk`](https://github.com/OakLabsInc/oak-examples/tree/master/simple-kiosk)
 * [`tetris`](https://github.com/OakLabsInc/oak-examples/tree/master/tetris)
+* [`multiple windows`](https://github.com/OakLabsInc/oak-examples/tree/master/multiple-windows)
 
 # I don't always test my code, but when I do...
 
