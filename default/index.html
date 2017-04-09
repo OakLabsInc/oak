@@ -3,22 +3,31 @@
   <head>
     <style type="text/css">
       body,html{
+        font-family: Arial, Helvetica, sans-serif;
         height: 100%;
         width: 100%;
         margin: 0;
         padding: 0;
         overflow: hidden;
       }
-      h1{
+      body {
         color: #fff;
-        margin: 50px;
+        font-size: 4vmax;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        text-transform: uppercase;
       }
     </style>
     <script type="text/javascript">
-      oak.ready()
+      document.addEventListener( "DOMContentLoaded", function () {        
+        oak.ready()
+      }, false)
     </script>
   </head>
   <body>
-    <h1>Oak default app</h1>
+    <div>oak default app</div>
   </body>
 </html>
