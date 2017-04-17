@@ -17,6 +17,33 @@ npm i -g electron@1.4.15 && npm i -g oak
 ```
 
 # Quick Start
+```
+$ oak --help
+
+  Usage: run [options] <url>
+
+  Options:
+
+    -h, --help                 output usage information
+    -V, --version              output the version number
+    -b, --background <String>  Hex background color for initial window. Example: #f0f0f0
+    -D, --display <Number>     Display to use
+    -f, --fullscreen           Full screen width and height
+    -F, --frame                Show window frame
+    -h, --height <Number>      Window height
+    -i, --insecure             Allow insecure connections (not recommended)
+    -k, --kiosk                Kiosk mode
+    -t, --ontop                Start window ontop of others
+    -s, --show                 Show window on start
+    -S, --shortcut [list]      Register shortcuts, comma separated. reload,quit
+    -t, --title <String>       Window title
+    -u, --useragent <String>   User-Agent string
+    -v, --verbose              Set log level to info
+    -w, --width <Number>       Window width
+    -x, --x <Number>           Window X position
+    -y, --y <Number>           Window Y position
+```
+
 You can use any URL you want to simply launch a fullscreen webpage, for example:
 ```
 oak http://gifdanceparty.giphy.com/
@@ -38,7 +65,10 @@ Run from global
 
 # Making an app
 
-`oak` only requires a couple things to get up and running: A URL, and an `index.js` file.
+`oak` only requires a couple things to get up and running: A URL, and an `index.js` file. You can specify a path to your module the same way you can with a URL:
+```
+oak path/to/app.js
+```
 
 ## index.js
 The most minimal example, this will launch a fullscreen app, injecting the `oak` object into the client side:
