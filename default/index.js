@@ -1,7 +1,5 @@
-const oak = require('oak')
 const { join } = require('path')
-
-oak.logger()
+const oak = require(join(__dirname, '..'))
 
 oak.on('ready', () => {
   oak.load({

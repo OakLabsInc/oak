@@ -6,7 +6,7 @@ BASE="oaklabs/oak:1.2.0"
 FROM="node"
 FROM_TAG="6.5.0-slim"
 
-ELECTRON="1.4.15"
+ELECTRON="1.4.16"
 ELECTRON_REBUILD="1.4.0"
 
 NPM_URL="https://registry.npmjs.org/"
