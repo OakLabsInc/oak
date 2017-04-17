@@ -1,41 +1,70 @@
 #!/usr/bin/env electron
 
 const { resolve, join } = require('path')
+const _ = require('lodash')
 const corePath = join(__dirname, 'lib', 'core.js')
+const tools = require('oak-tools')
 const { dialog } = require('electron')
 const oak = require(corePath)
 const program = require('commander')
 const { version } = require(join(__dirname, 'package.json'))
+
+let opts = {
+  url: join(__dirname, 'default')
+}
+
+program
+  .version(version)
+  .option('-b, --background <String>', 'Hex background color for initial window. Example: #f0f0f0')
+  .option('-D, --display <Number>', 'Display to use', _.toInteger)
+  .option('-f, --fullscreen', 'Full screen width and height')
+  .option('-F, --frame', 'Show window frame')
+  .option('-h, --height <Number>', 'Window height', _.toInteger)
+  .option('-i, --insecure', 'Allow insecure connections (not recommended)')
+  .option('-k, --kiosk', 'Kiosk mode')
+  .option('-t, --ontop', 'Start window ontop of others')
+  .option('-s, --show', 'Show window on start')
+  .option('-S, --shortcut [list]', 'Register shortcuts, comma separated. reload,quit', v => v.split(','))
+  .option('-t, --title <String>', 'Window title')
+  .option('-u, --useragent <String>', 'User-Agent string')
+  .option('-v, --verbose', 'Set log level to info')
+  .option('-w, --width <Number>', 'Window width', _.toInteger)
+  .option('-x, --x <Number>', 'Window X position', _.toInteger)
+  .option('-y, --y <Number>', 'Window Y position', _.toInteger)
+  .arguments('<url>')
+  .action(function (url) {
+    if (url) {
+      opts.url = url
+    }
+  })
+  .parse(process.argv)
+
+opts = _(program._events)
+  .omit('*', 'version')
+  .mapValues((v, k) => program[k])
+  .omitBy(_.isUndefined)
+  .merge(opts)
+  .value()
+
+let log = tools.logger({
+  level: program.verbose ? 'info' : 'error',
+  pretty: true
+})
 
 // we are (ideally) running without popups, so we will ignore the popup box for JS errors
 dialog.showErrorBox = (title, err) => {
   return
 }
 
-// take on uncaughtExceptions, emit them to the logger
-process.on('uncaughtException', e => {
-  oak.message.emit('logger.error', {
-    event: 'uncaughtException',
-    err: e
-  })
+// take on uncaughtExceptions, send them to the logger
+process.on('uncaughtException', err => {
+  log.error({ name: 'process.uncaughtException', err })
 })
 
-let appPath = join(__dirname, 'default')
-
-program
-  .version(version)
-  .arguments('<path>')
-  .action(function (path) {
-    if (path) {
-      appPath = path
-    }
-  })
-  .parse(process.argv)
-
-if (isURL(appPath)) {
-  oak.on('ready', () => oak.load({ url: appPath }))
+if (isURL(opts.url)) {
+  oak.on('ready', () => oak.load(opts))
 } else {
-  require(resolve(appPath))
+  require(resolve(opts.url))
 }
 
 function isURL (value) {
