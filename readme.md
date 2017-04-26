@@ -1,7 +1,7 @@
 # Oak
-[![release](https://img.shields.io/badge/release-v1.2.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/1.2.0)
-[![node](https://img.shields.io/badge/node-v6.5.0-green.svg)](https://github.com/nodejs/node/releases/tag/v6.5.0)
-[![electron](https://img.shields.io/badge/electron-v1.4.15-green.svg)](https://github.com/electron/electron/releases/tag/v1.4.15)
+[![release](https://img.shields.io/badge/release-v2.0.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/2.0.0)
+[![node](https://img.shields.io/badge/node-v7.4.0-green.svg)](https://github.com/nodejs/node/releases/tag/v7.4.0)
+[![electron](https://img.shields.io/badge/electron-v1.6.6-green.svg)](https://github.com/electron/electron/releases/tag/v1.6.6)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?branch=master&t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak?branch=master)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-green.svg)](http://standardjs.com/)
 
@@ -13,10 +13,7 @@ The job of the `oak` module is to give a really easy way to make a kiosk applica
 
 # Install
 ```bash
- npm i -g electron@1.4.15 && npm i -g oak
-# now in your project install oak
-cd myproject
-npm i oak
+npm i -g oak
 ```
 
 # Quick Start
@@ -52,23 +49,9 @@ You can use any URL you want to simply launch a fullscreen webpage, for example:
 oak http://gifdanceparty.giphy.com/
 ```
 
-`oak` provides both a global and a local module. The global is for launching, the local is for module use.If you want to develop and test quickly, you just need to have `oak` and `electron` installed globally.
-
-Run locally
-```
- npm i -g electron@1.4.15
- npm i oak
- ./node_modules/.bin/oak path/to/your/index.js
-```
-Run from global
-```
- // or globally
- npm i -g oak && oak path/to/your/index.js
-```
-
 # Making an app
 
-`oak` only requires a couple things to get up and running: A URL, and an `index.js` file. You can specify a path to your module the same way you can with a URL:
+`oak` only requires a couple things to get up and running: A URL, or an `index.js` file. You can specify a path to your module the same way you can with a URL:
 ```
 oak path/to/app.js
 ```
@@ -87,6 +70,8 @@ oak.on('ready', () => {
 })
 ```
 
+## `require('oak')`
+When you launch your app, the `oak` module is automatically resolved in modules, meaning you don't need to include it in your `package.json` file. This is similar to the way electron exposes it's own modules privately.
 
 ## `oak.load(options[, callback])`
 Most of these options are wrapping electron.js `BrowserWindow` options, but some are specific to our kiosk use-case. This method returns the `Window` object
