@@ -1,6 +1,0 @@
-image: oaklabs/oak:1.2.0-nvidia-367.44
-manifests:
-  - image: oaklabs/oak:1.2.0-amd64-nvidia-367.44
-    platform:
-      architecture: amd64
-      os: linux

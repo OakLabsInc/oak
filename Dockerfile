@@ -1,4 +1,4 @@
-FROM node:6.5.0-slim
+FROM node:7.4.0-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NVIDIA=false
@@ -28,20 +28,13 @@ RUN apt-get update -qq \
         wget \
     && mkdir -p /opt/oak/tmp \
     && npm config set registry https://registry.npmjs.org/ \
-    && npm i -g electron@1.4.15 electron-rebuild@1.4.0 \
-    && npm install --production=false --engine-strict=true --progress=false --loglevel="error" \
-    && npm test \
-    && npm prune --production --loglevel="error" \
-    && electron-rebuild -p -m /opt/oak \
-    && npm link --progress=false --loglevel="error" \
-    && cd default && npm link oak --progress=false --loglevel="error" && cd ../ \
+    && npm install oak@2.0.0 --global --engine-strict=true --progress=false --loglevel="error" \
     && /bin/bash -c "if [ $NVIDIA == true ]; then\
  apt-get install -y -qq --no-install-recommends module-init-tools binutils &&\
  wget -q -O /tmp/nvidia-driver.run\
  http://us.download.nvidia.com/XFree86/Linux-x86_64/$NVIDIA_VERSION/NVIDIA-Linux-x86_64-$NVIDIA_VERSION.run &&\
  sh /tmp/nvidia-driver.run -a -N --ui=none --no-kernel-module &&\
  rm /tmp/nvidia-driver.run; fi" \
-   && npm cache clean \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -51,12 +44,9 @@ ONBUILD WORKDIR /data/oak/app
 ONBUILD COPY . /data/oak/app
 ONBUILD RUN npm config set registry http://nexus.oak.host/repository/npm/ \
             && npm i --production=false --engine-strict=true --progress=false --loglevel="error" \
-            && electron-rebuild -p -m /data/oak/app \
             && npm test \
             && npm prune --production --loglevel="error" \
-            && npm link oak \
             && npm cache clean \
-            && ln -s /data/oak/app/node_modules /node_modules \
             && rm -rf ~/.electron
             
 ONBUILD VOLUME /data/oak/app

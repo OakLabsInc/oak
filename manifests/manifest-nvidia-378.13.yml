@@ -1,6 +1,0 @@
-image: oaklabs/oak:1.2.0-nvidia-378.13
-manifests:
-  - image: oaklabs/oak:1.2.0-amd64-nvidia-378.13
-    platform:
-      architecture: amd64
-      os: linux

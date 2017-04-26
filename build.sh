@@ -1,13 +1,12 @@
 #!/bin/bash -e
 
-BASE="oaklabs/oak:1.2.0"
+OAK_VERSION="2.0.0"
+BASE="oaklabs/oak:$OAK_VERSION"
 
 # our FROM line in the Dockerfile, should ideally match the current electron node version
 FROM="node"
-FROM_TAG="6.5.0-slim"
-
-ELECTRON="1.4.16"
-ELECTRON_REBUILD="1.4.0"
+NODE_VERSION="7.4.0"
+FROM_TAG="$NODE_VERSION-slim"
 
 NPM_URL="https://registry.npmjs.org/"
 
@@ -28,17 +27,14 @@ fi
 case $UNAME_ARCH in
   x86_64)
     FROM="node";
-    FROM_TAG="6.5.0-slim";
     ARCH_TAG="amd64";
     ;;
   armv6l)
     FROM="hypriot/rpi-node";
-    FROM_TAG="6.5.0-slim";
     ARCH_TAG="arm";
     ;;
   armv7l)
     FROM="hypriot/rpi-node";
-    FROM_TAG="6.5.0-slim";
     ARCH_TAG="arm64";
     ;;
 esac
@@ -50,14 +46,13 @@ TAGS=()
 TAGS+=("${FULL_TAG}")
 
 echo "";
-echo "* Compiling Dockerfile with $FULL_TAG on Electron v$ELECTRON";
+echo "* Compiling Dockerfile with $FULL_TAG";
 echo "";
 # compile our template file
 $DOCKERFILE_TEMPLATE_PATH \
     -d FROM=$FROM \
     -d FROM_TAG=$FROM_TAG \
-    -d ELECTRON=$ELECTRON \
-    -d ELECTRON_REBUILD=$ELECTRON_REBUILD \
+    -d OAK_VERSION=$OAK_VERSION \
     -d NPM_URL=$NPM_URL > Dockerfile;
 
 # build our base tag
@@ -68,12 +63,12 @@ docker build -t $FULL_TAG $(pwd);
 
 # ./build.sh nvidia will build nvidia version tags
 if [[ $# -lt 3 && $1 == "nvidia" ]]; then
-    for SPECIFIC_NVIDIA in "${NVIDIA_VERSIONS[@]}"; do
-        TAG="${FULL_TAG}-nvidia-${SPECIFIC_NVIDIA}";
+    for VERSION in "${NVIDIA_VERSIONS[@]}"; do
+        TAG="${FULL_TAG}-nvidia${VERSION}";
         echo "";
         echo "** Building $TAG";
         echo "";
-        docker build --build-arg NVIDIA=true --build-arg NVIDIA_VERSION=$SPECIFIC_NVIDIA -t $TAG $(pwd);
+        docker build --build-arg NVIDIA=true --build-arg NVIDIA_VERSION=$VERSION -t $TAG $(pwd);
         TAGS+=("${TAG}");
     done;
 fi
