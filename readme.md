@@ -12,8 +12,11 @@ Most of the `electron` project if focused around desktop application development
 The job of the `oak` module is to give a really easy way to make a kiosk application with modern web technology, so that it's repeatable, scalable, and easy to rapidly prototype for production.
 
 # Install
-```
-npm i -g electron@1.4.15 && npm i -g oak
+```bash
+ npm i -g electron@1.4.15 && npm i -g oak
+# now in your project install oak
+cd myproject
+npm i oak
 ```
 
 # Quick Start
