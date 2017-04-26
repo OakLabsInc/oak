@@ -27,10 +27,7 @@ exports.defineProperties = function (exports) {
   })
 }
 
-// if no app url is provided, we load the default
-let opts = {
-  url: join(__dirname, 'default')
-}
+let opts = {}
 
 program
   .version(version)
@@ -64,6 +61,10 @@ opts = _(program._events)
   .omitBy(_.isUndefined)
   .merge(opts)
   .value()
+
+if (!opts.url) {
+  program.help()
+}
 
 if (isURL(opts.url)) {
   oak.on('ready', () => oak.load(opts))
