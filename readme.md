@@ -80,7 +80,7 @@ oak.on('ready', () => {
   // loading takes an options object with a `url`, second parameter is an optional callback
   oak.load({
     url: 'http://www.mywebapp.com'
-  } // callback)
+  }) // or callback)
 })
 ```
 
@@ -221,7 +221,7 @@ I'm not going to lie... this is a pain in the ass. OSX doesn't have `xorg` or a 
 
 2.    Install `socat` and `python`
 
-      * `socat` will be needed to forward your X server socket, in order to display a window on your desktop. 
+      * `socat` will be needed to forward your X server socket, in order to display a window on your desktop.
          ```
          brew install socat
          ```
@@ -251,9 +251,9 @@ I'm not going to lie... this is a pain in the ass. OSX doesn't have `xorg` or a 
        After you run this, it will be waiting for connections, so don't close this `Terminal` window.
       ​
 
-7.    Edit `docker-compose.osx.yml` 
+7.    Edit `docker-compose.osx.yml`
 
-       Replace the X's with your IP address. This will resolve your `socat` connection to the container, which is proxying XQuartz. 
+       Replace the X's with your IP address. This will resolve your `socat` connection to the container, which is proxying XQuartz.
       ```
       environment:
         - DISPLAY=XXX.XXX.XXX.XXX:0
@@ -265,6 +265,3 @@ I'm not going to lie... this is a pain in the ass. OSX doesn't have `xorg` or a 
 
 ## On Windows
 Sorry but you are a little on your own as far as an X server goes! In the future we may update this readme to provide info for developing on Windows. In the mean time... [Cygwin](https://www.cygwin.com/)?
-
-
-
