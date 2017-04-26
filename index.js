@@ -1,14 +1,33 @@
-#!/usr/bin/env electron
+#!/usr/bin/env node
 
 const { resolve, join } = require('path')
+const Module = require('module')
 const _ = require('lodash')
-const corePath = join(__dirname, 'lib', 'core.js')
-const tools = require('oak-tools')
-const { dialog } = require('electron')
-const oak = require(corePath)
 const program = require('commander')
 const { version } = require(join(__dirname, 'package.json'))
 
+// oak gets loaded from this path
+const corePath = join(__dirname, 'lib', 'core.js')
+
+// resolve future require('oak') to our core path
+const origResolve = Module._resolveFilename
+Module._resolveFilename = function (request) {
+  return request === 'oak' ? corePath : origResolve(...[...arguments])
+}
+
+const oak = require('oak')
+
+// Attaches oak property to |exports|
+exports.defineProperties = function (exports) {
+  return Object.defineProperties(exports, {
+    oak: {
+      enumerable: false,
+      get: () => require('oak')
+    }
+  })
+}
+
+// if no app url is provided, we load the default
 let opts = {
   url: join(__dirname, 'default')
 }
@@ -45,21 +64,6 @@ opts = _(program._events)
   .omitBy(_.isUndefined)
   .merge(opts)
   .value()
-
-let log = tools.logger({
-  level: program.verbose ? 'info' : 'error',
-  pretty: true
-})
-
-// we are (ideally) running without popups, so we will ignore the popup box for JS errors
-dialog.showErrorBox = (title, err) => {
-  return
-}
-
-// take on uncaughtExceptions, send them to the logger
-process.on('uncaughtException', err => {
-  log.error({ name: 'process.uncaughtException', err })
-})
 
 if (isURL(opts.url)) {
   oak.on('ready', () => oak.load(opts))
