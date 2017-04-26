@@ -1,7 +1,6 @@
 {
   "name": "oak",
-  "productName": "Oak",
-  "version": "1.3.0",
+  "version": "2.0.0-rc1",
   "description": "A very opinionated kiosk framework based on Electron",
   "engines": {
     "node": "7.4.0"
@@ -9,7 +8,8 @@
   "scripts": {
     "coverage": "node node_modules/.bin/istanbul cover node_modules/.bin/tape test/*.js || true",
     "coveralls": "npm run-script coverage && node node_modules/.bin/coveralls < coverage/lcov.info && rm -rf coverage/ || true",
-    "test": "node_modules/.bin/standard && find test/*.js | xargs -n 1 node | node_modules/.bin/tap-difflet"
+    "test": "node_modules/.bin/standard && find test/*.js | xargs -n 1 node | node_modules/.bin/tap-difflet",
+    "prepublish": "npm t"
   },
   "main": "index.js",
   "bin": {

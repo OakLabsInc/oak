@@ -28,7 +28,7 @@ RUN apt-get update -qq \
         wget \
     && mkdir -p /opt/oak/tmp \
     && npm config set registry https://registry.npmjs.org/ \
-    && npm install oak@2.0.0 --global --engine-strict=true --progress=false --loglevel="error" \
+    && npm install oak@2.0.0-rc1 --global --engine-strict=true --progress=false --loglevel="error" \
     && /bin/bash -c "if [ $NVIDIA == true ]; then\
  apt-get install -y -qq --no-install-recommends module-init-tools binutils &&\
  wget -q -O /tmp/nvidia-driver.run\
