@@ -7,10 +7,7 @@ services:
   oak:
     build: .
     container_name: oak
-    image: oaklabs/oak:1.2.1-amd64
     network_mode: host
-    # For NVIDIA
-    # image: oaklabs/oak:1.2.0-nvidia
     devices:
       # our video card device, may vary per operating system
       - /dev/dri:/dev/dri
