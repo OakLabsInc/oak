@@ -3,7 +3,6 @@ services:
   oak:
     build: .
     container_name: oak
-    image: oaklabs/oak:1.0.0-amd64
     network_mode: host
     volumes:
       # for debugging!
