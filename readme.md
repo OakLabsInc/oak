@@ -1,5 +1,5 @@
 # Oak
-[![release](https://img.shields.io/badge/release-v2.0.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/2.0.0)
+[![release](https://img.shields.io/badge/release-v2.1.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/2.1.0)
 [![node](https://img.shields.io/badge/node-v7.4.0-green.svg)](https://github.com/nodejs/node/releases/tag/v7.4.0)
 [![electron](https://img.shields.io/badge/electron-v1.6.6-green.svg)](https://github.com/electron/electron/releases/tag/v1.6.6)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?branch=master&t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak?branch=master)
@@ -33,6 +33,7 @@ $ oak --help
     -h, --height <Number>      Window height
     -i, --insecure             Allow insecure connections (not recommended)
     -k, --kiosk                Kiosk mode
+    -n, --node                 Enable node integration
     -t, --ontop                Start window ontop of others
     -s, --show                 Show window on start
     -S, --shortcut [list]      Register shortcuts, comma separated. reload,quit
