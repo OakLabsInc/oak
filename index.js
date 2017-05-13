@@ -47,6 +47,7 @@ program
   .option('-u, --useragent [String]', 'User-Agent string', _.toString)
   .option('-F, --frame', 'Show window frame')
   .option('-s, --show', 'Show window on start')
+  .option('-n, --node', 'Enable node integration')
   .option('-i, --insecure', 'Allow insecure connections (not recommended)')
   .option('-v, --verbose', 'Set log level to info')
   .arguments('<url>')
