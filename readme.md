@@ -123,8 +123,9 @@ Send events to the window
 * `payload`: Any - whatever data you want to send along
 Example: `window.send('myEvent', { foo: 'bar' })`
 
-### `reload()`
+### `reload([url])`
 Reload the window. If `waitForUrl` was passed, after this function is the time to use `proceed`
+* `url`: String - Optional new URL to load, instead of the previous set URL. This will not overwrite options.
 
 ### `debug()`
 Toggle the chrome debugger
@@ -139,7 +140,7 @@ Hide the window
 Set the desktop focus to this window
 
 ### `proceed([url])`
-If `waitForUrl` was set `true`, you will need to execute this in order to continue with the reload.
+If `waitForUrl` was set `true`, you will need to execute this in order to continue with a reload.
 * `url`: String - Optional new URL to load, instead of the previous set URL. This will not overwrite options.
 
 ### `on(event, callback)`
