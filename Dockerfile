@@ -1,8 +1,7 @@
 FROM node:7.4.0-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG NVIDIA=false
-ARG NVIDIA_VERSION=367.44
+ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
 
 WORKDIR /opt/oak
 COPY . /opt/oak
@@ -28,21 +27,16 @@ RUN apt-get update -qq \
         wget \
     && mkdir -p /opt/oak/tmp \
     && npm config set registry https://registry.npmjs.org/ \
-    && npm install oak@2.1.1 --global --engine-strict=true --progress=false --loglevel="error" \
-    && /bin/bash -c "if [ $NVIDIA == true ]; then\
- apt-get install -y -qq --no-install-recommends module-init-tools binutils &&\
- wget -q -O /tmp/nvidia-driver.run\
- http://us.download.nvidia.com/XFree86/Linux-x86_64/$NVIDIA_VERSION/NVIDIA-Linux-x86_64-$NVIDIA_VERSION.run &&\
- sh /tmp/nvidia-driver.run -a -N --ui=none --no-kernel-module &&\
- rm /tmp/nvidia-driver.run; fi" \
-   && apt-get clean \
-   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && npm install oak@2.1.2 --global --engine-strict=true --progress=false --loglevel="error" \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /data/oak/app
 
 ONBUILD WORKDIR /data/oak/app
 ONBUILD COPY . /data/oak/app
-ONBUILD RUN npm config set registry http://nexus.oak.host/repository/npm/ \
+ONBUILD ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
+ONBUILD RUN npm config set registry $NPM_REGISTRY_URL \
             && npm i --production=false --engine-strict=true --progress=false --loglevel="error" \
             && npm test \
             && npm prune --production --loglevel="error" \
@@ -59,4 +53,6 @@ ENV DISPLAY=:0 \
     DEBUG=false \
     IGNORE_GPU_BLACKLIST=false \
     DISABLE_HTTP_CACHE=false \
-    NODE_TLS_REJECT_UNAUTHORIZED=0
+    NODE_TLS_REJECT_UNAUTHORIZED=0 \
+    PATH=/usr/local/nvidia/bin:$PATH \
+    LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
