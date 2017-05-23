@@ -54,5 +54,6 @@ ENV DISPLAY=:0 \
     IGNORE_GPU_BLACKLIST=false \
     DISABLE_HTTP_CACHE=false \
     NODE_TLS_REJECT_UNAUTHORIZED=0 \
+    # nvidia card specific env vars
     PATH=/usr/local/nvidia/bin:$PATH \
     LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
