@@ -16,7 +16,7 @@ MANIFEST_TOOL_PATH="/usr/bin/manifest-tool";
 UNAME_ARCH=$(uname -m);
 
 if [[ $# -lt 3 && $1 == "manifest" ]]; then
-    if [ ! -e "$DOCKERFILE_TEMPLATE_PATH" ]; then
+    if [ ! -e "$MANIFEST_TOOL_PATH" ]; then
         echo "";
         echo "* manifest-tool missing. Install it so you can use it!.";
         echo "";
