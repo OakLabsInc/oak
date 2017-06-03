@@ -8,7 +8,7 @@
   "scripts": {
     "coverage": "node node_modules/.bin/istanbul cover node_modules/.bin/tape test/*.js || true",
     "coveralls": "npm run-script coverage && node node_modules/.bin/coveralls < coverage/lcov.info && rm -rf coverage/ || true",
-    "test": "node_modules/.bin/standard && find test/*.js | xargs -n 1 node | node_modules/.bin/tap-difflet",
+    "test": "node_modules/.bin/standard && bin/entrypoint test/app.test.js",
     "prepublish": "npm t"
   },
   "main": "index.js",
@@ -35,13 +35,12 @@
     "uuid": "~2.0.2"
   },
   "devDependencies": {
-    "coveralls": "~2.11.6",
-    "ip": "~1.1.0",
-    "istanbul": "~0.4.2",
-    "rimraf": "~2.5.2",
-    "standard": "~10.0.0",
-    "tap-difflet": "~0.4.0",
-    "tape": "~4.6.0"
+    "coveralls": "~2.13.1",
+    "ip": "~1.1.5",
+    "istanbul": "~0.4.5",
+    "standard": "~10.0.2",
+    "tap-difflet": "~0.7.0",
+    "tape": "~4.6.3"
   },
   "keywords": [
     "oak",
@@ -49,7 +48,11 @@
     "IoT",
     "kiosk",
     "electron",
-    "docker"
+    "docker",
+    "docker electron",
+    "raspi kiosk",
+    "rpi",
+    "display"
   ],
   "standard": {
     "ignore": [
