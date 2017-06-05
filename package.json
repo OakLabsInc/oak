@@ -39,7 +39,6 @@
     "ip": "~1.1.5",
     "istanbul": "~0.4.5",
     "standard": "~10.0.2",
-    "tap-difflet": "~0.7.0",
     "tape": "~4.6.3"
   },
   "keywords": [
