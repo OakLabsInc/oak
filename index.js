@@ -8,12 +8,12 @@ const program = require('commander')
 const { version } = require(join(__dirname, 'package.json'))
 
 // oak gets loaded from this path
-const corePath = join(__dirname, 'lib', 'core.js')
+const oakPath = join(__dirname, 'lib', 'index.js')
 
 // resolve future require('oak') to our core path
 const origResolve = Module._resolveFilename
 Module._resolveFilename = function (request) {
-  return request === 'oak' ? corePath : origResolve(...[...arguments])
+  return request === 'oak' ? oakPath : origResolve(...[...arguments])
 }
 
 const oak = require('oak')
