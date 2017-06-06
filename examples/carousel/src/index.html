@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <style>
+            html, body {
+                margin: 0; padding: 0; overflow: hidden; height: 100%; width: 100%;
+                font-family: Arial, Helvetica, sans-serif;
+                color: #fff;
+            }
+            .view {
+              position: relative;
+              display: inline-block;
+              vertical-align: top;
+              height: 100%;
+              width: 100%;
+            }
+            webview {
+              position: relative;
+              height: 100%;
+              width: 100%;
+              top: 0;
+              left: 0;
+            }
+        </style>
+        
+	</head>
+  <body ng-app="carousel", ng-controller="carousel">
+    <div class="view", ng-repeat="url in settings.urls">
+      <webview disableguestresize data-src="{{ trustSrc(url) }}" src="http://www.oaklabs.is/"></webview>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript">
+      let app = window.angular
+        .module('carousel', [])
+        .controller('carousel', function ($scope, $timeout, $interval, $window, $sce) {
+          $scope.trustSrc = function (src) {
+            return $sce.trustAsResourceUrl(src)
+          }
+
+          $scope.index = 0
+          $scope.rotate = null
+
+          $scope.settings = {}
+            $window.oak.on('settings', function (settings) {
+              $timeout(() => {
+                $scope.settings = settings
+              }, 0)
+              $scope.rotate = $interval(function () {
+
+              }, $scope.settings.timer)
+              
+            })
+          
+          oak.ready()
+
+        })
+    </script>
+  </body>
+</html>

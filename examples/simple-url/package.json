@@ -1,0 +1,21 @@
+{
+  "name": "simple-url",
+  "version": "1.0.0",
+  "description": "Oak example of a loading just a URL",
+  "main": "index.js",
+  "scripts": {
+    "start": "../../bin/entrypoint index.js",
+    "test": "exit 0;"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OakLabsInc/oak.git"
+  },
+  "author": "Flynn Joffray <nucleardreamer@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/OakLabsInc/oak/issues"
+  },
+  "homepage": "https://github.com/OakLabsInc/oak/examples/simple-url#readme",
+  "private": true
+}

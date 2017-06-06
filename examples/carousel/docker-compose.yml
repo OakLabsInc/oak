@@ -1,0 +1,16 @@
+---
+version: '2'
+services:
+  multiplewindows:
+    build: .
+    container_name: multiple-windows
+    image: oaklabs/multiple-windows:latest
+    network_mode: host
+    devices:
+      # remove if you dont need to share your graphics card explicitely
+      - /dev/dri:/dev/dri
+    volumes:
+      - ./src:/data/oak/app/src
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev/shm:/dev/shm
+      - ../../oak/lib:/usr/local/lib/node_modules/oak/lib

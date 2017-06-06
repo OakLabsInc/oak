@@ -1,0 +1,29 @@
+{
+  "name": "multiple-windows",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "../../bin/entrypoint index.js",
+    "test": "node_modules/.bin/standard"
+  },
+  "license": "Apache-2.0",
+  "author": "Flynn Joffray <nucleardreamer@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/OakLabsInc/oak/issues"
+  },
+  "homepage": "https://github.com/OakLabsInc/oak/examples/multiple-windows#readme",
+  "dependencies": {
+    "hapi": "~16.1.0",
+    "inert": "~4.1.0",
+    "lodash": "~4.17.4"
+  },
+  "standard": {
+    "ignore": [
+      "src/js/"
+    ]
+  },
+  "devDependencies": {
+    "standard": "~10.0.2"
+  }
+}
