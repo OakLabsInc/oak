@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <style>
+            body {
+                margin: 0; padding: 0; overflow: hidden; height: 100%; width: 100%;
+                font-family: Arial, Helvetica, sans-serif;
+                color: #fff;
+                background-color: #E94E3D;
+            }
+            body > div {
+                position: absolute;
+                top: 30%;
+                width: 100%;
+                display: flex;
+                align-content: center;
+                justify-content: center;
+                text-align: center;
+                flex-direction: column;
+            }
+            #title {
+                font-weight: 100;
+                font-size: 3em;
+            }
+            #switcher {
+                text-transform: uppercase;
+                text-decoration: underline;
+            }
+        </style>
+	</head>
+    <body>
+        <div>
+            <h1 id="title">not set</h1>
+            <h2 id="switcher">switch windows</h2>
+        </div>
+        <script type="text/javascript">
+            document.addEventListener( "DOMContentLoaded", function () {
+                document.getElementById('title').innerHTML = oak.id
+                document.getElementById('switcher').addEventListener('click', function () {
+                    oak.send('switch', 'wadsadad')
+                }, false)
+                oak.on('sup', function () {
+                    console.log('SUP', arguments)
+                })
+                oak.ready()
+            }, false )
+        </script>
+    </body>
+</html>

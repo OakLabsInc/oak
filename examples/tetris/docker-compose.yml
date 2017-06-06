@@ -1,0 +1,15 @@
+---
+version: '2'
+services:
+  tetris:
+    build: .
+    container_name: tetris
+    image: oaklabs/tetris:latest
+    network_mode: host
+    devices:
+      # remove if you dont need to share your graphics card explicitely
+      - /dev/dri:/dev/dri
+    volumes:
+      - ./src:/data/oak/app/src
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev/shm:/dev/shm
