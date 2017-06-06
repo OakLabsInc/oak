@@ -27,27 +27,26 @@ RUN apt-get update -qq \
         wget \
     && mkdir -p /opt/oak/tmp \
     && npm config set registry https://registry.npmjs.org/ \
-    && npm install oak@2.1.2 --global --engine-strict=true --progress=false --loglevel="error" \
+    && npm install oak@2.2.0 --global --engine-strict=true --progress=false --loglevel="error" \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-WORKDIR /data/oak/app
+WORKDIR /app
 
-ONBUILD WORKDIR /data/oak/app
-ONBUILD COPY . /data/oak/app
+ONBUILD WORKDIR /app
+ONBUILD COPY . /app
 ONBUILD ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
 ONBUILD RUN npm config set registry $NPM_REGISTRY_URL \
             && npm i --production=false --engine-strict=true --progress=false --loglevel="error" \
             && npm test \
             && npm prune --production --loglevel="error" \
-            && npm cache clean \
-            && rm -rf ~/.electron
+            && npm cache clean
             
-ONBUILD VOLUME /data/oak/app
-ONBUILD CMD ["/data/oak/app"]
+ONBUILD VOLUME /app
+ONBUILD CMD ["/app"]
 
 ENTRYPOINT ["oak"]
-CMD ["/opt/oak/default"]
+CMD ["/opt/oak/examples/simple-script"]
 
 ENV DISPLAY=:0 \
     DEBUG=false \
