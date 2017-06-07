@@ -110,11 +110,11 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
   * `scripts`: Array `path` - Local node scripts or modules to load into the `window` during pre-dom phase. This can be a object with `name` and `path` if you want the `window.whatever` script to be named 
   * `flags`: Array - Chrome launch flags to set while starting the window
   * `insecure` Boolean - allow running and displaying insecure content (not recommended at all)
-  * `waitForUrl`: Boolean `false` - On reload, waits for an explicit `proceed([url])` call, or `proceed` event
   * `userAgent`: String - Defaults to `'Oak/' + oak.version`
 * `callback`: [Function] - Executed when the `ready` function has fired
 
-## Methods
+
+## Window methods
 `oak.load()` returns a `Window` object with methods and events. Each instance of `oak.load()` returns a unique object for that window, and the methods are mirrored for both the node side and client (renderer) side.
 
 ### `send(event[, payload])`
@@ -134,7 +134,7 @@ This is an instance of `EventEmitter2`
   * `err`: Error
 
 ### `reload([url])`
-Reload the window. If `waitForUrl` was passed, after this function is the time to use `proceed`
+Reload the window.
 * `url`: String - Optional new URL to load, instead of the previous set URL. This will not overwrite options.
 
 ### `debug()`
@@ -149,21 +149,20 @@ Hide the window
 ### `focus()`
 Set the desktop focus to this window
 
-### `oak.proceed([url])`
-If `waitForUrl` was set `true`, you will need to execute this in order to continue with a reload.
-* `url`: String - Optional new URL to load, instead of the previous set URL. This will not overwrite options.
-
-## Properties
+## Window properties
 
 ### `id`
-Unique `id` of that 
+Unique `id` of that window.
 
-The renderer has some specific 
+## Window events
+
+The window fires events from electrons [`BrowserWindow`](https://electron.atom.io/docs/api/browser-window/#instance-events) and [`webContents`](https://electron.atom.io/docs/api/web-contents/#instance-events).
+
+*note*: If you do a `send` of the same event from the renderer side, it will look like the same event coming from electron events. So be careful and watch your namespaces for conflicts!
 
 # Examples
-* [`simple kiosk`](https://github.com/OakLabsInc/oak-examples/tree/master/simple-kiosk)
-* [`tetris`](https://github.com/OakLabsInc/oak-examples/tree/master/tetris)
-* [`multiple windows`](https://github.com/OakLabsInc/oak-examples/tree/master/multiple-windows)
+
+Check out the [examples](https://github.com/OakLabsInc/oak/tree/master/examples) folder!
 
 # I don't always test my code, but when I do...
 

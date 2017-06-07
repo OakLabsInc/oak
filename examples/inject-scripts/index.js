@@ -3,10 +3,6 @@ const { join } = require('path')
 
 const scripts = join(__dirname, 'scripts')
 
-oak.catchErrors()
-
-oak.log.level = 'debug'
-
 oak.on('ready', () => {
   oak.load({
     url: 'file://' + join(__dirname, 'index.html'),

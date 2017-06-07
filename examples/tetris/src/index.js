@@ -81,18 +81,16 @@ server.start((err) => {
 
 // main app
 oak.on('ready', () => {
-  let window = oak.load({
+  oak.load({
     // load our local server as the url
     url: 'http://localhost:9999/index.html',
     // we want to use lodash in the client side
-    modules: ['lodash'],
+    scripts: ['lodash'],
     fullscreen: false,
     shortcut: {
       reload: true,
       quit: true
-    },
-    // this waits to show the window until we fire the 'proceed' event
-    waitForUrl: true
+    }
   }, function (msg) {
     // our clint side called oak.ready(msg)
     log.info({
@@ -100,14 +98,4 @@ oak.on('ready', () => {
       msg
     })
   })
-  // lets wait to show the window when reloaded, incase we need to do some cleanup or send a new URL
-  .on('reloading', function () {
-    log.info('we are reloading now')
-    // do cleanup here, before the window reloads
-    window.emit(
-      'proceed'
-      //, 'http://mynewurl.com/' // optional new url to load
-    )
-  })
-  // .debug() // uncomment to open the debugger on launch
 })

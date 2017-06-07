@@ -44,20 +44,19 @@ oak.catchErrors()
 oak.on('ready', () => {
   let one = oak.load({
     url: 'http://localhost:9999/index.html',
-    modules: ['lodash'],
+    scripts: ['lodash'],
     fullscreen: true,
     ontop: false
   }).on('switch', switchWindowFocus)
 
   let two = oak.load({
     url: 'http://localhost:9999/index.html',
-    modules: ['lodash'],
+    scripts: ['lodash'],
     fullscreen: true,
     ontop: false
   }).on('switch', switchWindowFocus)
 
   function switchWindowFocus (d) {
-    console.log('DATA', d)
     if (one.instance.isFocused()) {
       two.instance.focus()
     } else {
