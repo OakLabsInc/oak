@@ -1,23 +1,30 @@
 const oak = require('oak')
 const { join } = require('path')
 
+const scripts = join(__dirname, 'scripts')
+
+oak.catchErrors()
+
+oak.log.level = 'debug'
+
 oak.on('ready', () => {
   oak.load({
-    url: 'file://' + require('path').join(__dirname, 'index.html'),
+    url: 'file://' + join(__dirname, 'index.html'),
     scripts: [
-      // this will assign the JSON from inject_some.json to window.some_json in the renderer
+      // this will just evaluate the script, you dont have to use module.exports
+      join(scripts, 'iev_inject.js'),
+      // this will assign the JSON from json_inject.json to window.json_inject in the renderer
       {
-        name: 'some_json',
-        path: join(__dirname, 'scripts', 'inject_some.json')
+        name: 'json_inject',
+        path: join(scripts, 'json_inject.json')
       },
-      // the module export is a function, which gets assigned to window.how_cool()
+      // the module export is a function, which gets assigned to window.module_inject()
       {
-        name: 'how_cool',
-        path: join(__dirname, 'scripts', 'how_cool.js')
-      },
-      // this will just evaluate the script, outside the use of module.exports
-      join(__dirname, 'scripts', 'foobar.js')
+        name: 'module_inject',
+        path: join(scripts, 'module_inject.js')
+      }
     ],
-    fullscreen: false
-  }).debug()
+    fullscreen: false,
+    debugger: true
+  })
 })

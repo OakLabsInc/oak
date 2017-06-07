@@ -20,14 +20,19 @@
         text-align: center;
         text-transform: uppercase;
       }
+      #inject {
+        font-size: 2vmax;
+        color: lightblue;
+      }
     </style>
     <script type="text/javascript">
-      document.addEventListener( "DOMContentLoaded", function () {        
+      oak.on('dom-ready', function () {
         oak.ready()
-      }, false)
+      })
     </script>
   </head>
   <body>
     <div>oak inject-scripts example</div>
+    <div id="inject"></div>
   </body>
 </html>
