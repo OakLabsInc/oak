@@ -15,8 +15,6 @@ services:
       # - /dev/nvidia0:/dev/nvidia0
       # - /dev/nvidiactl:/dev/nvidiactl
     volumes:
-      # for debugging!
-      - ./default:/opt/oak/default
       # share memory
       - /dev/shm:/dev/shm
       # mount our X server socket
