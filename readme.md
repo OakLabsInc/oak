@@ -156,7 +156,7 @@ Unique `id` of that window.
 
 ## Window events
 
-The window fires events from electrons [`BrowserWindow`](https://electron.atom.io/docs/api/browser-window/#instance-events) and [`webContents`](https://electron.atom.io/docs/api/web-contents/#instance-events).
+The window fires events from electrons [`BrowserWindow`](https://electron.atom.io/docs/api/browser-window/#instance-events) and [`webContents`](https://electron.atom.io/docs/api/web-contents/#instance-events). The only event fired from that set into the renderer is `dom-ready`.
 
 *note*: If you do a `send` of the same event from the renderer side, it will look like the same event coming from electron events. So be careful and watch your namespaces for conflicts!
 

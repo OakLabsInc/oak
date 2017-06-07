@@ -5,3 +5,7 @@ window.foo = function () {
 window.bar = function () {
   return 'function bar() executed'
 }
+
+window.oak.on('dom-ready', function () {
+  document.getElementById('inject').innerText = 'I was injected after dom-ready was fired!'
+})
