@@ -107,7 +107,7 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
     * `quit` Boolean `false` - enable CommandOrControl+Shift+X to close the app
   * `background`: String `#000000` - Hex color of the window background
   * `frame`: Boolean `false` - Show window frame
-  * `modules`: Array - Local node modules to load into the `window` during pre-dom phase
+  * `scripts`: Array `path` - Local node scripts or modules to load into the `window` during pre-dom phase. This can be a object with `name` and `path` if you want the `window.whatever` script to be named 
   * `flags`: Array - Chrome launch flags to set while starting the window
   * `insecure` Boolean - allow running and displaying insecure content (not recommended at all)
   * `waitForUrl`: Boolean `false` - On reload, waits for an explicit `proceed([url])` call, or `proceed` event
