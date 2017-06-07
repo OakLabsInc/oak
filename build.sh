@@ -65,7 +65,6 @@ echo "";
 $DOCKERFILE_TEMPLATE_PATH \
     -d FROM=$FROM \
     -d FROM_TAG=$FROM_TAG \
-    -d OAK_VERSION=$OAK_VERSION \
     -d NPM_URL=$NPM_URL > Dockerfile;
 
 # build our base tag
