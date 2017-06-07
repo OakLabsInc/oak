@@ -97,7 +97,7 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
   * `fullscreen`: Boolean `true` - Set the window to max height and width
   * `kiosk`: Boolean `false` - Sets kiosk mode
   * `ontop`: Boolean `true` - Set the window to be always on top of others
-  * `show`: Boolean `true` - Start the window shown
+  * `show`: Boolean `true` - Start the window shown, this will also show the window whenever it is reloaded
   * `height`: Number `1024`
   * `width`: Number `768`
   * `x`: Number `0` - X position
@@ -115,13 +115,23 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
 * `callback`: [Function] - Executed when the `ready` function has fired
 
 ## Methods
-`oak.load()` returns a `Window` object with methods and events. The same methods are available in the client side on the `window.oak` object.
+`oak.load()` returns a `Window` object with methods and events. Each instance of `oak.load()` returns a unique object for that window, and the methods are mirrored for both the node side and client (renderer) side.
 
 ### `send(event[, payload])`
 Send events to the window
 * `event`: String - the event namespace, delimited by `.`
 * `payload`: Any - whatever data you want to send along
 Example: `window.send('myEvent', { foo: 'bar' })`
+
+### `on(event, callback)`
+This is an instance of `EventEmitter2`
+* `ready` - Will emit the ready event, and also execute the optional callback
+* `reloading` - The window is reloading, can be used in tandem with `proceed()`
+  * `oldSession` - previous session ID
+  * `newSession` - new session ID
+* `loadFailed` - The window load failed
+  * `opts`: Object - original options used
+  * `err`: Error
 
 ### `reload([url])`
 Reload the window. If `waitForUrl` was passed, after this function is the time to use `proceed`
@@ -139,19 +149,16 @@ Hide the window
 ### `focus()`
 Set the desktop focus to this window
 
-### `proceed([url])`
+### `oak.proceed([url])`
 If `waitForUrl` was set `true`, you will need to execute this in order to continue with a reload.
 * `url`: String - Optional new URL to load, instead of the previous set URL. This will not overwrite options.
 
-### `on(event, callback)`
-This is an instance of `EventEmitter2`
-* `ready` - Will emit the ready event, and also execute the optional callback
-* `reloading` - The window is reloading, can be used in tandem with `proceed()`
-  * `oldSession` - previous session ID
-  * `newSession` - new session ID
-* `loadFailed` - The window load failed
-  * `opts`: Object - original options used
-  * `err`: Error
+## Properties
+
+### `id`
+Unique `id` of that 
+
+The renderer has some specific 
 
 # Examples
 * [`simple kiosk`](https://github.com/OakLabsInc/oak-examples/tree/master/simple-kiosk)

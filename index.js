@@ -49,6 +49,7 @@ program
   .option('-s, --show', 'Show window on start')
   .option('-n, --node', 'Enable node integration')
   .option('-i, --insecure', 'Allow insecure connections (not recommended)')
+  .option('-d, --debugger', 'Open chrome dev tools on load')
   .option('-v, --verbose', 'Set log level to info')
   .arguments('<url>')
   .action(function (url) {
