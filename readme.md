@@ -1,7 +1,7 @@
 # Oak
 [![release](https://img.shields.io/badge/release-v3.0.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/3.0.0)
 [![node](https://img.shields.io/badge/node-v7.4.0-green.svg)](https://github.com/nodejs/node/releases/tag/v7.4.0)
-[![electron](https://img.shields.io/badge/electron-v1.6.6-green.svg)](https://github.com/electron/electron/releases/tag/v1.6.6)
+[![electron](https://img.shields.io/badge/electron-v1.6.11-green.svg)](https://github.com/electron/electron/releases/tag/v1.6.11)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?branch=master&t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak?branch=master)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-green.svg)](http://standardjs.com/)
 
