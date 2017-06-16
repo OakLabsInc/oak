@@ -24,7 +24,7 @@ RUN apt-get update -qq \
         libxss1 \
         libxtst6 \
         python \
-        wget \
+        udev \
     && mkdir -p /opt/oak/tmp \
     && npm config set registry %%NPM_URL%% \
     && npm install --engine-strict=true --progress=false --progress=false --loglevel="error" \
