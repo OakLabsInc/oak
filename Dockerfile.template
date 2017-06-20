@@ -42,7 +42,8 @@ ONBUILD RUN npm config set registry $NPM_REGISTRY_URL \
             && npm test \
             && npm prune --production --loglevel="error" \
             && npm cache clean \
-            && rm -rf ~/.electron
+            && rm -rf ~/.electron \
+            && ln -s /data/oak/app/node_modules /node_modules
             
 ONBUILD VOLUME /data/oak/app
 ONBUILD CMD ["/data/oak/app"]
