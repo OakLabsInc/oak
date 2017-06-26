@@ -31,6 +31,7 @@
     "electron": "1.7.3",
     "eventemitter2": "~0.4.14",
     "lodash": "~4.17.2",
+    "minimatch": "~3.0.4",
     "oak-tools": "~0.5.0",
     "uuid": "~2.0.2"
   },

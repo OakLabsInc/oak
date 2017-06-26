@@ -44,7 +44,7 @@ $ oak --help
     -s, --show [Boolean]           Show window on start
     -n, --node [Boolean]           Enable node integration
     -i, --insecure [Boolean]       Allow insecure connections (not recommended)
-    -c, --disable-cache [Boolean]  Disable the default HTTP cache, app wide
+    -c, --cache [Boolean]          Use HTTP cache
     -d, --debugger [Boolean]       Open chrome dev tools on load
 ```
  
