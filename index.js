@@ -32,25 +32,97 @@ let opts = {}
 
 program
   .version(version)
-  .description('If you load oak with a script path, no commandline options will apply. You need to specify them under oak.load(options)')
-  .option('-b, --background [String]', 'Hex background color for initial window. Example: #f0f0f0', '#000000')
-  .option('-f, --fullscreen [Boolean]', 'Set the window to full width and height', _.toBoolean, true)
-  .option('-h, --height [Number]', 'Window height', _.toInteger, 768)
-  .option('-w, --width [Number]', 'Window width', _.toInteger, 1024)
-  .option('-x, --x [Number]', 'Window X position', _.toInteger, 0)
-  .option('-y, --y [Number]', 'Window Y position', _.toInteger, 0)
-  .option('-t, --title [String]', 'Window title', _.toString, 'Oak')
-  .option('-t, --ontop [Boolean]', 'Start window ontop of others', _.toBoolean, true)
-  .option('-k, --kiosk [Boolean]', 'Kiosk mode', _.toBoolean, true)
-  .option('-D, --display [Number]', 'Display to use', _.toInteger, 0)
-  .option('-S, --shortcut [List]', 'Register shortcuts, comma separated. reload,quit', v => v.split(','))
-  .option('-u, --useragent [String]', 'User-Agent string', _.toString)
-  .option('-F, --frame', 'Show window frame')
-  .option('-s, --show', 'Show window on start')
-  .option('-n, --node', 'Enable node integration')
-  .option('-i, --insecure', 'Allow insecure connections (not recommended)')
-  .option('-d, --debugger', 'Open chrome dev tools on load')
-  .option('-v, --verbose', 'Set log level to info')
+  .description('If you load oak with a script path, no commandline options will apply automatically.')
+  .option(
+    '-b, --background [String]',
+    'Hex background color for initial window. Example: #f0f0f0',
+    '#000000'
+  )
+  .option(
+    '-f, --fullscreen [Boolean]',
+    'Set the window to full width and height',
+    _.toBoolean, true
+  )
+  .option(
+    '-h, --height [Number]',
+    'Window height',
+    _.toInteger, 768
+  )
+  .option(
+    '-w, --width [Number]',
+    'Window width',
+    _.toInteger, 1024
+  )
+  .option(
+    '-x, --x [Number]',
+    'Window X position',
+    _.toInteger, 0
+  )
+  .option(
+    '-y, --y [Number]',
+    'Window Y position',
+    _.toInteger, 0
+  )
+  .option(
+    '-t, --title [String]',
+    'Window title',
+    _.toString, 'Oak'
+  )
+  .option(
+    '-t, --ontop [Boolean]',
+    'Start window ontop of others',
+    _.toBoolean, true
+  )
+  .option(
+    '-k, --kiosk [Boolean]',
+    'Kiosk mode',
+    _.toBoolean, true
+  )
+  .option(
+     '-D, --display [Number]',
+     'Display to use',
+     _.toInteger, 0
+    )
+  .option(
+    '-S, --shortcut [List]',
+    'Register shortcuts, comma separated. reload,quit',
+    v => v.split(','), []
+  )
+  .option(
+    '-u, --useragent [String]',
+    'User-Agent string',
+    _.toString
+  )
+  .option(
+    '-F, --frame [Boolean]',
+    'Show window frame',
+    _.toBoolean, false
+  )
+  .option(
+    '-s, --show [Boolean]',
+    'Show window on start',
+    _.toBoolean, true
+  )
+  .option(
+    '-n, --node [Boolean]',
+    'Enable node integration',
+    _.toBoolean, false
+  )
+  .option(
+    '-i, --insecure [Boolean]',
+    'Allow insecure connections (not recommended)',
+    _.toBoolean, false
+  )
+  .option(
+    '-c, --disable-cache [Boolean]',
+    'Disable the default HTTP cache, app wide',
+    _.toBoolean, false
+  )
+  .option(
+    '-d, --debugger [Boolean]',
+    'Open chrome dev tools on load',
+    _.toBoolean, false
+  )
   .arguments('<url>')
   .action(function (url) {
     if (url) {
