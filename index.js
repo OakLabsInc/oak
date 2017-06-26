@@ -114,8 +114,13 @@ program
     _.toBoolean, false
   )
   .option(
-    '-c, --disable-cache [Boolean]',
-    'Disable the default HTTP cache, app wide',
+    '--sslExceptions [Array]',
+    'Ignore SSL security warnings from a host pattern. Don\'t include the FQDN. Example: *.mysite.com',
+    v => v.split(','), []
+  )
+  .option(
+    '-c, --cache [Boolean]',
+    'Use HTTP cache',
     _.toBoolean, false
   )
   .option(
