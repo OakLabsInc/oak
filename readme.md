@@ -1,5 +1,5 @@
 # Oak
-[![release](https://img.shields.io/badge/release-v3.1.0-rc1-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/3.1.0-rc1)
+[![release](https://img.shields.io/badge/release-v3.1.0-rc2-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/3.1.0-rc2)
 [![node](https://img.shields.io/badge/node-v7.4.0-green.svg)](https://github.com/nodejs/node/releases/tag/v7.4.0)
 [![electron](https://img.shields.io/badge/electron-v1.6.11-green.svg)](https://github.com/electron/electron/releases/tag/v1.6.11)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?branch=master&t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak?branch=master)
@@ -20,31 +20,34 @@ npm i -g oak
 ```
 $ oak --help
 
-  Usage: run [options] <url>
+  Usage: oak [options] <url>
+
+  If you load oak with a script path, no commandline options will apply automatically.
 
   Options:
 
-    -h, --help                 output usage information
-    -V, --version              output the version number
-    -b, --background <String>  Hex background color for initial window. Example: #f0f0f0
-    -D, --display <Number>     Display to use
-    -f, --fullscreen           Full screen width and height
-    -F, --frame                Show window frame
-    -h, --height <Number>      Window height
-    -i, --insecure             Allow insecure connections (not recommended)
-    -k, --kiosk                Kiosk mode
-    -n, --node                 Enable node integration
-    -t, --ontop                Start window ontop of others
-    -s, --show                 Show window on start
-    -S, --shortcut [list]      Register shortcuts, comma separated. reload,quit
-    -t, --title <String>       Window title
-    -u, --useragent <String>   User-Agent string
-    -v, --verbose              Set log level to info
-    -w, --width <Number>       Window width
-    -x, --x <Number>           Window X position
-    -y, --y <Number>           Window Y position
+    -h, --help                     output usage information
+    -V, --version                  output the version number
+    -b, --background [String]      Hex background color for initial window. Example: #f0f0f0
+    -f, --fullscreen [Boolean]     Set the window to full width and height
+    -h, --height [Number]          Window height
+    -w, --width [Number]           Window width
+    -x, --x [Number]               Window X position
+    -y, --y [Number]               Window Y position
+    -t, --title [String]           Window title
+    -t, --ontop [Boolean]          Start window ontop of others
+    -k, --kiosk [Boolean]          Kiosk mode
+    -D, --display [Number]         Display to use
+    -S, --shortcut [List]          Register shortcuts, comma separated. reload,quit
+    -u, --useragent [String]       User-Agent string
+    -F, --frame [Boolean]          Show window frame
+    -s, --show [Boolean]           Show window on start
+    -n, --node [Boolean]           Enable node integration
+    -i, --insecure [Boolean]       Allow insecure connections (not recommended)
+    -c, --disable-cache [Boolean]  Disable the default HTTP cache, app wide
+    -d, --debugger [Boolean]       Open chrome dev tools on load
 ```
-
+ 
 You can use any URL you want to simply launch a fullscreen webpage, for example:
 ```
 oak http://gifdanceparty.giphy.com/
@@ -109,7 +112,8 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
   * `frame`: Boolean `false` - Show window frame
   * `scripts`: Array `path` - Local node scripts or modules to load into the `window` during pre-dom phase. This can be a object with `name` and `path` if you want the `window.whatever` script to be named 
   * `flags`: Array - Chrome launch flags to set while starting the window
-  * `insecure` Boolean - allow running and displaying insecure content (not recommended at all)
+  * `insecure` Boolean `false` - allow running and displaying insecure content (not recommended at all)
+  * `cache` Boolean `false` - Enable HTTP cache flag for chrome
   * `userAgent`: String - Defaults to `'Oak/' + oak.version`
 * `callback`: [Function] - Executed when the `ready` function has fired
 
