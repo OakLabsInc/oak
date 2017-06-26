@@ -38,8 +38,7 @@ ONBUILD WORKDIR /data/oak/app
 ONBUILD COPY . /data/oak/app
 ONBUILD ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
 ONBUILD RUN npm config set registry $NPM_REGISTRY_URL \
-            && npm i --production=false --engine-strict=true --progress=false --loglevel="error" \
-            && npm test \
+            && npm i --progress=false --loglevel="error" \
             && npm prune --production --loglevel="error" \
             && npm cache clean \
             && rm -rf ~/.electron \
