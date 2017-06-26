@@ -115,7 +115,7 @@ program
   )
   .option(
     '--sslExceptions [Array]',
-    'Ignore SSL security warnings from a host pattern. Don\'t include the FQDN. Example: *.mysite.com',
+    'Bypass SSL security for specific hosts. This uses a host pattern. Example: *.mysite.com',
     v => v.split(','), []
   )
   .option(

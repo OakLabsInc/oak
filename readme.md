@@ -26,26 +26,27 @@ $ oak --help
 
   Options:
 
-    -h, --help                     output usage information
-    -V, --version                  output the version number
-    -b, --background [String]      Hex background color for initial window. Example: #f0f0f0
-    -f, --fullscreen [Boolean]     Set the window to full width and height
-    -h, --height [Number]          Window height
-    -w, --width [Number]           Window width
-    -x, --x [Number]               Window X position
-    -y, --y [Number]               Window Y position
-    -t, --title [String]           Window title
-    -t, --ontop [Boolean]          Start window ontop of others
-    -k, --kiosk [Boolean]          Kiosk mode
-    -D, --display [Number]         Display to use
-    -S, --shortcut [List]          Register shortcuts, comma separated. reload,quit
-    -u, --useragent [String]       User-Agent string
-    -F, --frame [Boolean]          Show window frame
-    -s, --show [Boolean]           Show window on start
-    -n, --node [Boolean]           Enable node integration
-    -i, --insecure [Boolean]       Allow insecure connections (not recommended)
-    -c, --cache [Boolean]          Use HTTP cache
-    -d, --debugger [Boolean]       Open chrome dev tools on load
+    -h, --help                  output usage information
+    -V, --version               output the version number
+    -b, --background [String]   Hex background color for initial window. Example: #f0f0f0
+    -f, --fullscreen [Boolean]  Set the window to full width and height
+    -h, --height [Number]       Window height
+    -w, --width [Number]        Window width
+    -x, --x [Number]            Window X position
+    -y, --y [Number]            Window Y position
+    -t, --title [String]        Window title
+    -t, --ontop [Boolean]       Start window ontop of others
+    -k, --kiosk [Boolean]       Kiosk mode
+    -D, --display [Number]      Display to use
+    -S, --shortcut [List]       Register shortcuts, comma separated. reload,quit
+    -u, --useragent [String]    User-Agent string
+    -F, --frame [Boolean]       Show window frame
+    -s, --show [Boolean]        Show window on start
+    -n, --node [Boolean]        Enable node integration
+    -i, --insecure [Boolean]    Allow insecure connections (not recommended)
+    --sslExceptions [Array]     Bypass SSL security for specific hosts. This uses a host pattern. Example: *.mysite.com
+    -c, --cache [Boolean]       Use HTTP cache
+    -d, --debugger [Boolean]    Open chrome dev tools on load
 ```
  
 You can use any URL you want to simply launch a fullscreen webpage, for example:
@@ -113,6 +114,7 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
   * `scripts`: Array `path` - Local node scripts or modules to load into the `window` during pre-dom phase. This can be a object with `name` and `path` if you want the `window.whatever` script to be named 
   * `flags`: Array - Chrome launch flags to set while starting the window
   * `insecure` Boolean `false` - allow running and displaying insecure content (not recommended at all)
+  * `sslExceptions` Array - Bypass SSL security for specific hosts. This uses a host pattern. Example: `*.mysite.com`
   * `cache` Boolean `false` - Enable HTTP cache flag for chrome
   * `userAgent`: String - Defaults to `'Oak/' + oak.version`
 * `callback`: [Function] - Executed when the `ready` function has fired
