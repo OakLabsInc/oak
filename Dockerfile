@@ -1,4 +1,4 @@
-FROM node:7.9.0-slim
+FROM node:7.4.0-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
