@@ -21,11 +21,11 @@ RUN apt-get update -qq \
         libgtk2.0-0 \
         libnotify4 \
         libnss3 \
+        libudev-dev \
         libxss1 \
         libxtst6 \
         python \
         udev \
-        usbutils \
     && mkdir -p /opt/oak/tmp \
     && npm config set registry https://registry.npmjs.org/ \
     && npm install --engine-strict=true --progress=false --progress=false --loglevel="error" \
