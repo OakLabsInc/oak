@@ -25,6 +25,7 @@ RUN apt-get update -qq \
         libxtst6 \
         python \
         udev \
+        usbutils \
     && mkdir -p /opt/oak/tmp \
     && npm config set registry %%NPM_URL%% \
     && npm install --engine-strict=true --progress=false --progress=false --loglevel="error" \
@@ -32,20 +33,7 @@ RUN apt-get update -qq \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-WORKDIR /data/oak/app
-
-ONBUILD WORKDIR /data/oak/app
-ONBUILD COPY . /data/oak/app
-ONBUILD ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
-ONBUILD RUN npm config set registry $NPM_REGISTRY_URL \
-            && npm i --progress=false --loglevel="error" \
-            && npm prune --production --loglevel="error" \
-            && npm cache clean \
-            && rm -rf ~/.electron \
-            && ln -s /data/oak/app/node_modules /node_modules
-            
-ONBUILD VOLUME /data/oak/app
-ONBUILD CMD ["/data/oak/app"]
+WORKDIR /
 
 ENTRYPOINT ["oak"]
 CMD ["/opt/oak/examples/simple-script/index.js"]
