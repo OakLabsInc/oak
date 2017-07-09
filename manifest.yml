@@ -1,14 +1,14 @@
-image: oaklabs/oak:3.1.5
+image: oaklabs/oak:3.2.0
 manifests:
-  - image: oaklabs/oak:3.1.5-arm
-    platform:
-      architecture: arm
-      os: linux
-  - image: oaklabs/oak:3.1.5-arm64
-    platform:
-      architecture: arm64
-      os: linux
-  - image: oaklabs/oak:3.1.5-amd64
+  # - image: oaklabs/oak:3.2.0-arm
+  #   platform:
+  #     architecture: arm
+  #     os: linux
+  # - image: oaklabs/oak:3.2.0-arm64
+  #   platform:
+  #     architecture: arm64
+  #     os: linux
+  - image: oaklabs/oak:3.2.0-amd64
     platform:
       architecture: amd64
       os: linux
