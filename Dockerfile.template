@@ -41,7 +41,6 @@ CMD ["/opt/oak/examples/simple-script/index.js"]
 ENV DISPLAY=:0 \
     DEBUG=false \
     IGNORE_GPU_BLACKLIST=false \
-    DISABLE_HTTP_CACHE=false \
     NODE_TLS_REJECT_UNAUTHORIZED=0 \
     # nvidia card specific env vars
     PATH=/usr/local/nvidia/bin:$PATH \
