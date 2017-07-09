@@ -115,7 +115,7 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
   * `flags`: Array - Chrome launch flags to set while starting the window
   * `insecure` Boolean `false` - allow running and displaying insecure content (not recommended at all)
   * `sslExceptions` Array - Bypass SSL security for specific hosts. This uses a host pattern. Example: `*.mysite.com`
-  * `cache` Boolean `false` - Enable HTTP cache flag for chrome
+  * `cache` Boolean `true` - Enable HTTP cache flag for chrome
   * `userAgent`: String - Defaults to `'Oak/' + oak.version`
 * `callback`: [Function] - Executed when the `ready` function has fired
 

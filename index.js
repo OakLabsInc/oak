@@ -121,7 +121,7 @@ program
   .option(
     '-c, --cache [Boolean]',
     'Use HTTP cache',
-    _.toBoolean, false
+    _.toBoolean, true
   )
   .option(
     '-d, --debugger [Boolean]',
