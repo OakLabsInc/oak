@@ -26,20 +26,20 @@
   },
   "homepage": "https://github.com/OakLabsInc/oak",
   "dependencies": {
-    "commander": "~2.9.0",
+    "commander": "~2.11.0",
     "electron": "1.6.11",
-    "eventemitter2": "~0.4.14",
+    "eventemitter2": "~4.1.2",
     "lodash": "~4.17.2",
     "minimatch": "~3.0.4",
     "oak-tools": "~0.5.0",
-    "uuid": "~2.0.2"
+    "uuid": "~3.1.0"
   },
   "devDependencies": {
     "coveralls": "~2.13.1",
     "ip": "~1.1.5",
     "istanbul": "~0.4.5",
     "standard": "~10.0.2",
-    "tape": "~4.6.3"
+    "tape": "~4.7.0"
   },
   "keywords": [
     "oak",
