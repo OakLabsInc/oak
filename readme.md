@@ -1,4 +1,6 @@
 # Oak
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/OakLabsInc/oak.svg)](https://greenkeeper.io/)
 [![release](https://img.shields.io/badge/release-v3.2.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/3.2.0)
 [![node](https://img.shields.io/badge/node-v7.4.0-green.svg)](https://github.com/nodejs/node/releases/tag/v7.4.0)
 [![electron](https://img.shields.io/badge/electron-v1.6.11-green.svg)](https://github.com/electron/electron/releases/tag/v1.6.11)
