@@ -11,7 +11,7 @@ FROM_TAG="$NODE_VERSION-slim";
 NPM_URL="https://registry.npmjs.org/";
 
 DOCKERFILE_TEMPLATE_PATH="./node_modules/.bin/dockerfile-template";
-MANIFEST_TOOL_PATH="/usr/bin/manifest-tool";
+MANIFEST_TOOL_PATH=$(which manifest-tool);
 
 UNAME_ARCH=$(uname -m);
 
