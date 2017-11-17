@@ -6,6 +6,7 @@ BASE="oaklabs/oak:$OAK_VERSION";
 # our FROM line in the Dockerfile, should ideally match the current electron node version
 FROM="node";
 NODE_VERSION="7.9.0";
+ELECTRON_VERSION="1.7.9"
 FROM_TAG="$NODE_VERSION-slim";
 
 NPM_URL="https://registry.npmjs.org/";
@@ -65,7 +66,8 @@ echo "";
 $DOCKERFILE_TEMPLATE_PATH \
     -d FROM=$FROM \
     -d FROM_TAG=$FROM_TAG \
-    -d NPM_URL=$NPM_URL > Dockerfile;
+    -d ELECTRON_VERSION=$ELECTRON_VERSION \
+    -d NPM_URL=$NPM_URL > Dockerfile
 
 # build our base tag
 echo "";

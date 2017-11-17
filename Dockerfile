@@ -38,7 +38,8 @@ WORKDIR /
 ENTRYPOINT ["oak"]
 CMD ["/opt/oak/examples/simple-script/index.js"]
 
-ENV DISPLAY=:0 \
+ENV ELECTRON_VERSION=1.7.9 \
+    DISPLAY=:0 \
     DEBUG=false \
     IGNORE_GPU_BLACKLIST=false \
     NODE_TLS_REJECT_UNAUTHORIZED=0 \
