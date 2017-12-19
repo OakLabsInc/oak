@@ -1,9 +1,7 @@
 # Oak
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/OakLabsInc/oak.svg)](https://greenkeeper.io/)
-[![release](https://img.shields.io/badge/release-v3.2.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/3.2.0)
-[![node](https://img.shields.io/badge/node-v7.4.0-green.svg)](https://github.com/nodejs/node/releases/tag/v7.4.0)
-[![electron](https://img.shields.io/badge/electron-v1.6.11-green.svg)](https://github.com/electron/electron/releases/tag/v1.6.11)
+[![release](https://img.shields.io/badge/release-v4.0.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/4.0.0)
+[![node](https://img.shields.io/badge/node-v7.9.0-green.svg)](https://github.com/nodejs/node/releases/tag/v7.9.0)
+[![electron](https://img.shields.io/badge/electron-v1.7.9-green.svg)](https://github.com/electron/electron/releases/tag/v1.7.9)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?branch=master&t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak?branch=master)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-green.svg)](http://standardjs.com/)
 
@@ -121,8 +119,12 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
   * `userAgent`: String - Defaults to `'Oak/' + oak.version`
 * `callback`: [Function] - Executed when the `ready` function has fired
 
+## `oak` properties
 
-## Window methods
+### `oak.ready`
+
+
+## Window object
 `oak.load()` returns a `Window` object with methods and events. Each instance of `oak.load()` returns a unique object for that window, and the methods are mirrored for both the node side and client (renderer) side.
 
 ### `send(event[, payload])`
