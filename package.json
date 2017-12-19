@@ -1,15 +1,16 @@
 {
   "name": "oak",
-  "version": "4.0.0",
+  "productName": "oak",
+  "version": "4.0.1",
   "description": "A very opinionated kiosk framework based on Electron",
   "engines": {
     "node": "7.9.0"
   },
   "scripts": {
     "coverage": "node node_modules/.bin/istanbul cover node_modules/.bin/tape test/*.js || true",
-    "coveralls": "npm run-script coverage && node node_modules/.bin/coveralls < coverage/lcov.info && rm -rf coverage/ || true",
+    "coveralls": "npm run coverage && node node_modules/.bin/coveralls < coverage/lcov.info && rm -rf coverage/ || true",
     "test": "node_modules/.bin/standard && bin/entrypoint test/app.test.js",
-    "prepublish": "npm t"
+    "build": "npm t && rm -rf ./build/* &&  electron-packager ./ --platform=linux --electron-version=$(./node_modules/.bin/electron -v - | sed -r s/v//) --out ./build"
   },
   "main": "index.js",
   "bin": {
@@ -36,22 +37,23 @@
   },
   "devDependencies": {
     "coveralls": "~2.13.1",
+    "electron-packager": "~10.1.0",
     "ip": "~1.1.5",
     "istanbul": "~0.4.5",
+    "spectron": "^3.7.2",
     "standard": "~10.0.2",
     "tape": "~4.7.0"
   },
   "keywords": [
     "oak",
     "oakos",
+    "oak labs",
     "IoT",
     "kiosk",
     "electron",
-    "docker",
     "docker electron",
     "raspi kiosk",
-    "rpi",
-    "display"
+    "rpi"
   ],
   "standard": {
     "ignore": [

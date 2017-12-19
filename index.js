@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 
-const { resolve, join } = require('path')
+const { resolve, join, basename } = require('path')
 const Module = require('module')
 const _ = require('lodash')
+
 require(join(__dirname, 'lib', 'util'))
+
 const program = require('commander')
+
 const {
   version,
   dependencies: {
@@ -147,7 +150,15 @@ program
       opts.url = url
     }
   })
-  .parse(process.argv)
+
+// setting temp argv for commander to use if we are inside our compiled app
+let tmpArgv = process.argv
+
+if (_.get(process.env, 'CHROME_DESKTOP') === 'oak.desktop' || basename(process.argv[0]).indexOf('oak') !== -1) {
+  tmpArgv = ['', ...process.argv]
+}
+
+program.parse(tmpArgv)
 
 opts = _(program._events)
   .omit('*', 'version', 'electronVersion')
