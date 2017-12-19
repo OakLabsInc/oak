@@ -5,7 +5,12 @@ const Module = require('module')
 const _ = require('lodash')
 require(join(__dirname, 'lib', 'util'))
 const program = require('commander')
-const { version } = require(join(__dirname, 'package.json'))
+const {
+  version,
+  dependencies: {
+    electron: electronVersion
+  }
+} = require(join(__dirname, 'package.json'))
 
 // oak gets loaded from this path
 const oakPath = join(__dirname, 'lib', 'index.js')
@@ -114,11 +119,6 @@ program
     _.toBoolean, false
   )
   .option(
-    '--sslExceptions [Array]',
-    'Bypass SSL security for specific hosts. This uses a host pattern. Example: *.mysite.com',
-    v => v.split(','), []
-  )
-  .option(
     '-c, --cache [Boolean]',
     'Use HTTP cache',
     _.toBoolean, true
@@ -128,8 +128,21 @@ program
     'Open chrome dev tools on load',
     _.toBoolean, false
   )
+  .option(
+    '--sslExceptions [Array]',
+    'Bypass SSL security for specific hosts. This uses a host pattern. Example: *.mysite.com',
+    v => v.split(','), []
+  )
+  .option(
+    '--electron-version',
+    'Print electron version'
+  )
   .arguments('<url>')
-  .action(function (url) {
+  .action(function (url, options) {
+    if (_.has(options, 'electronVersion')) {
+      console.log(electronVersion)
+      process.exit(0)
+    }
     if (url) {
       opts.url = url
     }
@@ -137,7 +150,7 @@ program
   .parse(process.argv)
 
 opts = _(program._events)
-  .omit('*', 'version')
+  .omit('*', 'version', 'electronVersion')
   .mapValues((v, k) => program[k])
   .omitBy(_.isUndefined)
   .merge(opts)
@@ -152,5 +165,10 @@ if (require('url').parse(opts.url).protocol !== null) {
   oak.on('ready', () => oak.load(opts))
 } else {
   // if not, require it as a file
-  require(resolve(opts.url))
+  try {
+    require(resolve(opts.url))
+  } catch (e) {
+    console.error('Not a valid URL or file path.')
+    process.exit(1)
+  }
 }
