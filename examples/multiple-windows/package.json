@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "../../bin/entrypoint index.js",
+    "start": "../../bin/entrypoint src/index.js",
     "test": "node_modules/.bin/standard"
   },
   "license": "Apache-2.0",
