@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/OakLabsInc/oak",
   "dependencies": {
+    "commander": "~2.12.0",
     "commander": "~2.9.0",
     "electron": "1.7.9",
     "commander": "~2.12.0",
