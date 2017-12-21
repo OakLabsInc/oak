@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+DESC=$(cat $PWD/package.json | jq '.description')
+VERSION=$(node bin/entrypoint --version)
+
+npm t;
+rm -rf ./build/release/*;
+
+exec electron-packager . \
+  --app-version=$VERSION \
+  --build-version=$VERSION \
+  --platform=linux \
+  --icon=build/resources/icon_32.png \
+  --out=build/release \
+  --asar

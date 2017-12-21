@@ -10,3 +10,5 @@ build.sh
 Dockerfile
 Dockerfile.template
 readme.md
+.cache/
+build/

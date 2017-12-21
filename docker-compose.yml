@@ -7,6 +7,7 @@ services:
   oak:
     build: .
     container_name: oak
+    image: oaklabs/oak:4.0.0
     network_mode: host
     devices:
       # our video card device, may vary per operating system
@@ -19,3 +20,4 @@ services:
       - /dev/shm:/dev/shm
       # mount our X server socket
       - /tmp/.X11-unix:/tmp/.X11-unix
+      # - ./build:/build

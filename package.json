@@ -1,6 +1,5 @@
 {
   "name": "oak",
-  "productName": "oak",
   "version": "4.0.0",
   "description": "A very opinionated kiosk framework based on Electron",
   "engines": {
@@ -20,14 +19,16 @@
     "url": "https://github.com/OakLabsInc/oak.git"
   },
   "license": "Apache-2.0",
-  "author": "Flynn Joffray <nucleardreamer@gmail.com>",
+  "author": {
+    "name": "Flynn Joffray",
+    "email": "nucleardreamer@gmail.com"
+  },
   "bugs": {
     "url": "https://github.com/OakLabsInc/oak/issues"
   },
   "homepage": "https://github.com/OakLabsInc/oak",
   "dependencies": {
     "commander": "~2.9.0",
-    "electron": "1.7.9",
     "eventemitter2": "~0.4.14",
     "lodash": "~4.17.2",
     "minimatch": "~3.0.4",
@@ -36,7 +37,10 @@
   },
   "devDependencies": {
     "coveralls": "~2.13.1",
+    "electron": "1.7.9",
+    "electron-compile": "~6.4.2",
     "electron-packager": "~10.1.0",
+    "electron-rebuild": "~1.6.0",
     "ip": "~1.1.5",
     "istanbul": "~0.4.5",
     "spectron": "^3.7.2",
@@ -52,7 +56,8 @@
     "electron",
     "docker electron",
     "raspi kiosk",
-    "rpi"
+    "rpi",
+    "signage"
   ],
   "standard": {
     "ignore": [
