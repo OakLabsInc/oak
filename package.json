@@ -1,6 +1,6 @@
 {
   "name": "oak",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A very opinionated kiosk framework based on Electron",
   "engines": {
     "node": "7.9.0"
@@ -29,6 +29,7 @@
   "homepage": "https://github.com/OakLabsInc/oak",
   "dependencies": {
     "commander": "~2.9.0",
+    "electron": "1.7.9",
     "eventemitter2": "~0.4.14",
     "lodash": "~4.17.2",
     "minimatch": "~3.0.4",
@@ -37,7 +38,6 @@
   },
   "devDependencies": {
     "coveralls": "~2.13.1",
-    "electron": "1.7.9",
     "electron-compile": "~6.4.2",
     "electron-packager": "~10.1.0",
     "electron-rebuild": "~1.6.0",
