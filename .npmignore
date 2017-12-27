@@ -1,0 +1,8 @@
+node_modules/
+build/
+examples/
+Dockerfile
+Dockerfile.template
+manifest.yml
+release
+.travis.yml

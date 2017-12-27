@@ -10,6 +10,9 @@ const program = require('commander')
 
 const {
   version,
+  engines: {
+    node: nodeVersion
+  },
   dependencies: {
     electron: electronVersion
   }
@@ -179,7 +182,15 @@ if (require('url').parse(opts.url).protocol !== null) {
   try {
     require(resolve(opts.url))
   } catch (e) {
-    console.error('Not a valid URL or file path.')
+    if (e.message.indexOf('Cannot find module') === 0) {
+      console.error('Not a valid URL or file path.', e.message)
+      process.exit(1)
+    }
+    if (e.message.indexOf('NODE_MODULE_VERSION') !== -1) {
+      console.error(`Wrong node modules version for electron@${electronVersion}.\nPlease use electron-rebuild or run npm install with node v${nodeVersion}`)
+      process.exit(1)
+    }
+    console.error(e)
     process.exit(1)
   }
 }

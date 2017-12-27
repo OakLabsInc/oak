@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-OAK_VERSION="4.0.1";
+OAK_VERSION="4.0.2";
 BASE="oaklabs/oak:$OAK_VERSION";
 
 # our FROM line in the Dockerfile, should ideally match the current electron node version
@@ -68,6 +68,8 @@ $DOCKERFILE_TEMPLATE_PATH \
     -d FROM_TAG=$FROM_TAG \
     -d ELECTRON_VERSION=$ELECTRON_VERSION \
     -d NPM_URL=$NPM_URL > Dockerfile
+
+npm uninstall dockerfile-template
 
 # build our base tag
 echo "";
