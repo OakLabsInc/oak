@@ -63,7 +63,7 @@ oak path/to/app.js
 
 ## index.js
 The most minimal example, this will launch a fullscreen app, injecting the `oak` object into the client side:
-```
+```js
 const oak = require('oak')
 
 // when oak is ready, we can tell it to load something
@@ -83,7 +83,7 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
 * `options`: Object
   * `url`: - Not optional
     * `String` - The `url` option is the only one required, and will load any valid URI
-      ```
+      ```js
       // load a local HTML file
       url: 'file://' + join(__dirname, 'index.html')
 
@@ -91,7 +91,7 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
       url: 'http://localhost:8080'
       ```
     * `Function` - You can also pass a function to `url`. The first parameter is a callback which you pass your string to. This is helpful for dynamic page loading, redirecting to another page, or simply passing query parameters.
-      ```
+      ```js
       url: function (callback) {
         callback('http://localhost:8080/?time=' + Date.now())
       }
