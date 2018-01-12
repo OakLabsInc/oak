@@ -40,7 +40,7 @@
     "coveralls": "~2.13.1",
     "electron-compile": "~6.4.2",
     "electron-packager": "~10.1.0",
-    "electron-rebuild": "~1.6.0",
+    "electron-rebuild": "~1.7.0",
     "ip": "~1.1.5",
     "istanbul": "~0.4.5",
     "spectron": "^3.7.2",
