@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-OAK_VERSION="4.0.3";
+OAK_VERSION="4.1.0";
 BASE="oaklabs/oak:$OAK_VERSION";
 
 # our FROM line in the Dockerfile, should ideally match the current electron node version
@@ -66,8 +66,7 @@ echo "";
 $DOCKERFILE_TEMPLATE_PATH \
     -d FROM=$FROM \
     -d FROM_TAG=$FROM_TAG \
-    -d ELECTRON_VERSION=$ELECTRON_VERSION \
-    -d NPM_URL=$NPM_URL > Dockerfile
+    -d ELECTRON_VERSION=$ELECTRON_VERSION > Dockerfile
 
 npm uninstall dockerfile-template
 

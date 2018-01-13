@@ -51,18 +51,18 @@ program
   )
   .option(
     '-f, --fullscreen [Boolean]',
-    'Set the window to full width and height',
+    'Set the window to full width and height. This overrides the --size option',
     _.toBoolean, true
   )
   .option(
-    '-h, --height [Number]',
-    'Window height',
-    _.toInteger, 768
+    '-k, --kiosk [Boolean]',
+    'Kiosk mode, which is fullscreen by default. On OSX this will cause the workspace to shift to a whole new one',
+    _.toBoolean, false
   )
   .option(
-    '-w, --width [Number]',
-    'Window width',
-    _.toInteger, 1024
+    '-s, --size [String]',
+    'Window height and width, in WIDTHxHEIGHT format. Example: 1024x768',
+    /(\d+)x(\d+)/
   )
   .option(
     '-x, --x [Number]',
@@ -82,11 +82,6 @@ program
   .option(
     '-t, --ontop [Boolean]',
     'Start window ontop of others',
-    _.toBoolean, true
-  )
-  .option(
-    '-k, --kiosk [Boolean]',
-    'Kiosk mode',
     _.toBoolean, true
   )
   .option(
@@ -110,7 +105,7 @@ program
     _.toBoolean, false
   )
   .option(
-    '-s, --show [Boolean]',
+    '--show [Boolean]',
     'Show window on start',
     _.toBoolean, true
   )
@@ -164,7 +159,7 @@ if (program.electronVersion) {
   process.exit(0)
 }
 
-if (!program.url) {
+if (!opts.url) {
   program.help()
 }
 

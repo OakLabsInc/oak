@@ -1,6 +1,6 @@
 {
   "name": "oak",
-  "version": "4.0.3",
+  "version": "4.1.0",
   "description": "A very opinionated kiosk framework based on Electron",
   "engines": {
     "node": "7.9.0"
@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "coveralls": "~2.13.1",
+    "dockerfile-template": "^0.1.0",
     "electron-compile": "~6.4.2",
     "electron-packager": "~10.1.0",
     "electron-rebuild": "~1.6.0",

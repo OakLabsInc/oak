@@ -1,5 +1,5 @@
 # Oak
-[![release](https://img.shields.io/badge/release-v4.0.3-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/4.0.3)
+[![release](https://img.shields.io/badge/release-v4.1.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/4.1.0)
 [![node](https://img.shields.io/badge/node-v7.9.0-green.svg)](https://github.com/nodejs/node/releases/tag/v7.9.0)
 [![electron](https://img.shields.io/badge/electron-v1.7.9-green.svg)](https://github.com/electron/electron/releases/tag/v1.7.9)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?branch=master&t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak?branch=master)
@@ -30,13 +30,13 @@ $ oak --help
     -V, --version               output the version number
     -b, --background [String]   Hex background color for initial window. Example: #f0f0f0
     -f, --fullscreen [Boolean]  Set the window to full width and height
+    -k, --kiosk [Boolean]       Kiosk mode
     -h, --height [Number]       Window height
     -w, --width [Number]        Window width
     -x, --x [Number]            Window X position
     -y, --y [Number]            Window Y position
     -t, --title [String]        Window title
     -t, --ontop [Boolean]       Start window ontop of others
-    -k, --kiosk [Boolean]       Kiosk mode
     -D, --display [Number]      Display to use
     -S, --shortcut [List]       Register shortcuts, comma separated. reload,quit
     -u, --useragent [String]    User-Agent string
