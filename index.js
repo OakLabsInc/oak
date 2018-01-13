@@ -140,15 +140,11 @@ program
     v => v.split(','), []
   )
   .option(
-    '--electron-version',
+    '--electronVersion',
     'Print electron version'
   )
   .arguments('<url>')
   .action(function (url, options) {
-    if (_.has(options, 'electronVersion')) {
-      console.log(electronVersion)
-      process.exit(0)
-    }
     if (url) {
       opts.url = url
     }
@@ -163,16 +159,21 @@ if (_.get(process.env, 'CHROME_DESKTOP') === 'oak.desktop' || basename(process.a
 
 program.parse(tmpArgv)
 
+if (program.electronVersion) {
+  console.log(electronVersion)
+  process.exit(0)
+}
+
+if (!program.url) {
+  program.help()
+}
+
 opts = _(program._events)
   .omit('*', 'version', 'electronVersion')
   .mapValues((v, k) => program[k])
   .omitBy(_.isUndefined)
   .merge(opts)
   .value()
-
-if (!opts.url) {
-  program.help()
-}
 
 if (require('url').parse(opts.url).protocol !== null) {
   // if the url argument is an actual URI, just load it
