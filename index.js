@@ -121,7 +121,7 @@ program
   )
   .option(
     '-c, --cache [Boolean]',
-    'Use HTTP cache',
+    'Use standard caching, setting this to false has the same effect as the --disable-http-cache chrome flag',
     _.toBoolean, true
   )
   .option(

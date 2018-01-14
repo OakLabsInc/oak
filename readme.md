@@ -168,11 +168,25 @@ This is an instance of `EventEmitter2`
   * `opts`: Object - original options used
   * `err`: Error
 
-#### `reload([url])`
+#### `exec(code, gesture, callback)`
+
+Execute a string in the window context. See [electron executeJavscript](https://electronjs.org/docs/api/web-contents#contentsexecutejavascriptcode-usergesture-callback) for more details.
+
+* `code`: String - String of JavaScript to exectute
+* `gesture`: Boolean `false` - User gesture flag (e.g. make full-screen) for certain events
+* `callback`: Function - The result of the code execution
+
+#### `location(url)`
+
+Set the URL location of the window. This will fire a `location` event.
+
+* `url`: String - URL to load
+
+#### `reload(cache)`
 
 Reload the window.
 
-* `url`: String - Optional new URL to load, instead of the previous set URL. This will not overwrite options.
+* `cache`: Boolean `false` - Reload the window without cache. This will fire a `reload` event.
 
 #### `debug()`
 
