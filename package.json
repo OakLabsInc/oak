@@ -1,6 +1,6 @@
 {
   "name": "oak",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "A very opinionated kiosk framework based on Electron",
   "engines": {
     "node": "7.9.0"
