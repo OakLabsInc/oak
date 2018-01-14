@@ -168,14 +168,6 @@ This is an instance of `EventEmitter2`
   * `opts`: Object - original options used
   * `err`: Error
 
-#### `exec(code, gesture, callback)`
-
-Execute a string in the window context. See [electron executeJavscript](https://electronjs.org/docs/api/web-contents#contentsexecutejavascriptcode-usergesture-callback) for more details.
-
-* `code`: String - String of JavaScript to exectute
-* `gesture`: Boolean `false` - User gesture flag (e.g. make full-screen) for certain events
-* `callback`: Function - The result of the code execution
-
 #### `location(url)`
 
 Set the URL location of the window. This will fire a `location` event.
