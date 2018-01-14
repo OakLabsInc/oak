@@ -61,7 +61,7 @@ program
   )
   .option(
     '-s, --size [String]',
-    'Window height and width, in WIDTHxHEIGHT format. Example: 1024x768',
+    'Window size in WIDTHxHEIGHT format. Example: 1024x768. This will over ride both --kiosk and --fullscreen',
     /(\d+)x(\d+)/
   )
   .option(
