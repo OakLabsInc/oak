@@ -30,13 +30,6 @@ if [[ $# -lt 3 && $1 == "manifest" ]]; then
     fi
 fi
 
-if [ ! -e "$DOCKERFILE_TEMPLATE_PATH" ]; then
-  echo "";
-  echo "* dockerfile-template missing. Attempting to install now.";
-  echo "";
-  npm i dockerfile-template;
-fi
-
 # The immediate targets are just for intel and arm (raspi)
 case $UNAME_ARCH in
   x86_64)
