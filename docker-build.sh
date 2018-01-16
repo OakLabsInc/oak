@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-OAK_VERSION="4.1.1";
+OAK_VERSION="4.1.2";
 BASE="oaklabs/oak:$OAK_VERSION";
 
 # our FROM line in the Dockerfile, should ideally match the current electron node version

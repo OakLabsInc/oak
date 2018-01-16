@@ -1,14 +1,14 @@
-image: oaklabs/oak:4.1.1
+image: oaklabs/oak:4.1.2
 manifests:
-  # - image: oaklabs/oak:4.1.1-arm
+  # - image: oaklabs/oak:4.1.2-arm
   #   platform:
   #     architecture: arm
   #     os: linux
-  # - image: oaklabs/oak:4.1.1-arm64
+  # - image: oaklabs/oak:4.1.2-arm64
   #   platform:
   #     architecture: arm64
   #     os: linux
-  - image: oaklabs/oak:4.1.1-amd64
+  - image: oaklabs/oak:4.1.2-amd64
     platform:
       architecture: amd64
       os: linux
