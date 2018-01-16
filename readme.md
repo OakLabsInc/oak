@@ -126,8 +126,7 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
   * `kiosk`: Boolean `false` - Sets kiosk mode
   * `ontop`: Boolean `true` - Set the window to be always on top of others
   * `show`: Boolean `true` - Start the window shown, this will also show the window whenever it is reloaded
-  * `height`: Number `1024`
-  * `width`: Number `768`
+  * `size`: String - Window size in WIDTHxHEIGHT format. Example: 1024x768. This will over ride both `kiosk` and `fullscreen`
   * `x`: Number `0` - X position
   * `y`: Number `0` - Y position
   * `shortcut` Object
@@ -161,7 +160,12 @@ Send events to the window
 This is an instance of `EventEmitter2`
 
 * `ready` - Will emit the ready event, and also execute the optional callback
-* `reloading` - The window is reloading, can be used in tandem with `proceed()`
+* `reload` - The window has reloaded
+  * `oldUrl` - previous URL
+  * `newUrl` - new resolved URL
+* `location` - A window location change has happened (will not fire if `window.location = X` is called in the rendered)
+  * `oldUrl` - previous URL
+  * `newUrl` - new resolved URL
   * `oldSession` - previous session ID
   * `newSession` - new session ID
 * `loadFailed` - The window load failed
