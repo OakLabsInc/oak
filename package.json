@@ -45,7 +45,7 @@
     "ip": "~1.1.5",
     "istanbul": "~0.4.5",
     "spectron": "~3.7.2",
-    "standard": "~10.0.2",
+    "standard": "~11.0.0",
     "tape": "~4.7.0"
   },
   "keywords": [
