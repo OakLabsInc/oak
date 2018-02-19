@@ -46,7 +46,7 @@
     "istanbul": "~0.4.5",
     "spectron": "~3.7.2",
     "standard": "~10.0.2",
-    "tape": "~4.7.0"
+    "tape": "~4.9.0"
   },
   "keywords": [
     "oak",
