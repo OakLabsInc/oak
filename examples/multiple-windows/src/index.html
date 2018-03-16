@@ -40,6 +40,9 @@
                 document.getElementById('switcher').addEventListener('click', function () {
                     oak.send('switch', null)
                 }, false)
+                oak.on('isFocused', function () {
+                    console.log('I just got focused!')
+                })
                 oak.ready()
             }, false )
         </script>
