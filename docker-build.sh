@@ -1,12 +1,12 @@
 #!/bin/bash -e
 
-OAK_VERSION="4.0.2";
+OAK_VERSION="4.1.3";
 BASE="oaklabs/oak:$OAK_VERSION";
 
 # our FROM line in the Dockerfile, should ideally match the current electron node version
 FROM="node";
 NODE_VERSION="7.9.0";
-ELECTRON_VERSION="1.7.9"
+ELECTRON_VERSION="1.7.11"
 FROM_TAG="$NODE_VERSION-slim";
 
 NPM_URL="https://registry.npmjs.org/";
@@ -15,27 +15,6 @@ DOCKERFILE_TEMPLATE_PATH="./node_modules/.bin/dockerfile-template";
 MANIFEST_TOOL_PATH=$(which manifest-tool);
 
 UNAME_ARCH=$(uname -m);
-
-if [[ $# -lt 3 && $1 == "manifest" ]]; then
-    if [ ! -e "$MANIFEST_TOOL_PATH" ]; then
-        echo "";
-        echo "* manifest-tool missing. Install it so you can use it!.";
-        echo "";
-        exit 1;
-    else
-        $MANIFEST_TOOL_PATH push from-spec manifest.yml
-        echo "";
-        echo "* manifest pushed successfully.";
-        exit 0;
-    fi
-fi
-
-if [ ! -e "$DOCKERFILE_TEMPLATE_PATH" ]; then
-  echo "";
-  echo "* dockerfile-template missing. Attempting to install now.";
-  echo "";
-  npm i dockerfile-template;
-fi
 
 # The immediate targets are just for intel and arm (raspi)
 case $UNAME_ARCH in
@@ -66,10 +45,7 @@ echo "";
 $DOCKERFILE_TEMPLATE_PATH \
     -d FROM=$FROM \
     -d FROM_TAG=$FROM_TAG \
-    -d ELECTRON_VERSION=$ELECTRON_VERSION \
-    -d NPM_URL=$NPM_URL > Dockerfile
-
-npm uninstall dockerfile-template
+    -d ELECTRON_VERSION=$ELECTRON_VERSION > Dockerfile
 
 # build our base tag
 echo "";
@@ -84,5 +60,16 @@ if [[ $# -lt 3 && $1 == "push" ]]; then
         echo "** Pushing $TAG";
         echo "";
         docker push $TAG;
+        if [ ! -e "$MANIFEST_TOOL_PATH" ]; then
+            echo "";
+            echo "* manifest-tool missing. Install it so you can use it!.";
+            echo "";
+            exit 1;
+        else
+            $MANIFEST_TOOL_PATH push from-spec manifest.yml
+            echo "";
+            echo "* manifest pushed successfully.";
+            exit 0;
+        fi
     done;
 fi

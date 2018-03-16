@@ -25,10 +25,9 @@ RUN apt-get update -qq \
         libxss1 \
         libxtst6 \
         python \
-        udev \
-    && mkdir -p /opt/oak/tmp \
-    && npm config set registry https://registry.npmjs.org/ \
-    && npm install --engine-strict=true --progress=false --progress=false --loglevel="error" \
+        udev
+
+RUN npm install --engine-strict=true --progress=false --loglevel="error" \
     && npm link \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -38,7 +37,7 @@ WORKDIR /
 ENTRYPOINT ["oak"]
 CMD ["/opt/oak/examples/simple-script/index.js"]
 
-ENV ELECTRON_VERSION=1.7.9 \
+ENV ELECTRON_VERSION=1.7.11 \
     DISPLAY=:0 \
     DEBUG=false \
     IGNORE_GPU_BLACKLIST=false \

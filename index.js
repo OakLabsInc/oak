@@ -51,18 +51,18 @@ program
   )
   .option(
     '-f, --fullscreen [Boolean]',
-    'Set the window to full width and height',
+    'Set the window to full width and height. This overrides the --size option',
     _.toBoolean, true
   )
   .option(
-    '-h, --height [Number]',
-    'Window height',
-    _.toInteger, 768
+    '-k, --kiosk [Boolean]',
+    'Kiosk mode, which is fullscreen by default. On OSX this will cause the workspace to shift to a whole new one',
+    _.toBoolean, false
   )
   .option(
-    '-w, --width [Number]',
-    'Window width',
-    _.toInteger, 1024
+    '-s, --size [String]',
+    'Window size in WIDTHxHEIGHT format. Example: 1024x768. This will over ride both --kiosk and --fullscreen',
+    /(\d+)x(\d+)/
   )
   .option(
     '-x, --x [Number]',
@@ -82,11 +82,6 @@ program
   .option(
     '-t, --ontop [Boolean]',
     'Start window ontop of others',
-    _.toBoolean, true
-  )
-  .option(
-    '-k, --kiosk [Boolean]',
-    'Kiosk mode',
     _.toBoolean, true
   )
   .option(
@@ -110,7 +105,7 @@ program
     _.toBoolean, false
   )
   .option(
-    '-s, --show [Boolean]',
+    '--show [Boolean]',
     'Show window on start',
     _.toBoolean, true
   )
@@ -126,7 +121,7 @@ program
   )
   .option(
     '-c, --cache [Boolean]',
-    'Use HTTP cache',
+    'Use standard caching, setting this to false has the same effect as the --disable-http-cache chrome flag',
     _.toBoolean, true
   )
   .option(
@@ -140,15 +135,11 @@ program
     v => v.split(','), []
   )
   .option(
-    '--electron-version',
+    '--electronVersion',
     'Print electron version'
   )
   .arguments('<url>')
   .action(function (url, options) {
-    if (_.has(options, 'electronVersion')) {
-      console.log(electronVersion)
-      process.exit(0)
-    }
     if (url) {
       opts.url = url
     }
@@ -163,16 +154,21 @@ if (_.get(process.env, 'CHROME_DESKTOP') === 'oak.desktop' || basename(process.a
 
 program.parse(tmpArgv)
 
+if (program.electronVersion) {
+  console.log(electronVersion)
+  process.exit(0)
+}
+
+if (!opts.url) {
+  program.help()
+}
+
 opts = _(program._events)
   .omit('*', 'version', 'electronVersion')
   .mapValues((v, k) => program[k])
   .omitBy(_.isUndefined)
   .merge(opts)
   .value()
-
-if (!opts.url) {
-  program.help()
-}
 
 if (require('url').parse(opts.url).protocol !== null) {
   // if the url argument is an actual URI, just load it
