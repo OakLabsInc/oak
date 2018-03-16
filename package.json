@@ -1,9 +1,9 @@
 {
   "name": "oak",
-  "version": "4.1.3",
+  "version": "4.2.0",
   "description": "A very opinionated kiosk framework based on Electron",
   "engines": {
-    "node": "7.9.0"
+    "node": "8.2.1"
   },
   "scripts": {
     "coverage": "node node_modules/.bin/istanbul cover node_modules/.bin/tape test/*.js || true",
@@ -28,25 +28,25 @@
   },
   "homepage": "https://github.com/OakLabsInc/oak",
   "dependencies": {
-    "commander": "~2.9.0",
-    "electron": "1.7.11",
-    "eventemitter2": "~0.4.14",
-    "lodash": "~4.17.2",
+    "commander": "~2.15.0",
+    "electron": "1.8.3",
+    "eventemitter2": "~5.0.1",
+    "lodash": "~4.17.5",
     "minimatch": "~3.0.4",
-    "oak-tools": "~0.5.0",
-    "uuid": "~3.1.0"
+    "oak-tools": "~0.5.6",
+    "uuid": "~3.2.1"
   },
   "devDependencies": {
-    "coveralls": "~2.13.1",
+    "coveralls": "~3.0.0",
     "dockerfile-template": "~0.1.0",
     "electron-compile": "~6.4.2",
-    "electron-packager": "~10.1.2",
+    "electron-packager": "~11.1.0",
     "electron-rebuild": "~1.7.3",
     "ip": "~1.1.5",
     "istanbul": "~0.4.5",
-    "spectron": "~3.7.2",
-    "standard": "~10.0.2",
-    "tape": "~4.7.0"
+    "spectron": "~3.8.0",
+    "standard": "~11.0.1",
+    "tape": "~4.9.0"
   },
   "keywords": [
     "oak",

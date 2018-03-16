@@ -35,7 +35,7 @@ RUN npm install --engine-strict=true --progress=false --loglevel="error" \
 WORKDIR /
 
 ENTRYPOINT ["oak"]
-CMD ["/opt/oak/examples/simple-script/index.js"]
+CMD ["--help"]
 
 ENV ELECTRON_VERSION=%%ELECTRON_VERSION%% \
     DISPLAY=:0 \
