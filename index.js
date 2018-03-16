@@ -85,10 +85,10 @@ program
     _.toBoolean, true
   )
   .option(
-     '-D, --display [Number]',
-     'Display to use',
-     _.toInteger, 0
-    )
+    '-D, --display [Number]',
+    'Display to use',
+    _.toInteger, 0
+  )
   .option(
     '-S, --shortcut [List]',
     'Register shortcuts, comma separated. reload,quit',

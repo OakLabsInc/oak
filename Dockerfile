@@ -1,4 +1,4 @@
-FROM node:7.9.0-slim
+FROM node:8.2.1-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
@@ -35,9 +35,9 @@ RUN npm install --engine-strict=true --progress=false --loglevel="error" \
 WORKDIR /
 
 ENTRYPOINT ["oak"]
-CMD ["/opt/oak/examples/simple-script/index.js"]
+CMD ["--help"]
 
-ENV ELECTRON_VERSION=1.7.11 \
+ENV ELECTRON_VERSION=1.8.3 \
     DISPLAY=:0 \
     DEBUG=false \
     IGNORE_GPU_BLACKLIST=false \

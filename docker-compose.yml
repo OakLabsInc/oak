@@ -7,7 +7,7 @@ services:
   oak:
     build: .
     container_name: oak
-    image: oaklabs/oak:4.1.3
+    image: oaklabs/oak:4.2.0
     network_mode: host
     devices:
       # our video card device, may vary per operating system
