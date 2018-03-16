@@ -30,7 +30,7 @@
   "dependencies": {
     "commander": "~2.9.0",
     "electron": "1.7.11",
-    "eventemitter2": "~0.4.14",
+    "eventemitter2": "~5.0.1",
     "lodash": "~4.17.2",
     "minimatch": "~3.0.4",
     "oak-tools": "~0.5.0",
