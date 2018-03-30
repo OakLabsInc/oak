@@ -200,6 +200,10 @@ Hide the window
 
 Set the desktop focus to this window
 
+#### `disableZoom()`
+
+Disables pinch zoom or any window zoom in the browser window
+
 ### Window properties
 
 #### `id`
