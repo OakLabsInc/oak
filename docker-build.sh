@@ -1,13 +1,13 @@
 #!/bin/bash -e
 
-OAK_VERSION="4.2.1";
+OAK_VERSION="4.2.2";
 BASE="oaklabs/oak:$OAK_VERSION";
 
 # our FROM line in the Dockerfile, should ideally match the current electron node version
 FROM="node";
-NODE_VERSION="8.2.1";
-ELECTRON_VERSION="1.8.3"
-FROM_TAG="$NODE_VERSION-slim";
+NODE_VERSION="8.11.1";
+ELECTRON_VERSION="1.8.4"
+FROM_TAG="$NODE_VERSION-stretch";
 
 NPM_URL="https://registry.npmjs.org/";
 

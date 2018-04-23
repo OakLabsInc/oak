@@ -1,4 +1,4 @@
-FROM node:8.2.1-slim
+FROM node:8.11.1-stretch
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
@@ -7,7 +7,7 @@ WORKDIR /opt/oak
 COPY . /opt/oak
 
 RUN apt-get update -qq \
-    && apt-get install -y -qq --no-install-recommends \
+    && apt-get install -y -qq \
         apt-utils \
         build-essential \
         dbus-x11 \
@@ -37,7 +37,7 @@ WORKDIR /
 ENTRYPOINT ["oak"]
 CMD ["--help"]
 
-ENV ELECTRON_VERSION=1.8.3 \
+ENV ELECTRON_VERSION=1.8.4 \
     DISPLAY=:0 \
     DEBUG=false \
     IGNORE_GPU_BLACKLIST=false \
