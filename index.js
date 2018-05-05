@@ -9,7 +9,7 @@ require(join(__dirname, 'lib', 'util'))
 const program = require('commander')
 
 const {
-  version,
+  version: oakVersion,
   engines: {
     node: nodeVersion
   },
@@ -18,31 +18,10 @@ const {
   }
 } = require(join(__dirname, 'package.json'))
 
-// oak gets loaded from this path
-const oakPath = join(__dirname, 'lib', 'index.js')
-
-// resolve future require('oak') to our core path
-const origResolve = Module._resolveFilename
-Module._resolveFilename = function (request) {
-  return request === 'oak' ? oakPath : origResolve(...[...arguments])
-}
-
-const oak = require('oak')
-
-// Attaches oak property to |exports|
-exports.defineProperties = function (exports) {
-  return Object.defineProperties(exports, {
-    oak: {
-      enumerable: false,
-      get: () => require('oak')
-    }
-  })
-}
-
 let opts = {}
 
 program
-  .version(version)
+  .version(oakVersion)
   .description('If you load oak with a script path, no commandline options will apply automatically.')
   .option(
     '-b, --background [String]',
@@ -134,16 +113,75 @@ program
     'Bypass SSL security for specific hosts. This uses a host pattern. Example: *.mysite.com',
     v => v.split(','), []
   )
-  .option(
-    '--electronVersion',
-    'Print electron version'
-  )
-  .arguments('<url>')
-  .action(function (url, options) {
-    if (url) {
-      opts.url = url
+
+  .arguments('<uri>')
+  .action(function (uri, options) {
+    if (uri) {
+      opts.url = uri
     }
   })
+
+program
+  .command('version [type]')
+  .description('Prints version, options are are `all`, `oak`, `electron`, `node`')
+  .option('-j, --json', 'Output in JSON format', false)
+  .action(function (type = 'oak', opts) {
+    let exitVal = 0
+    let all = {
+      oak: oakVersion,
+      electron: electronVersion,
+      node: nodeVersion
+    }
+    let out = all.oak
+    switch (type) {
+      case 'oak':
+      case 'electron':
+      case 'node': {
+        out = {}
+        out[type] = all[type]
+        if (!_.isUndefined(opts.json)) {
+          out = JSON.stringify(out, null, 2)
+          break
+        } else {
+          out = out[type]
+        }
+        out[type] = all[type]
+        break
+      }
+      case 'all': {
+        out = JSON.stringify(all, null, 2)
+        break
+      }
+      default: {
+        out = 'Invalid name for version'
+        exitVal = 1
+        break
+      }
+    }
+    console.log(out)
+    process.exit(exitVal)
+  })
+
+// oak gets loaded from this path
+const oakPath = join(__dirname, 'lib', 'index.js')
+
+// resolve future require('oak') to our core path
+const origResolve = Module._resolveFilename
+Module._resolveFilename = function (request) {
+  return request === 'oak' ? oakPath : origResolve(...[...arguments])
+}
+
+const oak = require('oak')
+
+// Attaches oak property to |exports|
+exports.defineProperties = function (exports) {
+  return Object.defineProperties(exports, {
+    oak: {
+      enumerable: false,
+      get: () => require('oak')
+    }
+  })
+}
 
 // setting temp argv for commander to use if we are inside our compiled app
 let tmpArgv = process.argv
@@ -154,24 +192,19 @@ if (_.get(process.env, 'CHROME_DESKTOP') === 'oak.desktop' || basename(process.a
 
 program.parse(tmpArgv)
 
-if (program.electronVersion) {
-  console.log(electronVersion)
-  process.exit(0)
-}
-
 if (!opts.url) {
   program.help()
 }
 
 opts = _(program._events)
-  .omit('*', 'version', 'electronVersion')
+  .omit('*', 'version')
   .mapValues((v, k) => program[k])
   .omitBy(_.isUndefined)
   .merge(opts)
   .value()
 
 if (require('url').parse(opts.url).protocol !== null) {
-  // if the url argument is an actual URI, just load it
+  // if the url argument is a valid URI, load that directly
   oak.on('ready', () => oak.load(opts))
 } else {
   // if not, require it as a file
@@ -179,7 +212,7 @@ if (require('url').parse(opts.url).protocol !== null) {
     require(resolve(opts.url))
   } catch (e) {
     if (e.message.indexOf('Cannot find module') === 0) {
-      console.error('Not a valid URL or file path.', e.message)
+      console.error('Not a valid URL or file path. Make sure you specify a valid URI with a protocol prefix (i.e. http:// or file://)', e.message)
       process.exit(1)
     }
     if (e.message.indexOf('NODE_MODULE_VERSION') !== -1) {
