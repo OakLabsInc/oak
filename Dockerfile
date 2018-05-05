@@ -6,26 +6,25 @@ ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
 WORKDIR /opt/oak
 COPY . /opt/oak
 
-RUN apt-get update -qq \
-    && apt-get install -y -qq \
-        apt-utils \
-        build-essential \
-        dbus-x11 \
-        libasound2 \
-        libcanberra-gtk-module \
-        libcurl3 \
-        libexif-dev \
-        libgconf-2-4 \
-        libgl1-mesa-dri \
-        libgl1-mesa-glx \
-        libgtk2.0-0 \
-        libnotify4 \
-        libnss3 \
-        libudev-dev \
-        libxss1 \
-        libxtst6 \
-        python \
-        udev
+RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
+    apt-utils \
+    build-essential \
+    dbus-x11 \
+    libasound2 \
+    libcanberra-gtk-module \
+    libcurl3 \
+    libexif-dev \
+    libgconf-2-4 \
+    libgl1-mesa-dri \
+    libgl1-mesa-glx \
+    libgtk2.0-0 \
+    libnotify4 \
+    libnss3 \
+    libudev-dev \
+    libxss1 \
+    libxtst6 \
+    python \
+    udev
 
 RUN npm install --engine-strict=true --progress=false --loglevel="error" \
     && npm link \
@@ -37,7 +36,8 @@ WORKDIR /
 ENTRYPOINT ["oak"]
 CMD ["--help"]
 
-ENV ELECTRON_VERSION=1.8.4 \
+ENV NODE_ENV=production \
+    ELECTRON_VERSION=1.8.6 \
     DISPLAY=:0 \
     DEBUG=false \
     IGNORE_GPU_BLACKLIST=false \
