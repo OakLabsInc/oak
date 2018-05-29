@@ -27,6 +27,7 @@ RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
     udev
 
 RUN npm install --engine-strict=true --progress=false --loglevel="error" \
+    && npm test \
     && npm link \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
