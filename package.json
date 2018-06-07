@@ -40,7 +40,7 @@
     "coveralls": "~3.0.1",
     "dockerfile-template": "~0.1.0",
     "electron-compile": "~6.4.2",
-    "electron-packager": "~11.1.0",
+    "electron-packager": "~11.2.0",
     "electron-rebuild": "~1.7.3",
     "ip": "~1.1.5",
     "istanbul": "~0.4.5",
