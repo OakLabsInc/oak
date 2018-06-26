@@ -34,7 +34,7 @@
     "lodash": "~4.17.10",
     "minimatch": "~3.0.4",
     "oak-tools": "~0.5.6",
-    "uuid": "~3.2.1"
+    "uuid": "~3.3.0"
   },
   "devDependencies": {
     "coveralls": "~3.0.1",
