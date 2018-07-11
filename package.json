@@ -1,9 +1,9 @@
 {
   "name": "oak",
-  "version": "4.2.3",
+  "version": "4.2.4",
   "description": "A very opinionated kiosk framework based on Electron",
   "engines": {
-    "node": "8.11.1"
+    "node": "8.11.3"
   },
   "scripts": {
     "coverage": "node node_modules/.bin/istanbul cover node_modules/.bin/tape test/*.js || true",

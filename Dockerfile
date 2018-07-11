@@ -1,4 +1,4 @@
-FROM node:8.11.1-stretch
+FROM node:8.11.3-stretch
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
@@ -38,7 +38,7 @@ ENTRYPOINT ["oak"]
 CMD ["--help"]
 
 ENV NODE_ENV=production \
-    ELECTRON_VERSION=1.8.6 \
+    ELECTRON_VERSION=1.8.7 \
     DISPLAY=:0 \
     DEBUG=false \
     IGNORE_GPU_BLACKLIST=false \
