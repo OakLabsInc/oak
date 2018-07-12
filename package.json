@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/OakLabsInc/oak",
   "dependencies": {
-    "commander": "^2.15.0",
+    "commander": "~2.15.0",
     "electron": "1.8.6",
     "eventemitter2": "~5.0.1",
     "lodash": "~4.17.10",
@@ -39,9 +39,9 @@
   "devDependencies": {
     "coveralls": "~3.0.1",
     "dockerfile-template": "~0.1.0",
-    "electron-compile": "~6.4.2",
+    "electron-compile": "~6.4.3",
     "electron-packager": "~11.1.0",
-    "electron-rebuild": "~1.7.3",
+    "electron-rebuild": "~1.8.1",
     "ip": "~1.1.5",
     "istanbul": "~0.4.5",
     "spectron": "~3.8.0",
