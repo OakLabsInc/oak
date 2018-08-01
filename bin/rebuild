@@ -1,0 +1,20 @@
+#!/bin/bash -e
+
+echo ""
+echo "Rebuilding node modules at $1"
+echo ""
+
+ELECTRON_VERSION=${ELECTRON_VERSION:=$(oak version electron)}
+
+pushd $1
+export npm_config_target=$ELECTRON_VERSION
+export npm_config_runtime=electron
+export npm_config_arch=x64
+export npm_config_target_arch=x64
+export npm_config_disturl=https://atom.io/download/electron
+
+npm rebuild
+popd
+
+echo ""
+echo "Finished rebuilding native modules"

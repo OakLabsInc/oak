@@ -37,7 +37,12 @@ WORKDIR /
 ENTRYPOINT ["oak"]
 CMD ["--help"]
 
-ENV NODE_ENV=production \
+ENV npm_config_target=1.8.7 \
+    npm_config_runtime=electron \
+    npm_config_arch=x64 \
+    npm_config_target_arch=x64 \
+    npm_config_disturl=https://atom.io/download/electron \
+    NODE_ENV=production \
     ELECTRON_VERSION=1.8.7 \
     DISPLAY=:0 \
     DEBUG=false \

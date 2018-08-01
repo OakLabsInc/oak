@@ -1,8 +1,8 @@
 # Oak
 
-[![release](https://img.shields.io/badge/release-v4.2.4-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/4.2.4)
-[![node](https://img.shields.io/badge/node-v8.11.1-green.svg)](https://github.com/nodejs/node/releases/tag/v8.11.1)
-[![electron](https://img.shields.io/badge/electron-v1.8.6-green.svg)](https://github.com/electron/electron/releases/tag/v1.8.6)
+[![release](https://img.shields.io/badge/release-v4.3.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/4.3.0)
+[![node](https://img.shields.io/badge/node-v8.11.3-green.svg)](https://github.com/nodejs/node/releases/tag/v8.11.3)
+[![electron](https://img.shields.io/badge/electron-v1.8.7-green.svg)](https://github.com/electron/electron/releases/tag/v1.8.7)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-green.svg)](http://standardjs.com/)
 
@@ -18,6 +18,15 @@ The job of the `oak` module is to give a really easy way to make a kiosk applica
 
 ```sh
 npm install -g oak
+```
+
+### Rebuilding native modules
+
+If you are using native node modules, you will generally need to rebuild them to function against the version of node running in `oak`.
+
+```sh
+npm install
+oak-rebuild $(pwd) #directory path of wherever you want to rebuild
 ```
 
 ### Locally
@@ -171,6 +180,7 @@ This is an instance of `EventEmitter2`
 * `loadFailed` - The window load failed
   * `opts`: Object - original options used
   * `err`: Error
+* `unresponsive` - The window has hung and become unresponsive
 
 #### `location(url)`
 

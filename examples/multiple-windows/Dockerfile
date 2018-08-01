@@ -1,4 +1,4 @@
-FROM oaklabs/oak:4.2.4
+FROM oaklabs/oak:4.3.0
 
 WORKDIR /app
 COPY . /app
