@@ -4,6 +4,8 @@ node_modules
 .idea
 *.log
 */tmp/
-.vscode/
+.vscode/*
+!.vscode/launch.json
 build/release/
 .cache/
+

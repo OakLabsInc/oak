@@ -1,0 +1,42 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch simple-url",
+      // "program": "${workspaceFolder}/examples/simple-url/index.js",
+      "cwd": "${workspaceFolder}/examples/simple-url",
+      "runtimeExecutable": "${workspaceFolder}/bin/entrypoint",
+      "runtimeArgs":[
+         "index.js"
+       ],
+       "env":{}
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch multiple-windows",
+      "cwd": "${workspaceFolder}/examples/multiple-windows/src",
+      "runtimeExecutable": "${workspaceFolder}/bin/entrypoint",
+      "runtimeArgs":[
+         "index.js"
+       ],
+       "env":{}
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch simple-script",
+      "cwd": "${workspaceFolder}/examples/simple-script",
+      "runtimeExecutable": "${workspaceFolder}/bin/entrypoint",
+      "runtimeArgs":[
+         "index.js"
+       ],
+       "env":{}
+    }
+  ]
+}
