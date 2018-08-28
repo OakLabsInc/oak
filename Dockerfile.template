@@ -21,6 +21,8 @@ RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
     libnotify4 \
     libnss3 \
     libudev-dev \
+    libusb-1.0-0 \
+    libusb-1.0.0-dev \
     libxss1 \
     libxtst6 \
     python \
