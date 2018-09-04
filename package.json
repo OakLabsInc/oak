@@ -8,7 +8,8 @@
   "scripts": {
     "coverage": "node node_modules/.bin/istanbul cover node_modules/.bin/tape test/*.js || true",
     "coveralls": "npm run coverage && node node_modules/.bin/coveralls < coverage/lcov.info && rm -rf coverage/ || true",
-    "test": "node_modules/.bin/standard && bin/entrypoint test/app.test.js"
+    "test": "node_modules/.bin/standard && bin/entrypoint test/app.test.js",
+    "clean": "rm -rf node_modules/ package-lock.json && npm install"
   },
   "main": "index.js",
   "bin": {
