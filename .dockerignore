@@ -9,6 +9,7 @@ circle.yml
 build.sh
 Dockerfile
 Dockerfile.template
+docker-deploy.sh
 readme.md
 .cache/
 build/
