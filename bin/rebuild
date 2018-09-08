@@ -1,12 +1,22 @@
 #!/bin/bash -e
 
+# If we need to rebuild the node_modules in a project to match the electron headers,
+# the quickest way is to export a few npm env variables so that the recompile points
+# at the right headers, not the local node version headers that are the default
+# configuration of local npm
+
+OAK_PATH=$(readlink -f "$(pwd)/$(dirname "${0}")/oak")
+REBUILD_PATH=$(readlink -f ${1:-$(pwd)})
+
 echo ""
-echo "Rebuilding node modules at $1"
+echo "* Rebuilding node_modules at $REBUILD_PATH"
+
+ELECTRON_VERSION=${ELECTRON_VERSION:=$(${OAK_PATH} version electron)}
+
+echo "* Using electron version: $ELECTRON_VERSION"
 echo ""
 
-ELECTRON_VERSION=${ELECTRON_VERSION:=$(oak version electron)}
-
-pushd $1
+pushd $REBUILD_PATH
 export npm_config_target=$ELECTRON_VERSION
 export npm_config_runtime=electron
 export npm_config_arch=x64
