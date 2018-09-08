@@ -5,6 +5,7 @@
 [![electron](https://img.shields.io/badge/electron-v1.8.8-green.svg)](https://github.com/electron/electron/releases/tag/v1.8.8)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-green.svg)](http://standardjs.com/)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOakLabsInc%2Foak.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FOakLabsInc%2Foak?ref=badge_shield)
 
 A very opinionated kiosk UI application based on [electron](http://electron.atom.io).
 
@@ -341,3 +342,7 @@ OSX doesn't have `xorg`, or any build in X server by default. You are going to b
 
 ## On Windows
 Sorry but you are a little on your own as far as an X server goes! In the future we may update this readme to provide info for developing on Windows. In the mean time... [Cygwin](https://www.cygwin.com/)?
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOakLabsInc%2Foak.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOakLabsInc%2Foak?ref=badge_large)
