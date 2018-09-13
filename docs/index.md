@@ -1,1 +1,1 @@
-{% include ../README.md %}
+{% include start-building.md %}
