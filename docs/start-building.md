@@ -30,7 +30,7 @@ First, create a new directory where all the files would live. In this directory 
         "lodash": "~4.17.10"
       },
       "devDependencies": {
-        "oak": "~4.3.2"
+        "oak": "XXX"
       },
       "scripts": {
         "start": "./node_modules/.bin/oak src/index.js",
@@ -92,7 +92,7 @@ Open the `Dockerfile` in your favorite text editor. We like [Visual Studio Cod
 
 The first thing we need to do is define from what image we want to build from. Here we will use the latest oak support:
 
-    FROM oaklabs/oak:4.3.2
+    FROM oaklabs/oak:XXX
 
 Next we create a directory to hold the application code inside the image, this will be the working directory for your application:
 
@@ -121,7 +121,7 @@ Your app binds to port `9999` so you'll use the `EXPOSE` instruction to have
 
 Your `Dockerfile` should now look like this:
 
-    FROM oaklabs/oak:4.3.2
+    FROM oaklabs/oak:XXX
 
     WORKDIR /app
     COPY . /app
