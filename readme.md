@@ -115,18 +115,10 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
 
     ```js
     // load a local HTML file
-    url: 'file://' + join(__dirname, 'index.html')
+    url: 'file://' + require('path').join(__dirname, 'index.html')
 
     // load your own webserver
     url: 'http://localhost:8080'
-    ```
-
-    * `Function` - You can also pass a function to `url`. The first parameter is a callback which you pass your string to. This is helpful for dynamic page loading, redirecting to another page, or simply passing query parameters.
-
-    ```js
-    url: function (callback) {
-      callback('http://localhost:8080/?time=' + Date.now())
-    }
     ```
 
   * `title`: String `OAK`- The window title
