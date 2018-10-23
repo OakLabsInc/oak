@@ -1,4 +1,4 @@
-FROM node:8.11.3-stretch
+FROM node:10.2.1-stretch
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NPM_REGISTRY_URL=https://registry.npmjs.org/

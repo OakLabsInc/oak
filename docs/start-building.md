@@ -23,7 +23,7 @@ First, create a new directory where all the files would live. In this directory 
       "description": "App repository as an example",
       "main": "src/index.js",
       "engines": {
-        "node": "8.11.3"
+        "node": "10.2.1"
       },
       "dependencies": {
         "@oaklabs/platform": "~1.2.4",
