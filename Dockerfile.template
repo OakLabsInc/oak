@@ -6,7 +6,7 @@ ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
 WORKDIR /opt/oak
 COPY . /opt/oak
 
-RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
+RUN apt-get update -q && apt-get install -y -q --no-install-recommends \
     apt-utils \
     build-essential \
     dbus-x11 \
@@ -17,7 +17,7 @@ RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
     libgconf-2-4 \
     libgl1-mesa-dri \
     libgl1-mesa-glx \
-    libgtk2.0-0 \
+    libgtk3.0 \
     libnotify4 \
     libnss3 \
     libudev-dev \
