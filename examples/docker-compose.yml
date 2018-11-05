@@ -1,0 +1,27 @@
+---
+version: '2'
+services:
+  multiplewindows:
+    build:
+      context: ./multiple-windows
+    container_name: multiple-windows
+    image: oaklabs/multiple-windows:latest
+    network_mode: host
+    devices:
+      # remove if you dont need to share your graphics card explicitely
+      - /dev/dri:/dev/dri
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev/shm:/dev/shm
+  simpleurl:
+    build:
+      context: ./simple-url
+    container_name: simple-url
+    image: oaklabs/simple-url:latest
+    network_mode: host
+    devices:
+      # remove if you dont need to share your graphics card explicitely
+      - /dev/dri:/dev/dri
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev/shm:/dev/shm
