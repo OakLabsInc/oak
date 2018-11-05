@@ -31,7 +31,7 @@
   "homepage": "https://github.com/OakLabsInc/oak",
   "dependencies": {
     "commander": "~2.15.0",
-    "electron": "1.8.8",
+    "electron": "3.0.8",
     "eventemitter2": "~5.0.1",
     "lodash": "~4.17.10",
     "minimatch": "~3.0.4",
