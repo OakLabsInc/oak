@@ -1,4 +1,4 @@
-FROM %%FROM%%:%%FROM_TAG%%
+FROM %%FROM%%
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NPM_REGISTRY_URL=https://registry.npmjs.org/

@@ -1,4 +1,4 @@
-FROM node:10.2.1-stretch
+FROM node:10.13.0-stretch
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
@@ -39,13 +39,13 @@ WORKDIR /
 ENTRYPOINT ["oak"]
 CMD ["--help"]
 
-ENV npm_config_target=1.8.8 \
+ENV npm_config_target=3.0.7 \
     npm_config_runtime=electron \
     npm_config_arch=x64 \
     npm_config_target_arch=x64 \
     npm_config_disturl=https://atom.io/download/electron \
     NODE_ENV=production \
-    ELECTRON_VERSION=1.8.8 \
+    ELECTRON_VERSION=3.0.7 \
     DISPLAY=:0 \
     DEBUG=false \
     IGNORE_GPU_BLACKLIST=false \
