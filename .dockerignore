@@ -13,3 +13,4 @@ docker-deploy.sh
 readme.md
 .cache/
 build/
+_config.yml
