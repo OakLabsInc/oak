@@ -7,3 +7,4 @@ node_modules
 .vscode/
 build/release/
 .cache/
+_config.yml

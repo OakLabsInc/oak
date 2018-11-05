@@ -6,3 +6,4 @@ Dockerfile.template
 manifest.yml
 release
 .travis.yml
+_config.yml
