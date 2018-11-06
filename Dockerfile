@@ -39,13 +39,13 @@ WORKDIR /
 ENTRYPOINT ["oak"]
 CMD ["--help"]
 
-ENV npm_config_target=3.0.7 \
+ENV npm_config_target=3.0.8 \
     npm_config_runtime=electron \
     npm_config_arch=x64 \
     npm_config_target_arch=x64 \
     npm_config_disturl=https://atom.io/download/electron \
     NODE_ENV=production \
-    ELECTRON_VERSION=3.0.7 \
+    ELECTRON_VERSION=3.0.8 \
     DISPLAY=:0 \
     DEBUG=false \
     IGNORE_GPU_BLACKLIST=false \
