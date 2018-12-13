@@ -1,11 +1,11 @@
 #!/bin/bash -e
 
-OAK_VERSION="5.0.0-rc1"
+OAK_VERSION="5.0.0-rc3"
 BASE="oaklabs/oak:$OAK_VERSION"
 
 # our FROM line in the Dockerfile, should ideally match the current electron node version
-ELECTRON_VERSION="3.0.8"
-FROM="node:10.13.0-stretch"
+ELECTRON_VERSION="3.0.11"
+FROM="node:10.14.2-stretch"
 
 NPM_URL="https://registry.npmjs.org/"
 
@@ -25,4 +25,4 @@ echo "** Building $BASE"
 echo ""
 
 docker build --compress -t $BASE .
-docker push $BASE
+# docker push $BASE

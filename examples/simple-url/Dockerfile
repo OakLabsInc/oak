@@ -1,7 +1,7 @@
-FROM oaklabs/oak:5.0.0-rc1
+FROM oaklabs/oak:5.0.0-rc3
 
 WORKDIR /app
 COPY . /app
 CMD ["/app"]
 
-ENV KIOSK_URL=http://gifdanceparty.giphy.com/
+ENV KIOSK_URL=https://www.zivelo.com/
