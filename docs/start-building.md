@@ -22,15 +22,11 @@ First, create a new directory where all the files would live. In this directory 
       "version": "0.0.1",
       "description": "App repository as an example",
       "main": "src/index.js",
-      "engines": {
-        "node": "10.2.1"
-      },
       "dependencies": {
-        "@oaklabs/platform": "~1.2.4",
-        "lodash": "~4.17.10"
+        "@oaklabs/platform": "x.x.x"
       },
       "devDependencies": {
-        "oak": "XXX"
+        "oak": "x.x.x"
       },
       "scripts": {
         "start": "./node_modules/.bin/oak src/index.js",
@@ -158,7 +154,7 @@ We like to use a docker compose file to run the container as the docker start up
 
 Create a `.dockerignore` file in the same directory as your `Dockerfile` with following content:
 
-    node_modules
+    /node_modules/
     npm-debug.log
 
 This will prevent your local modules and debug logs from being copied onto your Docker image and possibly overwriting modules installed within your image.
@@ -173,7 +169,7 @@ Please use `[nvm](https://github.com/creationix/nvm#install-script)` to instal
     # install dependencies
     npm install
 
-    # rebuilds native modules for oak
+    # optional - rebuilds native modules for oak if you have them
     ./node_modules/.bin/oak-rebuild .
 
 ## **Running Locally**
