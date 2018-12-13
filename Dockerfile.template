@@ -25,6 +25,7 @@ RUN apt-get update -q && apt-get install -y -q --no-install-recommends \
     libusb-1.0.0-dev \
     libxss1 \
     libxtst6 \
+    libxcursor1 \
     python \
     udev
 

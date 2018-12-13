@@ -1,4 +1,4 @@
-FROM node:10.13.0-stretch
+FROM node:10.14.2-stretch
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NPM_REGISTRY_URL=https://registry.npmjs.org/
@@ -25,6 +25,7 @@ RUN apt-get update -q && apt-get install -y -q --no-install-recommends \
     libusb-1.0.0-dev \
     libxss1 \
     libxtst6 \
+    libxcursor1 \
     python \
     udev
 
@@ -39,13 +40,13 @@ WORKDIR /
 ENTRYPOINT ["oak"]
 CMD ["--help"]
 
-ENV npm_config_target=3.0.8 \
+ENV npm_config_target=3.0.11 \
     npm_config_runtime=electron \
     npm_config_arch=x64 \
     npm_config_target_arch=x64 \
     npm_config_disturl=https://atom.io/download/electron \
     NODE_ENV=production \
-    ELECTRON_VERSION=3.0.8 \
+    ELECTRON_VERSION=3.0.11 \
     DISPLAY=:0 \
     DEBUG=false \
     IGNORE_GPU_BLACKLIST=false \
