@@ -61,7 +61,6 @@ oak.on('ready', () => {
   })
 
   function switchWindowFocus (toFocus) {
-    oak.log.info(`switching focus to ${toFocus.id}`)
     toFocus.focus().send('isFocused')
   }
 })
