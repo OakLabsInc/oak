@@ -34,13 +34,13 @@ RUN npm install --engine-strict=true \
 
 ENTRYPOINT ["oak"]
 
-ENV npm_config_target=3.0.11 \
+ENV npm_config_target=3.1.2 \
     npm_config_runtime=electron \
     npm_config_arch=x64 \
     npm_config_target_arch=x64 \
     npm_config_disturl=https://atom.io/download/electron \
     NODE_ENV=production \
-    ELECTRON_VERSION=3.0.11 \
+    ELECTRON_VERSION=3.1.2 \
     DISPLAY=:0 \
     IGNORE_GPU_BLACKLIST=false \
     NODE_TLS_REJECT_UNAUTHORIZED=0 \

@@ -1,8 +1,8 @@
 # Oak
 
-[![release](https://img.shields.io/badge/release-v5.0.1-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/5.0.1)
+[![release](https://img.shields.io/badge/release-v5.0.2-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/5.0.2)
 [![node](https://img.shields.io/badge/node-v10.14.2-green.svg)](https://github.com/nodejs/node/releases/tag/v10.14.2)
-[![electron](https://img.shields.io/badge/electron-v3.0.11-green.svg)](https://github.com/electron/electron/releases/tag/v3.0.11)
+[![electron](https://img.shields.io/badge/electron-v3.1.2-green.svg)](https://github.com/electron/electron/releases/tag/v3.1.2)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-green.svg)](http://standardjs.com/)
 
@@ -143,6 +143,12 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
   * `userAgent`: String - Defaults to `'Oak/' + oak.version`
   * `callback`: [Function] - Executed when the `ready` function has fired
 
+#### `oak.log`
+
+Returns a [`pino`](https://github.com/pinojs/pino/blob/master/docs/api.md) instance for logging. By default the `OAK_DEBUG` environment variable is set to `false`, and will only log messages with the level of `error` or greater.
+
+If you run `OAK_DEBUG=true`, you will get anything with a `debug` level or higher, including verbose window information.
+
 ### Window object
 
 `oak.load()` returns a `Window` object with methods and events. Each instance of `oak.load()` returns a unique object for that window, and the methods are mirrored for both the node side and client (renderer) side.
@@ -217,6 +223,10 @@ Unique `id` of that window.
 The window fires events from electrons [`BrowserWindow`](https://electron.atom.io/docs/api/browser-window/#instance-events) and [`webContents`](https://electron.atom.io/docs/api/web-contents/#instance-events). The only event fired from that set into the renderer is `dom-ready`.
 
 *note*: If you do a `send` of the same event from the renderer side, it will look like the same event coming from electron events. So be careful and watch your namespaces for conflicts!
+
+### Environment variables
+
+If you would like to use 
 
 ## Examples
 
