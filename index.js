@@ -207,16 +207,30 @@ if (require('url').parse(opts.url).protocol !== null) {
   // if the url argument is a valid URI, load that directly
   oak.on('ready', () => oak.load(opts))
 } else {
-  // if not, require it as a file
+  let resolvedURL = resolve(opts.url.replace(/~\//g, process.env.HOME))
+  // check to see if it's a JSON file
+  if (resolvedURL.split('.').pop().toLowerCase() === 'json') {
+    try {
+      return oak.on('ready', () => oak.load(require(resolvedURL)))
+    } catch (e) {
+      console.error('Error (Invalid JSON):', e.message)
+      process.exit(1)
+    }
+  }
+  // if none of those, require it as a file
   try {
-    require(resolve(opts.url))
+    require(resolvedURL)
   } catch (e) {
-    if (e.message.indexOf('Cannot find module') === 0) {
-      console.error('Not a valid URL or file path. Make sure you specify a valid URI with a protocol prefix (i.e. http:// or file://)', e.message)
+    if (e.constructor.name === 'SyntaxError') {
+      console.error('\nYou have a SyntaxError, but you might have specified a file that cannot be imported using require(). Please check your file type to make sure it is requireable.\n\n', e)
+      process.exit(1)
+    }
+    if (e.code === 'MODULE_NOT_FOUND') {
+      console.error('Error: Not a valid URL or file path. Make sure you specify a valid URI with a protocol prefix (i.e. http:// or file://)', e.message)
       process.exit(1)
     }
     if (e.message.indexOf('NODE_MODULE_VERSION') !== -1) {
-      console.error(`Wrong node modules version for electron@${electronVersion}.\nPlease use electron-rebuild or run npm install with node v${nodeVersion}`)
+      console.error(`Error: Wrong node modules version for electron@${electronVersion}.\nPlease use oak-rebuild, or use electron-rebuild and specify node v${nodeVersion}`)
       process.exit(1)
     }
     console.error(e)

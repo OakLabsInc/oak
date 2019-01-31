@@ -1,6 +1,6 @@
 # Oak
 
-[![release](https://img.shields.io/badge/release-v5.0.2-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/5.0.2)
+[![release](https://img.shields.io/badge/release-v5.0.3-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/5.0.3)
 [![node](https://img.shields.io/badge/node-v10.14.2-green.svg)](https://github.com/nodejs/node/releases/tag/v10.14.2)
 [![electron](https://img.shields.io/badge/electron-v3.1.2-green.svg)](https://github.com/electron/electron/releases/tag/v3.1.2)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak)
@@ -99,6 +99,20 @@ oak.on('ready', () => {
     url: 'http://www.mywebapp.com'
   }) // or callback)
 })
+```
+
+### Loading from a JSON file
+
+You can invoke the `oak` cli with a JSON file that contains same options object that you would pass `oak.load()`. An example like above:
+
+```json
+{
+    "url": "http://www.mywebapp.com"
+}
+```
+
+```sh
+oak myOptions.json
 ```
 
 ### `require('oak')`
@@ -236,11 +250,11 @@ Check out the [examples](https://github.com/OakLabsInc/oak/tree/master/examples)
 
 To get started running `oak` in Docker... you will need to have Docker installed. You can install from [here](https://www.docker.com/community-edition#/download), or on Linux systems, run this script:
 
-    ```sh
-    curl -sSL https://get.docker.com/ | sh
-    # add your user to the docker group
-    sudo usermod -aG docker $(whoami)
-    ```
+```sh
+curl -sSL https://get.docker.com/ | sh
+# add your user to the docker group
+sudo usermod -aG docker $(whoami)
+```
 
 You will also need an X server running (`xorg`). If you are on OSX, go ahead and follow the steps below to get setup.
 
