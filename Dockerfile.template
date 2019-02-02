@@ -23,11 +23,17 @@ RUN apt-get update -q && apt-get install -y -q --no-install-recommends \
     libxss1 \
     libxtst6 \
     libxcursor1 \
-    python
+    python \
+    xvfb \
+    xauth
 
 COPY . /opt/oak
 
-RUN npm install --engine-strict=true \
+RUN npm install \
+    && npm test \
+    && npm prune --production \
+    && apt-get install -y xvfb xauth \
+    && apt-get autoremove -y \
     && npm link \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.electron

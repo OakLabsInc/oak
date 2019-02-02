@@ -1,4 +1,4 @@
-FROM node:10.14.2-stretch
+FROM node:10.15.1-stretch
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -23,24 +23,30 @@ RUN apt-get update -q && apt-get install -y -q --no-install-recommends \
     libxss1 \
     libxtst6 \
     libxcursor1 \
-    python
+    python \
+    xvfb \
+    xauth
 
 COPY . /opt/oak
 
-RUN npm install --engine-strict=true \
+RUN npm install \
+    && npm test \
+    && npm prune --production \
+    && apt-get install -y xvfb xauth \
+    && apt-get autoremove -y \
     && npm link \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.electron
 
 ENTRYPOINT ["oak"]
 
-ENV npm_config_target=3.1.2 \
+ENV npm_config_target=3.1.3 \
     npm_config_runtime=electron \
     npm_config_arch=x64 \
     npm_config_target_arch=x64 \
     npm_config_disturl=https://atom.io/download/electron \
     NODE_ENV=production \
-    ELECTRON_VERSION=3.1.2 \
+    ELECTRON_VERSION=3.1.3 \
     DISPLAY=:0 \
     IGNORE_GPU_BLACKLIST=false \
     NODE_TLS_REJECT_UNAUTHORIZED=0 \
