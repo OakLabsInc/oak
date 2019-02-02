@@ -3,6 +3,7 @@ build/
 examples/
 test/
 docs/
+.vscode/
 .nvmrc
 .travis.yml
 _config.yml
