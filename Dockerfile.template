@@ -32,7 +32,7 @@ COPY . /opt/oak
 RUN npm install \
     && npm test \
     && npm prune --production \
-    && apt-get install -y xvfb xauth \
+    && apt-get remove --purge -y xvfb xauth \
     && apt-get autoremove -y \
     && npm link \
     && apt-get clean \
