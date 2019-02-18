@@ -29,6 +29,18 @@ npm install
 oak-rebuild $(pwd) #directory path of wherever you want to rebuild
 ```
 
+> Mac Tip: readlink is missing from OSX.
+>  
+> To fix this run these commands:
+>  
+> ```
+> brew install coreutils
+> sudo ln -s /usr/local/bin/greadlink /usr/local/bin/readlink
+> ./node_modules/.bin/oak-rebuild
+> ```
+>  
+> This will allow readlink to work on OSX
+
 ### Locally
 
 If you want to use a local version, you can install and execute oak from the `.bin` folder.
