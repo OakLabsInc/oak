@@ -169,6 +169,39 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
   * `userAgent`: String - Defaults to `'Oak/' + oak.version`
   * `callback`: [Function] - Executed when the `ready` function has fired
 
+#### `oak.getDisplays()`
+
+Returns the current displays, and their metadata. You can use the `id` property to specify a window in `oak.load` properties. An example response:
+
+```javascript
+[{
+  "id": 0,
+  "bounds": {
+    "x": 0,
+    "y": 0,
+    "width": 1920,
+    "height": 1080
+  },
+  "workArea": {
+    "x": 0,
+    "y": 0,
+    "width": 1920,
+    "height": 1080
+  },
+  "size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "workAreaSize": {
+    "width": 1920,
+    "height": 1080
+  },
+  "scaleFactor": 1,
+  "rotation": 0,
+  "touchSupport": "unknown"
+}]
+```
+
 #### `oak.log`
 
 Returns a [`pino`](https://github.com/pinojs/pino/blob/master/docs/api.md) instance for logging. By default the `OAK_DEBUG` environment variable is set to `false`, and will only log messages with the level of `error` or greater.
