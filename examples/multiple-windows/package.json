@@ -12,18 +12,5 @@
   "bugs": {
     "url": "https://github.com/OakLabsInc/oak/issues"
   },
-  "homepage": "https://github.com/OakLabsInc/oak/examples/multiple-windows#readme",
-  "dependencies": {
-    "hapi": "~16.1.0",
-    "inert": "~4.1.0",
-    "lodash": "~4.17.4"
-  },
-  "standard": {
-    "ignore": [
-      "src/js/"
-    ]
-  },
-  "devDependencies": {
-    "standard": "~10.0.2"
-  }
+  "homepage": "https://github.com/OakLabsInc/oak/examples/multiple-windows#readme"
 }

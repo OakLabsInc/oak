@@ -9,6 +9,9 @@
                 color: #fff;
                 background-color: #E94E3D;
             }
+            body.focused {
+                background-color: #3ca761
+            }
             body > div {
                 position: absolute;
                 top: 30%;
@@ -26,6 +29,7 @@
             #switcher {
                 text-transform: uppercase;
                 text-decoration: underline;
+                -webkit-user-select: none;
             }
         </style>
 	</head>
@@ -37,16 +41,18 @@
         <script type="text/javascript">
             document.addEventListener( "DOMContentLoaded", function () {
                 // set this windows unique id
+                var bodyEl = document.getElementsByTagName('body')[0]
                 document.getElementById('title').innerHTML = oak.id
-        
                 document.getElementById('switcher').addEventListener('click', function () {
                     // fire a `switch` event from here to the node side
                     // this will be emitted on the `oak.load()` window object
+                    bodyEl.classList.remove('focused')
                     oak.send('switch', null)
                 }, false)
 
                 // listening to the event sent by the `.send('isFocused')` on the window object in index.js
                 oak.on('isFocused', function () {
+                    bodyEl.classList.add('focused')
                     console.log('I just got focused!')
                 })
 

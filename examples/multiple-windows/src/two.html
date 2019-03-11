@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <style>
+            body {
+                margin: 0; padding: 0; overflow: hidden; height: 100%; width: 100%;
+                font-family: Arial, Helvetica, sans-serif;
+                color: #fff;
+                background-color: #E94E3D;
+            }
+            body.focused {
+                background-color: #3ca761
+            }
+            body > div {
+                position: absolute;
+                top: 30%;
+                width: 100%;
+                display: flex;
+                align-content: center;
+                justify-content: center;
+                text-align: center;
+                flex-direction: column;
+            }
+            #title {
+                font-weight: 100;
+                font-size: 3em;
+            }
+            #switcher {
+                text-transform: uppercase;
+                text-decoration: underline;
+                -webkit-user-select: none;
+            }
+        </style>
+	</head>
+    <body>
+        <div>
+            <h1 id="title">not set</h1>
+            <h2 id="switcher">switch windows</h2>
+        </div>
+        <script type="text/javascript">
+            document.addEventListener( "DOMContentLoaded", function () {
+                // set this windows unique id
+                var bodyEl = document.getElementsByTagName('body')[0]
+                document.getElementById('title').innerHTML = oak.id
+                document.getElementById('switcher').addEventListener('click', function () {
+                    // fire a `switch` event from here to the node side
+                    // this will be emitted on the `oak.load()` window object
+                    bodyEl.classList.remove('focused')
+                    oak.send('switch', null)
+                }, false)
+
+                // listening to the event sent by the `.send('isFocused')` on the window object in index.js
+                oak.on('isFocused', function () {
+                    bodyEl.classList.add('focused')
+                    console.log('I just got focused!')
+                })
+
+                // this is needed so the window callback fires when we are ready to get events
+                // * note: this is the third parameter on oak.load(), in index.js
+                oak.ready()
+            }, false )
+        </script>
+    </body>
+</html>
