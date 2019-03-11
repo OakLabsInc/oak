@@ -4,7 +4,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /opt/oak
 
-RUN apt-get update -q && apt-get install -y -q --no-install-recommends \
+RUN printf "deb http://httpredir.debian.org/debian stretch-backports main non-free\ndeb-src http://httpredir.debian.org/debian stretch-backports main non-free" > /etc/apt/sources.list.d/backports.list \
+    && apt-get update -q && apt-get install -t stretch-backports -y -q --no-install-recommends \
     apt-utils \
     build-essential \
     dbus-x11 \
@@ -16,6 +17,7 @@ RUN apt-get update -q && apt-get install -y -q --no-install-recommends \
     libgl1-mesa-dri \
     libgl1-mesa-glx \
     libgtk3.0 \
+    libdrm-intel1 \
     libnotify4 \
     libnss3 \
     libusb-1.0-0 \
