@@ -36,13 +36,22 @@
         </div>
         <script type="text/javascript">
             document.addEventListener( "DOMContentLoaded", function () {
+                // set this windows unique id
                 document.getElementById('title').innerHTML = oak.id
+        
                 document.getElementById('switcher').addEventListener('click', function () {
+                    // fire a `switch` event from here to the node side
+                    // this will be emitted on the `oak.load()` window object
                     oak.send('switch', null)
                 }, false)
+
+                // listening to the event sent by the `.send('isFocused')` on the window object in index.js
                 oak.on('isFocused', function () {
                     console.log('I just got focused!')
                 })
+
+                // this is needed so the window callback fires when we are ready to get events
+                // * note: this is the third parameter on oak.load(), in index.js
                 oak.ready()
             }, false )
         </script>

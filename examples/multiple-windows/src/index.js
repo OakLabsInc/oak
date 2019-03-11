@@ -47,20 +47,22 @@ oak.on('ready', () => {
     scripts: ['lodash'],
     fullscreen: false,
     ontop: false
-  }).on('switch', function () {
-    switchWindowFocus(two)
   })
+
+  one.on('switch', function () {
+      // the event has been fired by this windows index.html via `oak.send()`
+      two.focus().send('isFocused')
+    })
 
   let two = oak.load({
     url: 'http://localhost:9999/index.html',
     scripts: ['lodash'],
     fullscreen: false,
     ontop: false
-  }).on('switch', function () {
-    switchWindowFocus(one)
   })
 
-  function switchWindowFocus (toFocus) {
-    toFocus.focus().send('isFocused')
-  }
+  two.on('switch', function () {
+    // the event has been fired by this windows index.html via `oak.send()`
+    one.focus().send('isFocused')
+  })
 })
