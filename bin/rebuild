@@ -5,8 +5,8 @@
 # at the right headers, not the local node version headers that are the default
 # configuration of local npm
 
-OAK_PATH=$(readlink -f "$(pwd)/$(dirname "${0}")/oak")
-REBUILD_PATH=$(readlink -f ${1:-$(pwd)})
+OAK_PATH=$(realpath -e "$(pwd)/$(dirname "${0}")/oak")
+REBUILD_PATH=$(realpath -e ${1:-$(pwd)})
 
 echo ""
 echo "* Rebuilding node_modules at $REBUILD_PATH"
