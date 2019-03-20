@@ -40,6 +40,9 @@ oak-rebuild $(pwd) #directory path of wherever you want to rebuild
 > ```
 >  
 > This will allow readlink to work on OSX
+>
+> Also make sure you have installed the XCode Commandline Tools
+> `xcode-select --install`
 
 ### Locally
 
