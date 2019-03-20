@@ -1,6 +1,6 @@
 # Oak
 
-[![release](https://img.shields.io/badge/release-v5.0.6-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/5.0.6)
+[![release](https://img.shields.io/badge/release-v5.0.7-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/5.0.7)
 [![node](https://img.shields.io/badge/node-v10.15.3-green.svg)](https://github.com/nodejs/node/releases/tag/v10.15.3)
 [![electron](https://img.shields.io/badge/electron-v3.1.6-green.svg)](https://github.com/electron/electron/releases/tag/v3.1.6)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak)
@@ -28,6 +28,10 @@ If you are using native node modules, you will generally need to rebuild them to
 npm install
 oak-rebuild $(pwd) #directory path of wherever you want to rebuild
 ```
+
+> Mac Tip: readlink is missing from OSX.
+> Also make sure you have installed the XCode Commandline Tools
+> `xcode-select --install`
 
 ### Locally
 
