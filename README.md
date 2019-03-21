@@ -14,10 +14,29 @@ Most of the `electron` project if focused around desktop application development
 
 The job of the `oak` module is to give a really easy way to make a kiosk application with modern web technology, so that it's repeatable, scalable, and easy to rapidly prototype for production. It also takes care of a few common Electron work flow issues that aren't immediately apparent, but effect kiosks in a big way. A good example of this would be errors displaying in a dialog window.
 
+## Prerequisites
+
+We recommend that you install Nodejs via Node Version Manager: [https://github.com/creationix/nvm#install--update-script](https://github.com/creationix/nvm)
+
+After you install and follow the instructions at the end (adding `nvm` to your path),
+
+```
+
+```
+
 ## Install
 
+The recommended way is to install globally, so it's in your `$PATH`
+
 ```sh
-npm install -g oak
+$ npm install -g oak
+```
+
+If you aren't installing globally, you will have the `oak` entrypoint in your local `node_modules` directory
+
+```sh
+$ npm install --save-dev oak # make sure this is saved in your devDependencies
+$ node_modules/.bin/oak
 ```
 
 ### Rebuilding native modules
@@ -25,75 +44,35 @@ npm install -g oak
 If you are using native node modules, you will generally need to rebuild them to function against the version of node running in `oak`.
 
 ```sh
-npm install
-oak-rebuild $(pwd) #directory path of wherever you want to rebuild
+$ cd myApp/
+$ npm install
+# if you are using oak globally
+$ oak-rebuild .
 ```
 
-> Mac Tip: readlink is missing from OSX.
-> Also make sure you have installed the XCode Commandline Tools
-> `xcode-select --install`
-
-### Locally
-
-If you want to use a local version, you can install and execute oak from the `.bin` folder.
+if you are using oak in devDependencies
 
 ```sh
-npm install oak
-./node_modules/.bin/oak
+$ cd myApp/
+$ npm install
+$ node_modules/.bin/oak-rebuild .
+```
+
+#### on Mac OSX
+
+You will need to have the XCode Commandline Tools installed. If you don't, make sure to install XCode and then run:
+
+```sh
+$ xcode-select --install
 ```
 
 ## Quick Start
 
-```text
-$ oak --help
-
-  Usage: oak [options] <url>
-
-  If you load oak with a script path, no commandline options will apply automatically.
-
-  Options:
-    -h, --help                  output usage information
-    -V, --version               output the version number
-    -b, --background [String]   Hex background color for initial window. Example: #f0f0f0
-    -f, --fullscreen [Boolean]  Set the window to full width and height. This overrides the --size option
-    -k, --kiosk [Boolean]       Kiosk mode, which is fullscreen by default. On OSX this will cause the workspace to shift to a whole new one
-    -s, --size [String]         Window size in WIDTHxHEIGHT format. Example: 1024x768. This will over ride both --kiosk and --fullscreen
-    -x, --x [Number]            Window X position
-    -y, --y [Number]            Window Y position
-    -t, --title [String]        Window title
-    -t, --ontop [Boolean]       Start window ontop of others
-    -D, --display [Number]      Display to use
-    -S, --shortcut [List]       Register shortcuts, comma separated. reload,quit
-    -u, --useragent [String]    User-Agent string
-    -F, --frame [Boolean]       Show window frame
-    --show [Boolean]            Show window on start
-    -n, --node [Boolean]        Enable node integration
-    -i, --insecure [Boolean]    Allow insecure connections (not recommended)
-    -c, --cache [Boolean]       Use HTTP cache
-    -d, --debugger [Boolean]    Open chrome dev tools on load
-    --sslExceptions [Array]     Bypass SSL security for specific hosts. This uses a host pattern. Example: *.mysite.com
-    --electronVersion           Print electron version
-```
-
-You can use any URL you want to simply launch a fullscreen webpage, for example:
-
-```sh
-oak http://gifdanceparty.giphy.com/
-```
-
-## Making an app
-
-`oak` only requires a couple things to get up and running: A URL, or an `index.js` file. You can specify a path to your module the same way you can with a URL:
-
-```sh
-oak path/to/app.js
-```
-
-### index.js
-
-The most minimal example, this will launch a fullscreen app, injecting the `oak` object into the client side:
+The most minimal example, this will launch a fullscreen app. This will also inject the `oak` object into the client side `window.oak`
 
 ```js
+// index.js
+
 const oak = require('oak')
 
 // when oak is ready, we can tell it to load something
@@ -105,23 +84,83 @@ oak.on('ready', () => {
 })
 ```
 
-### Loading from a JSON file
+```sh
+$ oak index.js
+```
 
-You can invoke the `oak` cli with a JSON file that contains same options object that you would pass `oak.load()`. An example like above:
+> When you start your app, the `oak` module is automatically resolved in modules, meaning you don't need to include it in your `package.json` file. This is similar to the way electron exposes it's own modules automatically.
+
+### Load just a URL
+
+You can use any fully qualified URL, to simply launch a fullscreen webpage.
+
+```sh
+$ oak http://www.zivelo.com/
+```
+
+### Load a file
+
+You can load a single `.html` file as well, but just have a fully qualified path.
+
+```sh
+$ oak file://${pwd}/path/to/index.html
+```
+
+### Load via JSON
+
+You can also load a `.json` file, which contains the same configuration you would pass to `oak.load()`.
+
+Example: `myOptions.json`
 
 ```json
 {
-    "url": "http://www.mywebapp.com"
+  "url": "http://www.zivelo.com",
+  "fullscreen": false,
+  "ontop": false
 }
 ```
 
 ```sh
-oak myOptions.json
+$ oak myOptions.json
 ```
 
-### `require('oak')`
+### Load via CLI
 
-When you launch your app, the `oak` module is automatically resolved in modules, meaning you don't need to include it in your `package.json` file. This is similar to the way electron exposes it's own modules privately.
+```text
+$ oak --help
+
+Usage: oak [options] [command] <uri>
+
+If you load oak with a script path, no commandline options will apply automatically.
+
+Options:
+  -V, --version               output the version number
+  -b, --background [String]   Hex background color for initial window. Example: #f0f0f0 (default: "#000000")
+  -f, --fullscreen [Boolean]  Set the window to full width and height. This overrides the --size option (default: true)
+  -k, --kiosk [Boolean]       Kiosk mode, which is fullscreen by default. On OSX this will cause the workspace to shift to a whole new one (default: false)
+  -s, --size [String]         Window size in WIDTHxHEIGHT format. Example: 1024x768. This will over ride both --kiosk and --fullscreen
+  -x, --x [Number]            Window X position (default: 0)
+  -y, --y [Number]            Window Y position (default: 0)
+  -t, --title [String]        Window title (default: "Oak")
+  -t, --ontop [Boolean]       Start window ontop of others (default: true)
+  -D, --display [Number]      Display to use (default: 0)
+  -S, --shortcut [List]       Register shortcuts, comma separated. reload,quit (default: [])
+  -u, --useragent [String]    User-Agent string
+  -F, --frame [Boolean]       Show window frame (default: false)
+  --show [Boolean]            Show window on start (default: true)
+  -n, --node [Boolean]        Enable node integration (default: false)
+  -i, --insecure [Boolean]    Allow insecure connections (not recommended) (default: false)
+  -c, --cache [Boolean]       Use standard caching, setting this to false has the same effect as the --disable-http-cache chrome flag (default: true)
+  -d, --debugger [Boolean]    Open chrome dev tools on load (default: false)
+  -h, --help                  output usage information
+
+Commands:
+  version [options] [type]    Prints version, options are are `all`, `oak`, `electron`, `node`
+
+
+```
+
+## Methods
 
 ### `oak.load(options[, callback])`
 
@@ -165,46 +204,59 @@ Most of these options are wrapping electron.js `BrowserWindow` options, but some
 
 Returns the current displays, and their metadata. You can use the `id` property to specify a window in `oak.load` properties. An example response:
 
-```javascript
-[{
-  "id": 0,
-  "bounds": {
-    "x": 0,
-    "y": 0,
-    "width": 1920,
-    "height": 1080
-  },
-  "workArea": {
-    "x": 0,
-    "y": 0,
-    "width": 1920,
-    "height": 1080
-  },
-  "size": {
-    "width": 1920,
-    "height": 1080
-  },
-  "workAreaSize": {
-    "width": 1920,
-    "height": 1080
-  },
-  "scaleFactor": 1,
-  "rotation": 0,
-  "touchSupport": "unknown"
-}]
+```js
+[
+  {
+    "id": 0,
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    "workArea": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    "size": {
+      "width": 1920,
+      "height": 1080
+    },
+    "workAreaSize": {
+      "width": 1920,
+      "height": 1080
+    },
+    "scaleFactor": 1,
+    "rotation": 0,
+    "touchSupport": "unknown"
+  }
+]
+```
+
+#### `oak.sslExceptions`
+
+Bypass SSL security for specific hostnames. This is an array of host patterns, which follow the glob pattern of [minimatch](https://github.com/isaacs/minimatch).
+
+```js
+oak.sslExceptions = [
+  '*.example.com',
+  'subdomain.example.com'
+]
 ```
 
 #### `oak.log`
 
-Returns a [`pino`](https://github.com/pinojs/pino/blob/master/docs/api.md) instance for logging. By default the `OAK_DEBUG` environment variable is set to `false`, and will only log messages with the level of `error` or greater.
+Returns a [`pino`](https://github.com/pinojs/pino/blob/master/docs/api.md) instance for logging. By default the `DEBUG` environment variable is set to `false`, and will only log messages with the level of `error` or greater.
 
-If you run `OAK_DEBUG=true`, you will get anything with a `debug` level or higher, including verbose window information.
+If you run `DEBUG=true`, you will get anything with a `debug` level or higher, including verbose window information.
 
 ### Window object
 
 `oak.load()` returns a `Window` object with methods and events. Each instance of `oak.load()` returns a unique object for that window, and the methods are mirrored for both the node side and client (renderer) side.
 
-#### `send(event[, payload])`
+#### `.send(event[, payload])`
 
 Send events to the window
 
@@ -213,7 +265,7 @@ Send events to the window
 
     Example: `window.send('myEvent', { foo: 'bar' })`
 
-#### `on(event, callback)`
+#### `.on(event, callback)`
 
 This is an instance of `EventEmitter2`
 
@@ -231,35 +283,35 @@ This is an instance of `EventEmitter2`
   * `err`: Error
 * `unresponsive` - The window has hung and become unresponsive
 
-#### `location(url)`
+#### `.location(url)`
 
 Set the URL location of the window. This will fire a `location` event.
 
 * `url`: String - URL to load
 
-#### `reload(cache)`
+#### `.reload(cache)`
 
 Reload the window.
 
 * `cache`: Boolean `false` - Reload the window without cache. This will fire a `reload` event.
 
-#### `debug()`
+#### `.debug()`
 
 Toggle the chrome debugger
 
-#### `show()`
+#### `.show()`
 
 Show the window
 
-#### `hide()`
+#### `.hide()`
 
 Hide the window
 
-#### `focus()`
+#### `.focus()`
 
 Set the desktop focus to this window
 
-#### `disableZoom()`
+#### `.disableZoom()`
 
 Disables pinch zoom or any window zoom in the browser window
 
