@@ -108,12 +108,6 @@ program
     'Open chrome dev tools on load',
     _.toBoolean, false
   )
-  .option(
-    '--sslExceptions [Array]',
-    'Bypass SSL security for specific hosts. This uses a host pattern. Example: *.mysite.com',
-    v => v.split(','), []
-  )
-
   .arguments('<uri>')
   .action(function (uri, options) {
     if (uri) {

@@ -47,6 +47,7 @@ ENV npm_config_target=3.1.6 \
     npm_config_arch=x64 \
     npm_config_target_arch=x64 \
     npm_config_disturl=https://atom.io/download/electron \
+    DEBUG=false \
     NODE_ENV=production \
     ELECTRON_VERSION=3.1.6 \
     DISPLAY=:0 \
