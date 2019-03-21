@@ -27,8 +27,9 @@
     </style>
     <script type="text/javascript">
       oak.on('dom-ready', function () {
+        console.log('from module_inject.js:', module_inject())
+        console.log('from json_inject.json:', JSON.stringify(json_inject, null, 2))
         oak.ready()
-        console.log('k ready')
       })
     </script>
   </head>

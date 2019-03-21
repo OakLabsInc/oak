@@ -20,7 +20,6 @@ oak.on('ready', () => {
         path: join(scripts, 'module_inject.js')
       }
     ],
-    fullscreen: false,
-    debugger: true
+    fullscreen: false
   })
 })
