@@ -20,8 +20,9 @@ We recommend that you install Nodejs via Node Version Manager: [https://github.c
 
 After you install and follow the instructions at the end (adding `nvm` to your path),
 
-```
-
+```sh
+$ nvm install 10.15.3
+$ nvm use 10.15.3
 ```
 
 ## Install
