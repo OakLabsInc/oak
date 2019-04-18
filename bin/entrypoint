@@ -3,6 +3,7 @@
 const { join } = require('path')
 const { spawn } = require('child_process')
 const electron = require('electron')
+const _ = require('lodash')
 
 spawn(
   electron,
@@ -10,5 +11,10 @@ spawn(
     join(__dirname, '..'),
     ...(process.argv.splice(2, process.argv.length))
   ],
-  { stdio: 'inherit' }
+  {
+    stdio: 'inherit',
+    env: _.defaults(process.env, {
+      ELECTRON_DISABLE_SECURITY_WARNINGS: true
+    })
+  }
 )

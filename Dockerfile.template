@@ -53,6 +53,7 @@ ENV npm_config_target=%%ELECTRON_VERSION%% \
     DISPLAY=:0 \
     IGNORE_GPU_BLACKLIST=false \
     NODE_TLS_REJECT_UNAUTHORIZED=0 \
+    ELECTRON_ENABLE_SECURITY_WARNINGS=false \
     # nvidia card specific env vars
     PATH=/usr/local/nvidia/bin:$PATH \
     LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
