@@ -43,7 +43,7 @@
     "coveralls": "~3.0.1",
     "dockerfile-template": "^0.1.0",
     "electron-compile": "~6.4.3",
-    "electron-packager": "~13.0.1",
+    "electron-packager": "~14.0.5",
     "ip": "~1.1.5",
     "istanbul": "~0.4.5",
     "spectron": "~5.0.0",
