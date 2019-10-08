@@ -36,7 +36,7 @@
     "lodash": "~4.17.10",
     "minimatch": "~3.0.4",
     "pino": "^5.11.1",
-    "pino-pretty": "^2.5.0",
+    "pino-pretty": "^3.2.2",
     "uuid": "~3.3.2"
   },
   "devDependencies": {
