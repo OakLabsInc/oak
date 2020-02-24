@@ -37,7 +37,7 @@
     "minimatch": "~3.0.4",
     "pino": "^5.11.1",
     "pino-pretty": "^2.5.0",
-    "uuid": "~3.3.2"
+    "uuid": "~7.0.0"
   },
   "devDependencies": {
     "coveralls": "~3.0.1",
