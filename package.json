@@ -32,7 +32,7 @@
   "dependencies": {
     "commander": "~2.19.0",
     "electron": "3.1.13",
-    "eventemitter2": "~5.0.1",
+    "eventemitter2": "~6.3.0",
     "lodash": "~4.17.15",
     "minimatch": "~3.0.4",
     "pino": "^5.11.1",
