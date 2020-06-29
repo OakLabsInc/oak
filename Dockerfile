@@ -1,4 +1,4 @@
-FROM node:10.15.3-stretch
+FROM node:12.18.1-stretch
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -42,14 +42,14 @@ RUN npm install \
 
 ENTRYPOINT ["oak"]
 
-ENV npm_config_target=3.1.13 \
+ENV npm_config_target=6.1.12 \
     npm_config_runtime=electron \
     npm_config_arch=x64 \
     npm_config_target_arch=x64 \
     npm_config_disturl=https://atom.io/download/electron \
     DEBUG=false \
     NODE_ENV=production \
-    ELECTRON_VERSION=3.1.13 \
+    ELECTRON_VERSION=6.1.12 \
     DISPLAY=:0 \
     IGNORE_GPU_BLACKLIST=false \
     NODE_TLS_REJECT_UNAUTHORIZED=0 \
