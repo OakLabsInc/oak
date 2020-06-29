@@ -5,12 +5,18 @@ const { spawn } = require('child_process')
 const electron = require('electron')
 const _ = require('lodash')
 
+let args =   [
+  join(__dirname, '..'),
+  ...(process.argv.splice(2, process.argv.length))
+]
+
+if (process.env.HOME && process.env.HOME === '/root') {
+  args.push('--no-sandbox')
+}
+
 spawn(
   electron,
-  [
-    join(__dirname, '..'),
-    ...(process.argv.splice(2, process.argv.length))
-  ],
+  args,
   {
     stdio: 'inherit',
     env: _.defaults(process.env, {
