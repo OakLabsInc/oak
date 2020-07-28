@@ -4,7 +4,7 @@ git:
 notifications:
   email: false
 node_js:
-  - "12.18.1"
+  - "12.18.3"
 matrix:
   include:
     - os: linux

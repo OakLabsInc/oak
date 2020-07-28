@@ -1,8 +1,8 @@
 # Oak
 
-[![release](https://img.shields.io/badge/release-v6.0.1-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/6.0.1)
-[![node](https://img.shields.io/badge/node-v12.18.1-green.svg)](https://github.com/nodejs/node/releases/tag/v12.18.1)
-[![electron](https://img.shields.io/badge/electron-v6.1.12-green.svg)](https://github.com/electron/electron/releases/tag/v6.1.12)
+[![release](https://img.shields.io/badge/release-v7.0.0-green.svg)](https://github.com/OakLabsInc/oak/releases/tag/7.0.0)
+[![node](https://img.shields.io/badge/node-v12.18.3-green.svg)](https://github.com/nodejs/node/releases/tag/v12.18.3)
+[![electron](https://img.shields.io/badge/electron-v7.3.2-green.svg)](https://github.com/electron/electron/releases/tag/v7.3.2)
 [![Coverage Status](https://coveralls.io/repos/github/OakLabsInc/oak/badge.svg?t=zYcBU6)](https://coveralls.io/github/OakLabsInc/oak)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-green.svg)](http://standardjs.com/)
 
@@ -21,8 +21,8 @@ We recommend that you install Nodejs via Node Version Manager: [https://github.c
 After you install and follow the instructions at the end (adding `nvm` to your path),
 
 ```sh
-$ nvm install 12.18.1
-$ nvm use 12.18.1
+$ nvm install 12.18.3
+$ nvm use 12.18.3
 ```
 
 ## Install
