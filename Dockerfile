@@ -42,7 +42,7 @@ RUN npm install \
 
 ENTRYPOINT ["oak"]
 
-ENV npm_config_target=6.14.12 \
+ENV npm_config_target=9.4.4 \
     npm_config_runtime=electron \
     npm_config_arch=x64 \
     npm_config_target_arch=x64 \
